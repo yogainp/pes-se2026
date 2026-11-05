@@ -2,7 +2,10 @@
   "timestamp": "2026-11-05 08:40:08",
   "fileName": "20261105_084008.xlsx",
   "defaultDay": 5,
+  "fieldDays": 23,
+  "cleaningDays": 7,
   "totalDays": 30,
+  "totalPetugas": 52,
   "records": [
     {
       "id": "PPL-0",

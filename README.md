@@ -1,37 +1,54 @@
 # Dashboard Monitoring Harian Petugas PES SE2026 Kalimantan Barat
 
-Dashboard pemantauan lapangan kegiatan **Post Enumeration Survey (PES) Sensus Ekonomi 2026 (SE2026)** untuk BPS Provinsi Kalimantan Barat dan 8 BPS Kabupaten/Kota.
+Portal pemantauan operasional lapangan kegiatan **Post Enumeration Survey (PES) Sensus Ekonomi 2026 (SE2026)** untuk BPS Provinsi Kalimantan Barat dan 8 Satuan Kerja BPS Kabupaten/Kota.
 
-Didesain khusus untuk di-hosting di **Vercel** secara gratis, 100% **Client-Side Data Processing** tanpa memerlukan database backend.
+Didesain khusus untuk di-hosting di **Vercel**, 100% **Single Source of Truth** berbasis commit Git, cepat, responsif, dan tanpa ketergantungan database eksternal.
 
 ---
 
-## 🚀 Fitur Unggulan
+## 📌 Ringkasan Konsep & Metodologi
 
-1. **Monitoring Target Harian (30 Hari November 2026)**:
-   - Menghitung otomatis target harian ideal (\( \text{Assigned} / 30 \)) dan target kumulatif hari ke-\( N \).
-   - Menghitung deviasi (Gap +/-) dan beban sisa harian (*Required Run-rate*) yang harus dicapai agar selesai tepat waktu pada 30 November.
-   - Slider interaktif hari ke-1 s.d. 30 untuk simulasi tanggal pengawasan.
+1. **Target Waktu Lapangan 23 Hari (1 s.d. 23 November 2026)**:
+   - Target penyelesaian pencacahan lapangan dirancang selesai dalam **23 hari efektif**.
+   - Target harian ideal: $\text{Target} = \text{Assigned} / 23$.
+   - Target kumulatif hari ke-$N$: $(\text{Assigned} / 23) \times \min(N, 23)$.
+   - Beban sisa harian (*Required Run-rate*): $(\text{Target} - \text{Realisasi}) / \max(1, 23 - N)$.
 
-2. **Sistem Peringatan Dini (Warning System)**:
-   - 🚨 **0% Belum Ada Progres**: Alert khusus untuk petugas yang belum pernah submit data.
-   - 🔴 **Kritis (<70%)**: Petugas yang tertinggal jauh dari target kumulatif hari ini.
-   - 🟡 **Waspada (70–99%)**: Petugas yang sedikit di bawah target ideal.
-   - 🟢 **Sesuai Target (≥100%)**: Petugas yang berada pada jalur yang tepat (*On Track*).
-   - 🌟 **Melampaui Target (>125%)**: Petugas berkinerja tinggi.
+2. **Fase Cleaning & Validasi Data (24 s.d. 30 November 2026)**:
+   - 7 hari terakhir dialokasikan penuh untuk pemeriksaan pengawas (PML), cleaning data anomali, penanganan penolakan/revisi (*revoke/reject*), dan konfirmasi kelengkapan sebelum penutupan kegiatan.
 
-3. **Multi-level Overview & Klasemen Kab/Kota**:
-   - Leaderboard 8 Kabupaten/Kota (Sambas, Bengkayang, Sanggau, Ketapang, Sintang, Kayong Utara, Kota Pontianak, Kota Singkawang).
-   - Pemetaan pengawas (PML) dan daftar SLS penugasan per petugas.
+3. **Monitoring Progres Wilayah (8 Satker)**:
+   - Pemantauan kepatuhan target per Kabupaten/Kota: Kab. Sambas (6101), Kab. Bengkayang (6102), Kab. Sanggau (6103), Kab. Ketapang (6104), Kab. Sintang (6105), Kab. Kayong Utara (6111), Kota Pontianak (6171), Kota Singkawang (6172).
+   - Menghilangkan tropes kompetisi/klasemen; fokus pada akuntabilitas dan asistensi lapangan.
 
-4. **Zero-Database & Fleksibilitas Pembaruan Data**:
-   - **Data Default Bawaan**: Langsung memuat snapshot terbaru saat web dibuka pertama kali.
-   - **Upload Excel Instan**: Drag-and-drop file Excel unduhan dari Fasih Dashboard (`202611xx_xxxxxx.xlsx`). Diproses instan di browser dan disimpan di `localStorage`.
-   - **Update via Git**: Commit file excel baru atau update kode ke repository GitHub, Vercel otomatis deploy versi terbaru.
+4. **Kriteria Evaluasi & Pengawasan Lapangan**:
+   - **Sesuai Target ($\ge 100\%$)**: Petugas berada pada ritme kerja yang tepat untuk selesai tepat waktu.
+   - **Waspada ($70\% - 99\%$)**: Petugas sedikit di bawah target ideal, memerlukan pengingat ritme.
+   - **Kritis ($< 70\%$)**: Keterlambatan signifikan, memerlukan asistensi langsung pengawas (PML).
+   - **Nol Progres ($0\%$)**: Petugas belum mengirimkan data sama sekali s.d. hari pemantauan.
 
-5. **Fitur Koordinasi WhatsApp & Ekspor Laporan**:
-   - **Template WhatsApp 1-Klik**: Format ringkasan siap blast untuk tingkat Provinsi, per Kabupaten/Kota, maupun pesan japri personal ke petugas terkait.
-   - **Ekspor Excel**: Download tabel evaluasi lengkap dengan kolom target harian, run-rate, dan status warning.
+5. **Metadata Operasional & Catatan Teknis Terintegrasi**:
+   - Dilengkapi glosarium variabel Fasih (*Assigned*, *Open*, *Draft*, *Dicacah*, *Diolah*), formula run-rate, dan catatan metodologi di bagian bawah dashboard serta *informative tooltips*.
+
+---
+
+## 🔄 Alur Pembaruan Data (GitOps Sync)
+
+Karena sistem dikelola oleh admin tunggal, tidak diperlukan form upload pada antarmuka web. Pembaruan data dilakukan langsung melalui commit file Excel:
+
+1. Unduh file progres harian terbaru dari **Fasih Dashboard BPS RI** (format: `202611xx_xxxxxx.xlsx`).
+2. Masukkan file ke dalam folder `data_awal/` atau `data/` di repositori.
+3. Jalankan sinkronisasi lokal (opsional):
+   ```bash
+   npm run sync
+   ```
+4. Commit dan push ke repository GitHub:
+   ```bash
+   git add .
+   git commit -m "data: update progres Fasih per [tanggal]"
+   git push origin main
+   ```
+5. **Vercel otomatis menjalankan build & deploy**. Seluruh pimpinan dan pengawas langsung melihat angka terbaru tanpa perlu login atau upload ulang.
 
 ---
 
@@ -44,44 +61,23 @@ cd C:\Dev\pes-se2026
 # Install dependencies (jika belum)
 npm install
 
-# Jalankan server lokal
+# Sinkronkan data dari file Excel terbaru
+npm run sync
+
+# Jalankan server pengembangan
 npm run dev
 ```
 
-Buka browser di `http://localhost:3000`.
+Buka browser di `http://localhost:5173` (atau port default Vite yang ditampilkan).
 
 ---
 
-## 🌐 Panduan Hosting di Vercel
+## 📂 Struktur Proyek
 
-### Opsi 1: Hubungkan Repository GitHub (Sangat Direkomendasikan)
-1. Inisialisasi git dan buat repository di GitHub:
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: initial release dashboard PES SE2026 Kalbar"
-   git remote add origin https://github.com/USERNAME/pes-se2026.git
-   git branch -M main
-   git push -u origin main
-   ```
-2. Buka dashboard [Vercel](https://vercel.com).
-3. Klik **Add New...** -> **Project** -> Pilih repository `pes-se2026`.
-4. Framework Preset akan otomatis terdeteksi sebagai **Vite**.
-5. Klik **Deploy**. Selesai dalam hitungan detik!
-6. Setiap kali Anda melakukan `git push` dengan fitur baru atau data baru, Vercel otomatis membangun dan memperbarui web.
-
-### Opsi 2: Menggunakan Vercel CLI
-```bash
-npm i -g vercel
-vercel
-```
-
----
-
-## 📂 Struktur Data
-
-- `src/data/initialData.json`: Data default baseline petugas dan wilayah Kalbar per 5 November 2026.
-- `src/utils/calculations.ts`: Formula kalkulasi target harian, kumulatif, run-rate, dan status warning.
-- `src/utils/excelParser.ts`: Engine pembaca file Excel Fasih langsung di browser.
-- `src/utils/whatsappGenerator.ts`: Generator template pesan WhatsApp.
-- `src/utils/excelExporter.ts`: Generator unduhan file Excel laporan evaluasi.
+- `data_awal/`: Arsip file Excel unduhan Fasih dan master data pengawas/pencacah.
+- `scripts/sync-data.mjs`: Script Node.js otomatis pembaca Excel terbaru dan pemeta SLS/PML ke JSON.
+- `src/data/initialData.json`: Data resmi yang disinkronisasi untuk aplikasi web.
+- `src/utils/calculations.ts`: Formula kalkulasi target 23 hari lapangan, gap, dan status evaluasi.
+- `src/utils/whatsappGenerator.ts`: Generator template pesan koordinasi WhatsApp resmi.
+- `src/utils/excelExporter.ts`: Generator unduhan file evaluasi Excel lengkap dengan sheet metadata.
+- `src/components/MetadataSection.tsx`: Komponen catatan teknis dan metadata operasional.

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, AlertOctagon, Share2, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { Share2, ChevronRight } from 'lucide-react';
 import { KabupatenSummary } from '../types';
 
 interface KabupatenOverviewProps {
@@ -8,7 +8,8 @@ interface KabupatenOverviewProps {
   onSelectKabupaten: (kode: string) => void;
   onShareKabupaten: (summary: KabupatenSummary) => void;
   currentDay: number;
-  totalDays: number;
+  fieldDays?: number;
+  totalDays?: number;
 }
 
 export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
@@ -17,70 +18,69 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
   onSelectKabupaten,
   onShareKabupaten,
   currentDay,
-  totalDays,
+  fieldDays = 23,
 }) => {
-  const idealPct = (currentDay / totalDays) * 100;
+  const idealPct = Math.min(100, (currentDay / fieldDays) * 100);
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 mb-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+    <div className="bg-white rounded-lg border border-slate-200 p-5 mb-6 shadow-2xs">
+      
+      {/* Header Section */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3.5 border-b border-slate-100">
         <div>
-          <div className="flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-amber-500" />
-            <h2 className="text-base font-bold text-slate-900">
-              Klasemen Capaian Target Harian per Kabupaten/Kota
-            </h2>
-          </div>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Diurutkan berdasarkan % pemenuhan target kumulatif hari ke-{currentDay} (Target Ideal: {idealPct.toFixed(1)}%)
+          <h2 className="text-lg font-bold text-slate-900">
+            Monitoring Progres Wilayah (8 Kabupaten/Kota)
+          </h2>
+          <p className="text-sm text-slate-500 mt-0.5">
+            Pemantauan pemenuhan target lapangan 23 hari kerja (Target Ideal Hari ke-{currentDay}: {idealPct.toFixed(1)}%).
           </p>
         </div>
-        <div className="text-xs text-slate-500 flex items-center gap-3">
+        
+        {/* Legend */}
+        <div className="text-sm text-slate-600 flex items-center gap-4">
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" /> On Track (≥100%)
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block" /> Sesuai Target (≥100%)
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block" /> Waspada (70-99%)
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-600 inline-block" /> Waspada (70–99%)
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block" /> Kritis (&lt;70%)
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-600 inline-block" /> Kritis (&lt;70%)
           </span>
         </div>
       </div>
 
-      {/* Grid Cards of 8 Kab/Kota */}
+      {/* Grid of 8 Kabupaten/Kota */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5">
-        {summaries.map((kab, idx) => {
+        {summaries.map((kab) => {
           const isSelected = selectedKabupaten === kab.kode;
           const isAhead = kab.persenCapaian >= 100;
           const isCritical = kab.persenCapaian < 70;
-
-          const medalEmoji = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${idx + 1}`;
 
           return (
             <div
               key={kab.kode}
               onClick={() => onSelectKabupaten(isSelected ? 'all' : kab.kode)}
-              className={`rounded-xl border p-4 transition-all cursor-pointer relative ${
+              className={`rounded-lg border p-4 transition-colors cursor-pointer relative ${
                 isSelected
-                  ? 'border-sky-500 ring-2 ring-sky-500/20 bg-sky-50/40 shadow-sm'
-                  : 'border-slate-200/80 hover:border-slate-300 hover:bg-slate-50/60'
+                  ? 'border-blue-600 bg-blue-50/40 shadow-xs'
+                  : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50/60'
               }`}
             >
               {/* Header Card */}
-              <div className="flex items-start justify-between gap-1 mb-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-slate-400 font-mono w-6">
-                    {medalEmoji}
-                  </span>
-                  <div>
-                    <h3 className="font-bold text-slate-900 text-sm leading-tight">
+              <div className="flex items-start justify-between gap-1 mb-2.5">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                      {kab.kode}
+                    </span>
+                    <h3 className="font-bold text-slate-900 text-base leading-tight">
                       {kab.nama}
                     </h3>
-                    <span className="text-[11px] text-slate-500 font-mono">
-                      {kab.kode} • {kab.totalPetugas} PPL
-                    </span>
                   </div>
+                  <span className="text-xs text-slate-500 mt-1 block">
+                    {kab.totalPetugas} Petugas PPL
+                  </span>
                 </div>
 
                 <button
@@ -89,29 +89,29 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
                     e.stopPropagation();
                     onShareKabupaten(kab);
                   }}
-                  className="p-1 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors cursor-pointer"
+                  className="p-1.5 text-slate-400 hover:text-emerald-700 hover:bg-emerald-50 rounded transition-colors cursor-pointer"
                   title={`Salin ringkasan WA untuk ${kab.nama}`}
                 >
-                  <Share2 className="w-3.5 h-3.5" />
+                  <Share2 className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Progress Bar vs Target */}
               <div className="mt-3">
-                <div className="flex items-center justify-between text-xs mb-1">
-                  <span className="text-slate-600 font-medium">Capaian Target:</span>
+                <div className="flex items-center justify-between text-sm mb-1">
+                  <span className="text-slate-600">Capaian Target:</span>
                   <span
                     className={`font-bold ${
-                      isAhead ? 'text-emerald-600' : isCritical ? 'text-rose-600' : 'text-amber-600'
+                      isAhead ? 'text-emerald-700' : isCritical ? 'text-rose-700' : 'text-amber-700'
                     }`}
                   >
                     {kab.persenCapaian}%
                   </span>
                 </div>
-                <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden relative">
+                <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
                   <div
-                    className={`h-full rounded-full transition-all duration-500 ${
-                      isAhead ? 'bg-emerald-500' : isCritical ? 'bg-rose-500' : 'bg-amber-500'
+                    className={`h-full rounded-full transition-all duration-300 ${
+                      isAhead ? 'bg-emerald-600' : isCritical ? 'bg-rose-600' : 'bg-amber-600'
                     }`}
                     style={{ width: `${Math.min(100, kab.persenCapaian)}%` }}
                   />
@@ -119,37 +119,35 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
               </div>
 
               {/* Metrics Detail */}
-              <div className="mt-3 pt-2.5 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
+              <div className="mt-3.5 pt-2.5 border-t border-slate-100 grid grid-cols-2 gap-2 text-sm">
                 <div>
-                  <span className="text-slate-400 block text-[10px]">Realisasi</span>
-                  <span className="font-semibold text-slate-800">
-                    {kab.totalDicacah.toLocaleString()} <span className="text-slate-400 font-normal">/ {kab.totalAssigned}</span>
+                  <span className="text-slate-500 block text-xs">Realisasi</span>
+                  <span className="font-bold text-slate-800">
+                    {kab.totalDicacah.toLocaleString()} <span className="text-slate-400 font-normal text-xs">/ {kab.totalAssigned}</span>
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block text-[10px]">Beban Sisa</span>
-                  <span className="font-semibold text-indigo-700">
-                    {kab.avgRunRate} <span className="text-slate-400 font-normal">/hari</span>
+                  <span className="text-slate-500 block text-xs">Beban Sisa</span>
+                  <span className="font-bold text-slate-800">
+                    {kab.avgRunRate} <span className="text-slate-400 font-normal text-xs">/hari</span>
                   </span>
                 </div>
               </div>
 
-              {/* Alerts & Footer */}
-              <div className="mt-2.5 flex items-center justify-between text-[11px]">
+              {/* Status Note & Selection Pill */}
+              <div className="mt-3 pt-2.5 border-t border-slate-100/80 flex items-center justify-between text-xs">
                 {kab.petugasZero > 0 ? (
-                  <span className="inline-flex items-center gap-1 text-rose-700 font-medium bg-rose-50 px-2 py-0.5 rounded-md">
-                    <AlertOctagon className="w-3 h-3 text-rose-500" />
+                  <span className="text-rose-700 font-medium bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
                     {kab.petugasZero} PPL Nol (0%)
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1 text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded-md">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                  <span className="text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                     Semua Bergerak
                   </span>
                 )}
 
-                <span className="text-sky-600 font-medium flex items-center gap-0.5">
-                  {isSelected ? 'Aktif' : 'Lihat'} <ChevronRight className="w-3 h-3" />
+                <span className="text-blue-700 font-semibold flex items-center gap-0.5">
+                  {isSelected ? 'Terpilih' : 'Filter'} <ChevronRight className="w-3.5 h-3.5" />
                 </span>
               </div>
             </div>

@@ -4,38 +4,40 @@ export function generateProvinceWhatsAppText(
   kabupatenSummaries: KabupatenSummary[],
   allPetugas: PetugasAnalysis[],
   currentDay: number,
+  fieldDays: number = 23,
   totalDays: number = 30
 ): string {
   const totalAssigned = allPetugas.reduce((acc, cur) => acc + cur.assigned, 0);
   const totalDicacah = allPetugas.reduce((acc, cur) => acc + cur.dicacah, 0);
   const totalDraft = allPetugas.reduce((acc, cur) => acc + cur.draft, 0);
-  const targetKumulatif = ((totalAssigned / totalDays) * currentDay).toFixed(0);
+  const targetKumulatif = ((totalAssigned / fieldDays) * Math.min(currentDay, fieldDays)).toFixed(0);
   const pctProv = totalAssigned > 0 ? ((totalDicacah / totalAssigned) * 100).toFixed(1) : '0';
-  const idealPct = ((currentDay / totalDays) * 100).toFixed(1);
+  const idealPct = ((Math.min(currentDay, fieldDays) / fieldDays) * 100).toFixed(1);
 
   const zeroPetugas = allPetugas.filter((p) => p.status === 'zero');
   const criticalPetugas = allPetugas.filter((p) => p.status === 'critical');
+  const sisaHariLapangan = Math.max(0, fieldDays - currentDay);
 
-  let text = `📢 *MONITORING HARIAN PES SE2026 KALIMANTAN BARAT*\n`;
-  text += `📅 *Hari ke-${currentDay} dari ${totalDays} Hari* (Periode 1-30 Nov 2026)\n\n`;
+  let text = `*MONITORING HARIAN PES SE2026 KALIMANTAN BARAT*\n`;
+  text += `Hari ke-${currentDay} dari ${totalDays} Hari | Target Lapangan: 1 - ${fieldDays} Nov 2026\n\n`;
 
-  text += `📊 *RINGKASAN PROVINSI:*\n`;
-  text += `• Total Target: *${totalAssigned.toLocaleString()}* sampel\n`;
-  text += `• Realisasi Dicacah: *${totalDicacah.toLocaleString()}* (${pctProv}%)\n`;
-  text += `• Draft Tersimpan: *${totalDraft.toLocaleString()}*\n`;
-  text += `• Target Kumulatif Ideal: *${targetKumulatif}* (${idealPct}%)\n`;
-  text += `• Petugas Belum Bergerak (0%): *${zeroPetugas.length} orang*\n`;
-  text += `• Petugas Kritis (<70% target harian): *${criticalPetugas.length} orang*\n\n`;
+  text += `*RINGKASAN PROVINSI:*\n`;
+  text += `• Total Target: ${totalAssigned.toLocaleString()} sampel\n`;
+  text += `• Realisasi Dicacah: ${totalDicacah.toLocaleString()} (${pctProv}%)\n`;
+  text += `• Draft Tersimpan: ${totalDraft.toLocaleString()}\n`;
+  text += `• Target Ideal s.d. Hari Ini: ${targetKumulatif} (${idealPct}%)\n`;
+  text += `• Sisa Waktu Lapangan: ${sisaHariLapangan} hari (Batas Akhir: ${fieldDays} Nov)\n`;
+  text += `• Petugas Nol Progres (0%): ${zeroPetugas.length} orang\n`;
+  text += `• Petugas Kritis (<70% target): ${criticalPetugas.length} orang\n\n`;
 
-  text += `🏆 *KLASEMEN CAPAIAN KABUPATEN/KOTA:*\n`;
-  kabupatenSummaries.forEach((k, idx) => {
-    const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `${idx + 1}.`;
-    const warningIcon = k.petugasZero > 0 ? `⚠️ (${k.petugasZero} PPL 0%)` : '✅';
-    text += `${medal} *${k.nama}*: ${k.persenCapaian}% target (${k.totalDicacah}/${k.totalAssigned}) ${warningIcon}\n`;
+  text += `*PROGRES PER KABUPATEN/KOTA:*\n`;
+  kabupatenSummaries.forEach((k) => {
+    const statusNote = k.petugasZero > 0 ? `(${k.petugasZero} PPL 0%)` : `(Semua aktif)`;
+    text += `• ${k.nama}: ${k.persenCapaian}% target ideal (${k.totalDicacah}/${k.totalAssigned}) - ${statusNote}\n`;
   });
 
   if (zeroPetugas.length > 0) {
-    text += `\n🚨 *ATENSI KHUSUS PETUGAS BELUM ADA PROGRES (0%):*\n`;
+    text += `\n*DAFTAR PETUGAS PERLU ASISTENSI (0%):*\n`;
     const groupedZero: { [kab: string]: string[] } = {};
     zeroPetugas.forEach((p) => {
       if (!groupedZero[p.kabupatenNama]) groupedZero[p.kabupatenNama] = [];
@@ -43,14 +45,14 @@ export function generateProvinceWhatsAppText(
     });
 
     Object.keys(groupedZero).forEach((kab) => {
-      text += `📍 *${kab}* (${groupedZero[kab].length} PPL):\n`;
+      text += `[${kab}] (${groupedZero[kab].length} PPL):\n`;
       groupedZero[kab].forEach((email) => {
-        text += `   - ${email}\n`;
+        text += `  - ${email}\n`;
       });
     });
   }
 
-  text += `\n💪 Mohon Bapak/Ibu Pimpinan BPS Kab/Kota dan PML untuk terus mendorong PPL agar mengejar target harian sebelum batas akhir 30 November. Terima kasih! 🙏`;
+  text += `\nCatatan: Sisa 7 hari (24-30 Nov) difokuskan untuk verifikasi PML dan cleaning data. Mohon Bapak/Ibu Pimpinan BPS Kab/Kota dan PML untuk mengawal pencacahan agar rampung sebelum 23 November 2026. Terima kasih.`;
 
   return text;
 }
@@ -59,39 +61,34 @@ export function generateKabupatenWhatsAppText(
   kabupaten: KabupatenSummary,
   petugasList: PetugasAnalysis[],
   currentDay: number,
-  totalDays: number = 30
+  fieldDays: number = 23,
+  _totalDays: number = 30
 ): string {
-  const idealPct = ((currentDay / totalDays) * 100).toFixed(1);
-  const sisaHari = totalDays - currentDay;
+  const idealPct = ((Math.min(currentDay, fieldDays) / fieldDays) * 100).toFixed(1);
+  const sisaHari = Math.max(0, fieldDays - currentDay);
 
-  let text = `📢 *MONITORING HARIAN PES SE2026 - ${kabupaten.nama.toUpperCase()}*\n`;
-  text += `📅 *Hari ke-${currentDay} dari ${totalDays} Hari* (Sisa waktu: ${sisaHari} hari)\n\n`;
+  let text = `*MONITORING HARIAN PES SE2026 - ${kabupaten.nama.toUpperCase()}*\n`;
+  text += `Hari ke-${currentDay} | Sisa Waktu Lapangan: ${sisaHari} hari (Deadline: ${fieldDays} Nov)\n\n`;
 
-  text += `📊 *STATUS KABUPATEN:*\n`;
-  text += `• Total Target: *${kabupaten.totalAssigned.toLocaleString()}* sampel (${kabupaten.totalPetugas} Petugas)\n`;
-  text += `• Realisasi Dicacah: *${kabupaten.totalDicacah.toLocaleString()}* (${kabupaten.persenTotal}%)\n`;
-  text += `• Capaian vs Target Ideal: *${kabupaten.persenCapaian}%* (Target Ideal: ${idealPct}%)\n`;
-  text += `• Target Harian Dibutuhkan: *${kabupaten.avgRunRate} sampel/hari*\n\n`;
+  text += `*RINGKASAN SATKER:*\n`;
+  text += `• Total Target: ${kabupaten.totalAssigned.toLocaleString()} sampel (${kabupaten.totalPetugas} PPL)\n`;
+  text += `• Realisasi Dicacah: ${kabupaten.totalDicacah.toLocaleString()} (${kabupaten.persenTotal}% total)\n`;
+  text += `• Capaian vs Target Ideal: ${kabupaten.persenCapaian}% (Ideal: ${idealPct}%)\n`;
+  text += `• Rata-rata Beban Sisa: ${kabupaten.avgRunRate} sampel/hari\n\n`;
 
-  text += `👥 *DETAIL STATUS PETUGAS (${kabupaten.totalPetugas} PPL):*\n`;
+  text += `*STATUS PETUGAS (${kabupaten.totalPetugas} PPL):*\n`;
   petugasList.forEach((p) => {
-    let icon = '🟢';
-    if (p.status === 'zero') icon = '🚨 0%';
-    else if (p.status === 'critical') icon = '🔴 Kritis';
-    else if (p.status === 'warning') icon = '🟡 Waspada';
-    else if (p.status === 'ahead') icon = '🌟 Unggul';
-
     text += `• ${p.pencacah}\n`;
-    text += `  └ Capaian: ${p.dicacah}/${p.assigned} (${p.persenCapaian}% target) [${icon}]\n`;
-    text += `  └ Beban sisa: ${p.runRateRequired} sampel/hari\n`;
+    text += `  Realisasi: ${p.dicacah}/${p.assigned} (${p.persenCapaian}% target ideal) [Status: ${p.statusLabel}]\n`;
+    text += `  Beban sisa: ${p.runRateRequired} sampel/hari\n`;
   });
 
   const zeroOrCrit = petugasList.filter((p) => p.status === 'zero' || p.status === 'critical');
   if (zeroOrCrit.length > 0) {
-    text += `\n⚠️ *Perhatian Khusus:* Terdapat ${zeroOrCrit.length} petugas di bawah target yang memerlukan pendampingan intensif dari Pengawas (PML).`;
+    text += `\n*Perhatian Khusus:* Terdapat ${zeroOrCrit.length} petugas yang membutuhkan supervisi langsung dari Pengawas (PML).`;
   }
 
-  text += `\n\nTetap semangat rekan-rekan ${kabupaten.nama}! Mari selesaikan pendataan tepat waktu dan berkualitas. 🙏`;
+  text += `\n\nMari kita tuntaskan pencacahan sebelum tanggal ${fieldDays} November 2026 agar proses cleaning berjalan optimal. Terima kasih.`;
 
   return text;
 }
@@ -99,26 +96,27 @@ export function generateKabupatenWhatsAppText(
 export function generatePersonalPetugasWhatsAppText(
   p: PetugasAnalysis,
   currentDay: number,
-  totalDays: number = 30
+  fieldDays: number = 23,
+  _totalDays: number = 30
 ): string {
-  const sisaHari = totalDays - currentDay;
+  const sisaHari = Math.max(0, fieldDays - currentDay);
 
-  let text = `Halo rekan *${p.pencacah}*,\n\n`;
-  text += `Pengingat Progres Kegiatan *PES SE2026* per Hari ke-${currentDay} (${p.kabupatenNama}):\n`;
-  text += `• Target Total: *${p.assigned}* sampel\n`;
-  text += `• Realisasi Dicacah: *${p.dicacah}* sampel\n`;
-  text += `• Sisa Beban: *${p.sisaTarget}* sampel\n`;
-  text += `• Target Kumulatif Hari Ini: *${p.targetKumulatif}* sampel\n`;
-  text += `• Target Harian Rekomendasi: *${p.runRateRequired}* sampel/hari (dalam ${sisaHari} hari ke depan)\n\n`;
+  let text = `Yth. Rekan ${p.pencacah},\n\n`;
+  text += `Berikut perkembangan kegiatan PES SE2026 per Hari ke-${currentDay} (${p.kabupatenNama}):\n`;
+  text += `• Alokasi Beban: ${p.assigned} sampel\n`;
+  text += `• Selesai Dicacah: ${p.dicacah} sampel\n`;
+  text += `• Target Kumulatif Ideal: ${p.targetKumulatif} sampel\n`;
+  text += `• Sisa Beban Belum Selesai: ${p.sisaTarget} sampel\n`;
+  text += `• Beban Harian Rekomendasi: ${p.runRateRequired} sampel/hari (sisa ${sisaHari} hari s.d. 23 Nov)\n\n`;
 
   if (p.status === 'zero') {
-    text += `🚨 *Status:* Belum ada data yang dikirim (0%). Mohon segera konfirmasi ke Pengawas (PML) mengenai kendala di lapangan.\n`;
+    text += `Catatan: Belum ada pengiriman data ke sistem. Mohon konfirmasi kendala lapangan kepada Pengawas (PML).\n`;
   } else if (p.status === 'critical' || p.status === 'warning') {
-    text += `⚠️ *Status:* Masih di bawah target harian (${p.gap} sampel tertinggal). Mohon ditingkatkan kecepatannya hari ini ya.\n`;
+    text += `Catatan: Progres berada di bawah target ideal (${Math.abs(p.gap)} sampel tertinggal). Mohon lakukan percepatan pendataan.\n`;
   } else {
-    text += `👏 *Status:* Sangat baik! Pertahankan performa kerja Anda hingga seluruh target selesai.\n`;
+    text += `Catatan: Progres berada pada jalur yang tepat. Pertahankan ritme kerja hingga selesai sebelum 23 November 2026.\n`;
   }
 
-  text += `\nSemangat dan jaga kesehatan selalu! 🙏`;
+  text += `\nTetap semangat dan jaga kualitas data. Terima kasih.`;
   return text;
 }

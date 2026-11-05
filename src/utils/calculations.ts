@@ -1,43 +1,57 @@
 import { PetugasRecord, PetugasAnalysis, KabupatenSummary, WarningStatus } from '../types';
 
+export const FIELD_TARGET_DAYS = 23; // Target penyelesaian pencacahan lapangan (1-23 Nov)
+export const TOTAL_MONTH_DAYS = 30; // Total periode kegiatan November
+
 export function analyzePetugas(
   records: PetugasRecord[],
   currentDay: number,
-  totalDays: number = 30,
+  fieldDays: number = FIELD_TARGET_DAYS,
+  _totalDays: number = TOTAL_MONTH_DAYS,
   includeDraft: boolean = false
 ): PetugasAnalysis[] {
+  const isCleaningPhase = currentDay > fieldDays;
+
   return records.map((record) => {
     const assigned = record.assigned || 0;
-    const targetHarian = assigned / totalDays;
-    // Target kumulatif ideal s.d. hari ini
-    const targetKumulatif = (assigned / totalDays) * currentDay;
+    // Target harian dihitung berbasis hari kerja efektif lapangan (23 hari)
+    const targetHarian = assigned / fieldDays;
 
-    // Realisasi
+    // Target kumulatif ideal s.d. hari pemantauan
+    const targetKumulatif = isCleaningPhase
+      ? assigned
+      : (assigned / fieldDays) * currentDay;
+
+    // Realisasi dicacah (Submit + Approve + Complete) atau ditambah Draft jika diaktifkan
     const realisasi = includeDraft ? (record.dicacah + record.draft) : record.dicacah;
 
     // % capaian terhadap target kumulatif hari ini
     const persenCapaian = targetKumulatif > 0 ? (realisasi / targetKumulatif) * 100 : 0;
-    // % capaian terhadap total keseluruhan 1 bulan
+    // % capaian terhadap total keseluruhan alokasi
     const persenTotal = assigned > 0 ? (realisasi / assigned) * 100 : 0;
 
     const gap = realisasi - targetKumulatif;
     const sisaTarget = Math.max(0, assigned - realisasi);
-    const sisaHari = Math.max(1, totalDays - currentDay);
-    const runRateRequired = Number((sisaTarget / sisaHari).toFixed(1));
 
-    // Evaluasi Warning
+    // Sisa hari lapangan untuk menyelesaikan target (tgl 1-23 Nov)
+    const sisaHariLapangan = isCleaningPhase ? 0 : Math.max(1, fieldDays - currentDay);
+    const runRateRequired = sisaHariLapangan > 0
+      ? Number((sisaTarget / sisaHariLapangan).toFixed(1))
+      : sisaTarget;
+
+    // Evaluasi Status Pengawasan (Formal)
     let status: WarningStatus = 'on_track';
     let statusLabel = 'Sesuai Target';
 
     if (realisasi === 0 && currentDay >= 2) {
       status = 'zero';
-      statusLabel = 'Belum Ada Progres (0%)';
+      statusLabel = 'Nol Progres';
     } else if (persenCapaian < 70) {
       status = 'critical';
-      statusLabel = 'Kritis (Tertinggal)';
+      statusLabel = 'Kritis';
     } else if (persenCapaian < 100) {
       status = 'warning';
-      statusLabel = 'Waspada (Kurang)';
+      statusLabel = 'Waspada';
     } else if (persenCapaian <= 125) {
       status = 'on_track';
       statusLabel = 'Sesuai Target';
@@ -55,10 +69,11 @@ export function analyzePetugas(
       persenTotal: Number(persenTotal.toFixed(1)),
       gap: Number(gap.toFixed(1)),
       sisaTarget,
-      sisaHari,
+      sisaHari: sisaHariLapangan,
       runRateRequired,
       status,
       statusLabel,
+      isCleaningPhase,
     };
   });
 }
@@ -93,8 +108,10 @@ export function calculateKabupatenSummary(analyzedRecords: PetugasAnalysis[]): K
     const petugasZero = list.filter((p) => p.status === 'zero').length;
 
     const totalSisaTarget = list.reduce((sum, item) => sum + item.sisaTarget, 0);
-    const sisaHari = list[0]?.sisaHari || 25;
-    const avgRunRate = Number((totalSisaTarget / sisaHari).toFixed(1));
+    const sisaHari = list[0]?.sisaHari ?? 1;
+    const avgRunRate = sisaHari > 0
+      ? Number((totalSisaTarget / sisaHari).toFixed(1))
+      : totalSisaTarget;
 
     return {
       kode: list[0]?.kabupatenKode || '',
@@ -117,6 +134,6 @@ export function calculateKabupatenSummary(analyzedRecords: PetugasAnalysis[]): K
     };
   });
 
-  // Sort by persenCapaian descending
-  return summaries.sort((a, b) => b.persenCapaian - a.persenCapaian);
+  // Urutkan default berdasarkan kode satker kabupaten (6101..6172) agar rapi secara hirarki administrasi
+  return summaries.sort((a, b) => a.kode.localeCompare(b.kode));
 }

@@ -32,10 +32,11 @@ export interface PetugasAnalysis extends PetugasRecord {
   persenTotal: number; // (realisasi / assigned) * 100
   gap: number; // realisasi - targetKumulatif
   sisaTarget: number; // assigned - realisasi
-  sisaHari: number; // totalHari - hariKe
+  sisaHari: number; // sisa hari kerja lapangan (s.d. tgl 23 Nov)
   runRateRequired: number; // sisaTarget / sisaHari
   status: WarningStatus;
   statusLabel: string;
+  isCleaningPhase: boolean;
 }
 
 export interface KabupatenSummary {

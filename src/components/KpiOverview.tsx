@@ -1,18 +1,18 @@
 import React from 'react';
-import { Target, CheckCircle, AlertTriangle, AlertOctagon, TrendingUp, Users } from 'lucide-react';
 import { PetugasAnalysis } from '../types';
 
 interface KpiOverviewProps {
   analyzedRecords: PetugasAnalysis[];
   currentDay: number;
-  totalDays: number;
+  fieldDays?: number;
+  totalDays?: number;
   includeDraft: boolean;
 }
 
 export const KpiOverview: React.FC<KpiOverviewProps> = ({
   analyzedRecords,
   currentDay,
-  totalDays,
+  fieldDays = 23,
   includeDraft,
 }) => {
   const totalPetugas = analyzedRecords.length;
@@ -22,112 +22,125 @@ export const KpiOverview: React.FC<KpiOverviewProps> = ({
   const totalDraft = analyzedRecords.reduce((sum, p) => sum + p.draft, 0);
   const totalRealisasi = includeDraft ? totalDicacah + totalDraft : totalDicacah;
 
-  const targetKumulatif = (totalAssigned / totalDays) * currentDay;
-  const idealPct = (currentDay / totalDays) * 100;
+  const isCleaningPhase = currentDay > fieldDays;
+  const targetKumulatif = isCleaningPhase
+    ? totalAssigned
+    : (totalAssigned / fieldDays) * currentDay;
+
+  const idealPct = Math.min(100, (currentDay / fieldDays) * 100);
   const actualPct = totalAssigned > 0 ? (totalRealisasi / totalAssigned) * 100 : 0;
   const vsTargetPct = targetKumulatif > 0 ? (totalRealisasi / targetKumulatif) * 100 : 0;
 
   const zeroPetugas = analyzedRecords.filter((p) => p.status === 'zero');
   const criticalPetugas = analyzedRecords.filter((p) => p.status === 'critical');
 
-  const sisaHari = Math.max(1, totalDays - currentDay);
+  const sisaHariLapangan = isCleaningPhase ? 0 : Math.max(1, fieldDays - currentDay);
   const sisaTarget = Math.max(0, totalAssigned - totalRealisasi);
-  const runRateRequired = (sisaTarget / sisaHari).toFixed(0);
+  const runRateRequired = sisaHariLapangan > 0
+    ? (sisaTarget / sisaHariLapangan).toFixed(0)
+    : sisaTarget.toString();
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 mb-6">
       
       {/* 1. Total Target Alokasi */}
-      <div className="bg-white rounded-xl p-4 border border-slate-200/80 shadow-sm relative overflow-hidden">
-        <div className="flex items-center justify-between text-slate-500 mb-2">
-          <span className="text-xs font-medium uppercase tracking-wider">Total Target</span>
-          <Target className="w-4 h-4 text-sky-600" />
+      <div 
+        className="bg-white rounded-lg p-4 border border-slate-200 shadow-2xs"
+        title="Total beban sampel survei yang dialokasikan kepada seluruh petugas di 8 Satker BPS Kab/Kota"
+      >
+        <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+          Total Alokasi
         </div>
-        <div className="text-2xl font-bold text-slate-900">
+        <div className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
           {totalAssigned.toLocaleString()}
         </div>
-        <div className="flex items-center gap-1.5 mt-1.5 text-xs text-slate-500">
-          <Users className="w-3.5 h-3.5 text-slate-400" />
-          <span>{totalPetugas} Petugas PPL</span>
+        <div className="mt-1.5 text-sm text-slate-500">
+          {totalPetugas} Petugas PPL
         </div>
       </div>
 
       {/* 2. Realisasi Dicacah */}
-      <div className="bg-white rounded-xl p-4 border border-slate-200/80 shadow-sm relative overflow-hidden">
-        <div className="flex items-center justify-between text-slate-500 mb-2">
-          <span className="text-xs font-medium uppercase tracking-wider">Realisasi Dicacah</span>
-          <CheckCircle className="w-4 h-4 text-emerald-600" />
+      <div 
+        className="bg-white rounded-lg p-4 border border-slate-200 shadow-2xs"
+        title="Kuesioner yang telah selesai pendataan (Submit + Approve + Complete)"
+      >
+        <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+          Realisasi Selesai
         </div>
-        <div className="text-2xl font-bold text-emerald-700">
+        <div className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
           {totalRealisasi.toLocaleString()}
         </div>
-        <div className="flex items-center justify-between mt-1.5 text-xs">
-          <div className="flex items-center gap-1">
-            <span className="font-semibold text-emerald-700">{actualPct.toFixed(1)}%</span>
-            <span className="text-slate-400">total</span>
-            {includeDraft && <span className="text-[10px] text-amber-600 font-medium">(+Draft)</span>}
-          </div>
-          <span className="text-[11px] text-slate-500 font-mono">Diolah: {totalDiolah.toLocaleString()}</span>
+        <div className="mt-1.5 text-sm text-slate-600 flex items-center justify-between">
+          <span className="font-semibold text-slate-800">{actualPct.toFixed(1)}% total</span>
+          <span className="text-slate-400 text-xs">Diolah: {totalDiolah.toLocaleString()}</span>
         </div>
       </div>
 
-      {/* 3. Target Ideal Kumulatif Hari Ini */}
-      <div className="bg-white rounded-xl p-4 border border-slate-200/80 shadow-sm relative overflow-hidden">
-        <div className="flex items-center justify-between text-slate-500 mb-2">
-          <span className="text-xs font-medium uppercase tracking-wider">Target Hari ke-{currentDay}</span>
-          <TrendingUp className="w-4 h-4 text-blue-600" />
+      {/* 3. Target Kumulatif Lapangan */}
+      <div 
+        className="bg-white rounded-lg p-4 border border-slate-200 shadow-2xs"
+        title={`Target kumulatif dihitung berbasis alokasi dibagi ${fieldDays} hari lapangan (1-${fieldDays} Nov)`}
+      >
+        <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+          Target H-{currentDay} ({fieldDays} Hari)
         </div>
-        <div className="text-2xl font-bold text-slate-800">
+        <div className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
           {Math.round(targetKumulatif).toLocaleString()}
         </div>
-        <div className="flex items-center justify-between mt-1.5 text-xs">
-          <span className="text-slate-500">Target: {idealPct.toFixed(1)}%</span>
-          <span className={`font-semibold ${vsTargetPct >= 100 ? 'text-emerald-600' : 'text-amber-600'}`}>
-            ({vsTargetPct.toFixed(0)}% tercapai)
+        <div className="mt-1.5 text-sm text-slate-600 flex items-center justify-between">
+          <span>Ideal: {idealPct.toFixed(1)}%</span>
+          <span className={`font-semibold ${vsTargetPct >= 100 ? 'text-emerald-700' : 'text-amber-700'}`}>
+            {vsTargetPct.toFixed(0)}% tercapai
           </span>
         </div>
       </div>
 
-      {/* 4. Petugas Belum Bergerak (0%) */}
-      <div className="bg-white rounded-xl p-4 border border-rose-200 shadow-sm relative overflow-hidden bg-rose-50/30">
-        <div className="flex items-center justify-between text-rose-700 mb-2">
-          <span className="text-xs font-semibold uppercase tracking-wider">Nol Progres (0%)</span>
-          <AlertOctagon className="w-4 h-4 text-rose-600" />
+      {/* 4. Petugas Nol Progres */}
+      <div 
+        className="bg-white rounded-lg p-4 border border-slate-200 shadow-2xs"
+        title="Petugas yang belum mengirimkan kuesioner sama sekali s.d. hari pemantauan"
+      >
+        <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+          Nol Progres (0%)
         </div>
-        <div className="text-2xl font-bold text-rose-700">
-          {zeroPetugas.length} <span className="text-sm font-normal text-rose-600">PPL</span>
+        <div className={`text-2xl sm:text-3xl font-bold ${zeroPetugas.length > 0 ? 'text-rose-700' : 'text-slate-900'} tracking-tight`}>
+          {zeroPetugas.length} <span className="text-sm font-normal text-slate-500">PPL</span>
         </div>
-        <div className="mt-1.5 text-xs text-rose-600 font-medium">
-          🚨 Perlu konfirmasi segera
-        </div>
-      </div>
-
-      {/* 5. Petugas Kritis (<70%) */}
-      <div className="bg-white rounded-xl p-4 border border-amber-200 shadow-sm relative overflow-hidden bg-amber-50/30">
-        <div className="flex items-center justify-between text-amber-700 mb-2">
-          <span className="text-xs font-semibold uppercase tracking-wider">Petugas Kritis</span>
-          <AlertTriangle className="w-4 h-4 text-amber-600" />
-        </div>
-        <div className="text-2xl font-bold text-amber-700">
-          {criticalPetugas.length} <span className="text-sm font-normal text-amber-600">PPL</span>
-        </div>
-        <div className="mt-1.5 text-xs text-amber-600 font-medium">
-          Di bawah 70% target
+        <div className="mt-1.5 text-sm text-slate-500">
+          {zeroPetugas.length > 0 ? 'Perlu konfirmasi kendala' : 'Semua sudah bergerak'}
         </div>
       </div>
 
-      {/* 6. Run-Rate Harian Yang Diperlukan */}
-      <div className="bg-white rounded-xl p-4 border border-indigo-200 shadow-sm relative overflow-hidden bg-indigo-50/30">
-        <div className="flex items-center justify-between text-indigo-700 mb-2">
-          <span className="text-xs font-semibold uppercase tracking-wider">Beban Sisa Hari</span>
-          <TrendingUp className="w-4 h-4 text-indigo-600" />
+      {/* 5. Petugas Kritis */}
+      <div 
+        className="bg-white rounded-lg p-4 border border-slate-200 shadow-2xs"
+        title="Petugas yang capaiannya di bawah 70% dari target kumulatif ideal hari ini"
+      >
+        <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+          Kritis (&lt;70%)
         </div>
-        <div className="text-2xl font-bold text-indigo-800">
+        <div className={`text-2xl sm:text-3xl font-bold ${criticalPetugas.length > 0 ? 'text-amber-700' : 'text-slate-900'} tracking-tight`}>
+          {criticalPetugas.length} <span className="text-sm font-normal text-slate-500">PPL</span>
+        </div>
+        <div className="mt-1.5 text-sm text-slate-500">
+          Perlu akselerasi kerja
+        </div>
+      </div>
+
+      {/* 6. Beban Sisa Harian */}
+      <div 
+        className="bg-white rounded-lg p-4 border border-slate-200 shadow-2xs"
+        title={`Rata-rata kuesioner harian yang harus diselesaikan sebelum deadline ${fieldDays} November`}
+      >
+        <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+          Beban Sisa / Hari
+        </div>
+        <div className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
           {Number(runRateRequired).toLocaleString()}
-          <span className="text-xs font-normal text-indigo-600 ml-1">/hari</span>
+          <span className="text-sm font-normal text-slate-500 ml-1">sampel</span>
         </div>
-        <div className="mt-1.5 text-xs text-indigo-600 font-medium">
-          Dalam {sisaHari} hari tersisa
+        <div className="mt-1.5 text-sm text-slate-500">
+          {isCleaningPhase ? 'Fase cleaning berjalan' : `Sisa ${sisaHariLapangan} hari s.d. 23 Nov`}
         </div>
       </div>
 

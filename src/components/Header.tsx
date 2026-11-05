@@ -1,76 +1,78 @@
 import React from 'react';
-import { UploadCloud, Share2, Download, RotateCcw, Calendar, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Share2, Download, Calendar, Info } from 'lucide-react';
 
 interface HeaderProps {
   currentDay: number;
+  fieldDays?: number;
   totalDays: number;
   onDayChange: (day: number) => void;
   includeDraft: boolean;
   onIncludeDraftChange: (include: boolean) => void;
   fileName: string;
   lastUpdated: string;
-  isCustomData: boolean;
-  onOpenUpload: () => void;
   onOpenShareModal: () => void;
   onExportExcel: () => void;
-  onResetData: () => void;
+  onScrollToMetadata: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentDay,
-  totalDays,
+  fieldDays = 23,
+  totalDays = 30,
   onDayChange,
   includeDraft,
   onIncludeDraftChange,
   fileName,
   lastUpdated,
-  isCustomData,
-  onOpenUpload,
   onOpenShareModal,
   onExportExcel,
-  onResetData,
+  onScrollToMetadata,
 }) => {
+  const isCleaningPhase = currentDay > fieldDays;
+  const idealPct = Math.min(100, (currentDay / fieldDays) * 100);
+
   return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-      {/* Top Banner */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+    <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        
+        {/* Top Header Row */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           
-          {/* Logo & Title */}
-          <div className="flex items-center space-x-3.5">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-700 to-blue-600 flex items-center justify-center text-white shadow-md shadow-sky-600/20">
-              <span className="font-bold tracking-wider text-sm">PES</span>
+          {/* Institutional Title & Branding */}
+          <div className="flex items-center space-x-4">
+            <div className="w-11 h-11 rounded-lg bg-[#005596] flex items-center justify-center text-white font-bold text-base tracking-wider shrink-0 shadow-xs">
+              BPS
             </div>
             <div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2.5">
                 <h1 className="text-xl font-bold text-slate-900 tracking-tight">
                   Monitoring Harian Petugas PES SE2026
                 </h1>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-sky-100 text-sky-800 border border-sky-200">
-                  BPS Prov. Kalbar
+                <span className="text-xs font-semibold px-2.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                  Provinsi Kalimantan Barat
                 </span>
               </div>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Pemantauan Target Harian Lapangan • 1 s.d. 30 November 2026
+              <p className="text-sm text-slate-500 mt-0.5">
+                Target Lapangan 1 s.d. {fieldDays} November • Pembersihan Data 24 s.d. {totalDays} November 2026
               </p>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <button
-              onClick={onOpenUpload}
-              className="inline-flex items-center px-3.5 py-2 text-xs font-medium rounded-lg text-white bg-sky-600 hover:bg-sky-700 transition-colors shadow-sm gap-1.5 cursor-pointer"
-              title="Upload file excel hasil download dari Fasih Dashboard"
+              onClick={onScrollToMetadata}
+              className="inline-flex items-center px-3.5 py-2 text-sm font-medium rounded-lg text-slate-600 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 transition-colors gap-2 cursor-pointer"
+              title="Lihat Metadata Operasional & Catatan Teknis"
             >
-              <UploadCloud className="w-4 h-4" />
-              <span>Upload Excel Progres</span>
+              <Info className="w-4 h-4 text-slate-500" />
+              <span>Metadata & Catatan</span>
             </button>
 
             <button
               onClick={onOpenShareModal}
-              className="inline-flex items-center px-3.5 py-2 text-xs font-medium rounded-lg text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 transition-colors gap-1.5 cursor-pointer"
-              title="Salin pesan ringkasan siap blast ke grup WhatsApp"
+              className="inline-flex items-center px-3.5 py-2 text-sm font-medium rounded-lg text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors gap-2 cursor-pointer"
+              title="Salin ringkasan koordinasi ke WhatsApp"
             >
               <Share2 className="w-4 h-4 text-emerald-600" />
               <span>Ringkasan WA</span>
@@ -78,85 +80,81 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={onExportExcel}
-              className="inline-flex items-center px-3 py-2 text-xs font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 transition-colors gap-1.5 cursor-pointer"
-              title="Download evaluasi dan status warning ke file Excel"
+              className="inline-flex items-center px-3.5 py-2 text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 transition-colors gap-2 cursor-pointer shadow-xs"
+              title="Unduh rekapitulasi evaluasi dalam format Excel"
             >
               <Download className="w-4 h-4 text-slate-500" />
-              <span>Export Excel</span>
+              <span>Ekspor Excel</span>
             </button>
-
-            {isCustomData && (
-              <button
-                onClick={onResetData}
-                className="inline-flex items-center px-2.5 py-2 text-xs font-medium rounded-lg text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-colors gap-1 cursor-pointer"
-                title="Kembalikan ke data default awal"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Reset</span>
-              </button>
-            )}
           </div>
         </div>
 
-        {/* Status bar & Interactive Controls */}
-        <div className="mt-3.5 pt-3 border-t border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs">
+        {/* Status Bar & Interactive Timeline Slider */}
+        <div className="mt-4 pt-3.5 border-t border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-sm">
           
-          {/* File info */}
+          {/* Data Source & Git Sync Info */}
           <div className="flex flex-wrap items-center gap-2 text-slate-600">
-            <span className="font-medium text-slate-500">File Aktif:</span>
-            <code className="px-2 py-0.5 rounded bg-slate-100 font-mono text-[11px] text-slate-700 border border-slate-200">
+            <span className="text-slate-400">Sumber:</span>
+            <code className="px-2 py-0.5 rounded bg-slate-100 text-xs text-slate-700 font-mono border border-slate-200 font-medium">
               {fileName}
             </code>
-            <span className="text-slate-400">•</span>
-            <span>Update: <strong className="text-slate-700">{lastUpdated}</strong></span>
-            {isCustomData ? (
-              <span className="inline-flex items-center gap-1 text-[11px] text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200 font-medium">
-                <AlertCircle className="w-3 h-3" /> Data Hasil Upload User
-              </span>
-            ) : (
-              <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 font-medium">
-                <CheckCircle2 className="w-3 h-3" /> Data Default Baseline
-              </span>
-            )}
+            <span className="text-slate-300">•</span>
+            <span>Update: <strong className="text-slate-800 font-semibold">{lastUpdated}</strong></span>
+            <span className="text-slate-300">•</span>
+            <span className="text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+              Sinkronisasi Otomatis Git
+            </span>
           </div>
 
-          {/* Day & Target Slider Controls */}
-          <div className="flex flex-wrap items-center gap-4 bg-slate-50 p-2 rounded-xl border border-slate-200/80">
+          {/* Timeline & Phase Controls */}
+          <div className="flex flex-wrap items-center gap-4 bg-slate-50 px-3.5 py-2 rounded-lg border border-slate-200">
             {/* Draft toggle */}
-            <label className="flex items-center gap-1.5 cursor-pointer text-slate-700 select-none">
+            <label className="flex items-center gap-2 cursor-pointer text-slate-700 select-none" title="Sertakan kuesioner berstatus Draft di Fasih sebagai progres pendataan">
               <input
                 type="checkbox"
                 checked={includeDraft}
                 onChange={(e) => onIncludeDraftChange(e.target.checked)}
-                className="w-3.5 h-3.5 rounded text-sky-600 focus:ring-sky-500 border-slate-300"
+                className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300 cursor-pointer"
               />
-              <span>Hitung Draft</span>
+              <span className="text-sm font-medium">Hitung Draft</span>
             </label>
 
-            <div className="h-4 w-px bg-slate-200 hidden sm:block" />
+            <div className="h-4 w-px bg-slate-300 hidden sm:block" />
 
-            {/* Day slider */}
-            <div className="flex items-center gap-2.5">
-              <div className="flex items-center gap-1 text-slate-700">
-                <Calendar className="w-3.5 h-3.5 text-sky-600" />
-                <span className="font-semibold text-slate-900">
-                  Hari ke-{currentDay} <span className="font-normal text-slate-500 text-[11px]">({currentDay} Nov)</span>
+            {/* Day slider with Phase Indicator */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5 text-slate-700">
+                <Calendar className="w-4 h-4 text-slate-500" />
+                <span className="font-semibold text-slate-900 text-sm">
+                  Hari ke-{currentDay} <span className="font-normal text-slate-500 text-xs">({currentDay} Nov)</span>
                 </span>
               </div>
+
               <input
                 type="range"
                 min="1"
                 max={totalDays}
                 value={currentDay}
                 onChange={(e) => onDayChange(Number(e.target.value))}
-                className="w-24 sm:w-32 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
+                className="w-28 sm:w-36 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#005596]"
               />
-              <span className="text-[11px] text-slate-500 font-medium">
-                Ideal: {((currentDay / totalDays) * 100).toFixed(0)}%
-              </span>
+
+              <div className="text-xs">
+                {isCleaningPhase ? (
+                  <span className="inline-block px-2 py-0.5 rounded bg-amber-50 text-amber-800 font-medium border border-amber-200">
+                    Fase Cleaning Data
+                  </span>
+                ) : (
+                  <span className="text-slate-600 font-medium">
+                    Target Ideal: {idealPct.toFixed(1)}% <span className="text-slate-400 font-normal">({currentDay}/{fieldDays} hr)</span>
+                  </span>
+                )}
+              </div>
             </div>
           </div>
+
         </div>
+
       </div>
     </header>
   );
