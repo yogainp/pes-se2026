@@ -424,7 +424,7 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
                                     Benchmark Kontrol Sensus Ekonomi (SE2026):
                                   </span>
                                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-slate-700">
-                                    <span>Target Keluarga SE: <strong className="text-blue-950">{p.kontrolKeluarga}</strong></span>
+                                    <span>Total Assignment: <strong className="text-blue-950">{p.kontrolKeluarga}</strong></span>
                                     <span>Realisasi Dicacah: <strong className="text-emerald-700">{p.dicacah}</strong></span>
                                     <span>Coverage SE: <strong className="text-blue-900">{p.coverageKeluargaSE}%</strong></span>
                                     <span>

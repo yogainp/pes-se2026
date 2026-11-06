@@ -59,8 +59,8 @@ export const KpiOverview: React.FC<KpiOverviewProps> = ({
         <div className="mt-1.5 text-xs text-slate-500 flex items-center justify-between">
           <span>{totalPetugas} PPL</span>
           {totalKontrolKeluarga > 0 && (
-            <span className="font-semibold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded text-[11px]" title="Total Keluarga Data Kontrol Hasil Sensus Ekonomi 2026">
-              SE: {totalKontrolKeluarga.toLocaleString()} Kel
+            <span className="font-semibold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded text-[11px]" title="Total Assignment Data Kontrol Hasil Sensus Ekonomi 2026">
+              SE: {totalKontrolKeluarga.toLocaleString()}
             </span>
           )}
         </div>

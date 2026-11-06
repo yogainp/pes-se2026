@@ -126,8 +126,8 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
                     {kab.totalDicacah.toLocaleString()} <span className="text-slate-400 font-normal text-xs">/ {kab.totalAssigned}</span>
                   </span>
                   {kab.totalKontrolKeluarga ? (
-                    <span className="text-[11px] text-blue-600 block mt-0.5" title="Data Kontrol Keluarga dari Hasil Sensus Ekonomi 2026">
-                      SE: {kab.totalKontrolKeluarga.toLocaleString()} Kel ({kab.coverageKeluargaSE}%)
+                    <span className="text-[11px] text-blue-600 block mt-0.5" title="Data Kontrol Total Assignment dari Hasil Sensus Ekonomi 2026">
+                      SE: {kab.totalKontrolKeluarga.toLocaleString()} ({kab.coverageKeluargaSE}%)
                     </span>
                   ) : null}
                 </div>
