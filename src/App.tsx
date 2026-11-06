@@ -55,7 +55,7 @@ export default function App() {
 
   // Export Excel
   const handleExportExcel = () => {
-    exportAnalysisToExcel(analyzedRecords, kabupatenSummaries, currentDay, fieldDays, totalDays);
+    exportAnalysisToExcel(analyzedRecords, kabupatenSummaries, currentDay, fieldDays, totalDays, includeDraft);
   };
 
   // Open WA Modal for specific Kabupaten
@@ -125,6 +125,7 @@ export default function App() {
           currentDay={currentDay}
           fieldDays={fieldDays}
           totalDays={totalDays}
+          includeDraft={includeDraft}
         />
 
         {/* Tabel Monitoring Detail Petugas (PPL) */}
@@ -136,6 +137,7 @@ export default function App() {
           currentDay={currentDay}
           fieldDays={fieldDays}
           totalDays={totalDays}
+          includeDraft={includeDraft}
           onSendPetugasAlert={handleSendPetugasAlert}
         />
 
@@ -165,6 +167,7 @@ export default function App() {
         currentDay={currentDay}
         fieldDays={fieldDays}
         totalDays={totalDays}
+        includeDraft={includeDraft}
         initialKabupaten={shareKabupatenKode}
         initialPetugas={sharePetugas}
       />

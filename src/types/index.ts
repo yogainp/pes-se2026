@@ -56,6 +56,7 @@ export interface KabupatenSummary {
   totalPetugas: number;
   totalAssigned: number;
   totalDicacah: number;
+  totalRealisasi: number;
   totalDiolah: number;
   totalOpen: number;
   totalDraft: number;

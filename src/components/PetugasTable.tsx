@@ -10,10 +10,11 @@ interface PetugasTableProps {
   currentDay: number;
   fieldDays?: number;
   totalDays: number;
+  includeDraft?: boolean;
   onSendPetugasAlert: (petugas: PetugasAnalysis) => void;
 }
 
-type SortField = 'persenCapaian' | 'assigned' | 'dicacah' | 'gap' | 'runRateRequired' | 'pencacah';
+type SortField = 'persenCapaian' | 'assigned' | 'realisasi' | 'dicacah' | 'gap' | 'runRateRequired' | 'pencacah';
 type SortDirection = 'asc' | 'desc';
 
 export const PetugasTable: React.FC<PetugasTableProps> = ({
@@ -23,6 +24,7 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
   kabupatenList,
   currentDay,
   fieldDays = 23,
+  includeDraft = false,
   onSendPetugasAlert,
 }) => {
   const [search, setSearch] = useState('');
@@ -213,11 +215,18 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
               </th>
 
               <th 
-                onClick={() => handleSort('dicacah')}
+                onClick={() => handleSort(includeDraft ? 'realisasi' : 'dicacah')}
                 className="py-3 px-3 cursor-pointer hover:text-slate-900 transition-colors text-right"
-                title="Kuesioner yang selesai dicacah (Submit + Approve + Complete)"
+                title={includeDraft ? "Total realisasi selesai dicacah (Submit + Approve + Complete) ditambah Draft tersimpan" : "Kuesioner yang selesai dicacah (Submit + Approve + Complete)"}
               >
-                Realisasi
+                <div className="inline-flex items-center justify-end gap-1 w-full">
+                  <span>Realisasi</span>
+                  {includeDraft && (
+                    <span className="text-[10px] font-semibold text-blue-700 bg-blue-100/80 px-1 py-0.2 rounded border border-blue-200">
+                      +Draft
+                    </span>
+                  )}
+                </div>
               </th>
 
               <th 
@@ -313,11 +322,30 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
                         <span className="text-xs text-slate-400 block">({p.targetHarian}/hr)</span>
                       </td>
 
-                      {/* Realisasi Dicacah */}
+                      {/* Realisasi Dicacah / Total */}
                       <td className="py-3 px-3 text-right text-sm">
-                        <span className="font-bold text-slate-900">{p.dicacah}</span>
-                        {p.draft > 0 && (
-                          <span className="text-xs text-amber-700 font-medium block">+{p.draft} draft</span>
+                        {includeDraft ? (
+                          <>
+                            <span className="font-bold text-slate-900 block">{p.realisasi}</span>
+                            {p.draft > 0 ? (
+                              <span className="text-[11px] text-blue-700 font-medium block" title="Gabungan data dicacah dan draft">
+                                ({p.dicacah} + {p.draft} draft)
+                              </span>
+                            ) : (
+                              <span className="text-[11px] text-slate-400 font-normal block">
+                                (0 draft)
+                              </span>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <span className="font-bold text-slate-900 block">{p.dicacah}</span>
+                            {p.draft > 0 && (
+                              <span className="text-xs text-amber-700 font-medium block" title="Draft tersimpan di perangkat lokal (belum dihitung ke realisasi)">
+                                +{p.draft} draft
+                              </span>
+                            )}
+                          </>
                         )}
                         {p.coverageKeluargaSE !== undefined && p.coverageKeluargaSE > 0 && (
                           <span className="text-[11px] text-emerald-600 font-medium block" title="Persentase cakupan terhadap baseline keluarga hasil SE">
@@ -425,7 +453,13 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
                                   </span>
                                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-slate-700">
                                     <span>Total Assignment: <strong className="text-blue-950">{p.kontrolKeluarga}</strong></span>
-                                    <span>Realisasi Dicacah: <strong className="text-emerald-700">{p.dicacah}</strong></span>
+                                    <span>
+                                      Realisasi {includeDraft ? 'Total' : 'Dicacah'}:{' '}
+                                      <strong className="text-emerald-700">{includeDraft ? p.realisasi : p.dicacah}</strong>
+                                      {includeDraft && p.draft > 0 && (
+                                        <span className="text-slate-500 font-normal ml-1">({p.dicacah} + {p.draft} draft)</span>
+                                      )}
+                                    </span>
                                     <span>Coverage SE: <strong className="text-blue-900">{p.coverageKeluargaSE}%</strong></span>
                                     <span>
                                       Deviasi Beban:{' '}

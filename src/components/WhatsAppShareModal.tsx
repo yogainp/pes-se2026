@@ -15,6 +15,7 @@ interface WhatsAppShareModalProps {
   currentDay: number;
   fieldDays?: number;
   totalDays: number;
+  includeDraft?: boolean;
   initialKabupaten?: string; // kode
   initialPetugas?: PetugasAnalysis | null;
 }
@@ -27,6 +28,7 @@ export const WhatsAppShareModal: React.FC<WhatsAppShareModalProps> = ({
   currentDay,
   fieldDays = 23,
   totalDays,
+  includeDraft = false,
   initialKabupaten,
   initialPetugas,
 }) => {
@@ -57,21 +59,21 @@ export const WhatsAppShareModal: React.FC<WhatsAppShareModalProps> = ({
     if (!isOpen) return;
 
     if (targetType === 'provinsi') {
-      setMessage(generateProvinceWhatsAppText(kabupatenSummaries, allPetugas, currentDay, fieldDays, totalDays));
+      setMessage(generateProvinceWhatsAppText(kabupatenSummaries, allPetugas, currentDay, fieldDays, totalDays, includeDraft));
     } else if (targetType === 'kabupaten') {
       const kab = kabupatenSummaries.find((k) => k.kode === selectedKabKode) || kabupatenSummaries[0];
       if (kab) {
         const pList = allPetugas.filter((p) => p.kabupatenKode === kab.kode);
-        setMessage(generateKabupatenWhatsAppText(kab, pList, currentDay, fieldDays, totalDays));
+        setMessage(generateKabupatenWhatsAppText(kab, pList, currentDay, fieldDays, totalDays, includeDraft));
       }
     } else if (targetType === 'petugas') {
       const p = allPetugas.find((item) => item.id === selectedPetugasId) || allPetugas[0];
       if (p) {
-        setMessage(generatePersonalPetugasWhatsAppText(p, currentDay, fieldDays, totalDays));
+        setMessage(generatePersonalPetugasWhatsAppText(p, currentDay, fieldDays, totalDays, includeDraft));
       }
     }
     setCopied(false);
-  }, [isOpen, targetType, selectedKabKode, selectedPetugasId, kabupatenSummaries, allPetugas, currentDay, fieldDays, totalDays]);
+  }, [isOpen, targetType, selectedKabKode, selectedPetugasId, kabupatenSummaries, allPetugas, currentDay, fieldDays, totalDays, includeDraft]);
 
   if (!isOpen) return null;
 
@@ -175,7 +177,7 @@ export const WhatsAppShareModal: React.FC<WhatsAppShareModalProps> = ({
             >
               {kabupatenSummaries.map((k) => (
                 <option key={k.kode} value={k.kode}>
-                  {k.nama} ({k.totalDicacah}/{k.totalAssigned})
+                  {k.nama} ({includeDraft ? k.totalRealisasi : k.totalDicacah}/{k.totalAssigned})
                 </option>
               ))}
             </select>
@@ -192,7 +194,7 @@ export const WhatsAppShareModal: React.FC<WhatsAppShareModalProps> = ({
             >
               {allPetugas.map((p) => (
                 <option key={p.id} value={p.id}>
-                  [{p.kabupatenNama}] {p.pencacah} ({p.dicacah}/{p.assigned})
+                  [{p.kabupatenNama}] {p.pencacah} ({includeDraft ? p.realisasi : p.dicacah}/{p.assigned})
                 </option>
               ))}
             </select>

@@ -125,6 +125,7 @@ export function calculateKabupatenSummary(analyzedRecords: PetugasAnalysis[]): K
       totalPetugas: list.length,
       totalAssigned,
       totalDicacah,
+      totalRealisasi,
       totalDiolah,
       totalOpen,
       totalDraft,

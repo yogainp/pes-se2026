@@ -10,6 +10,7 @@ interface KabupatenOverviewProps {
   currentDay: number;
   fieldDays?: number;
   totalDays?: number;
+  includeDraft?: boolean;
 }
 
 export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
@@ -19,6 +20,7 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
   onShareKabupaten,
   currentDay,
   fieldDays = 23,
+  includeDraft = false,
 }) => {
   const idealPct = Math.min(100, (currentDay / fieldDays) * 100);
 
@@ -123,8 +125,14 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
                 <div>
                   <span className="text-slate-500 block text-xs">Realisasi / Alokasi</span>
                   <span className="font-bold text-slate-800">
-                    {kab.totalDicacah.toLocaleString()} <span className="text-slate-400 font-normal text-xs">/ {kab.totalAssigned}</span>
+                    {includeDraft ? kab.totalRealisasi.toLocaleString() : kab.totalDicacah.toLocaleString()}{' '}
+                    <span className="text-slate-400 font-normal text-xs">/ {kab.totalAssigned}</span>
                   </span>
+                  {includeDraft && kab.totalDraft > 0 && (
+                    <span className="text-[11px] text-blue-700 font-medium block">
+                      ({kab.totalDicacah} + {kab.totalDraft} draft)
+                    </span>
+                  )}
                   {kab.totalKontrolKeluarga ? (
                     <span className="text-[11px] text-blue-600 block mt-0.5" title="Data Kontrol Total Assignment dari Hasil Sensus Ekonomi 2026">
                       SE: {kab.totalKontrolKeluarga.toLocaleString()} ({kab.coverageKeluargaSE}%)

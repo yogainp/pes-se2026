@@ -6,7 +6,8 @@ export function exportAnalysisToExcel(
   kabupatenSummaries: KabupatenSummary[],
   currentDay: number,
   fieldDays: number = 23,
-  _totalDays: number = 30
+  _totalDays: number = 30,
+  includeDraft: boolean = false
 ) {
   const wb = XLSX.utils.book_new();
 
@@ -19,6 +20,7 @@ export function exportAnalysisToExcel(
     'Pengawas (PML)': p.pengawas,
     'Total Beban (Assigned)': p.assigned,
     [`Target Kumulatif (H-${currentDay}/${fieldDays})`]: p.targetKumulatif,
+    'Realisasi (Evaluasi)': p.realisasi,
     'Realisasi Dicacah': p.dicacah,
     'Draft': p.draft,
     'Diolah': p.diolah,
@@ -42,6 +44,7 @@ export function exportAnalysisToExcel(
     'Jumlah PPL': k.totalPetugas,
     'Total Target Alokasi': k.totalAssigned,
     [`Target Kumulatif (H-${currentDay}/${fieldDays})`]: k.targetKumulatif,
+    'Total Realisasi (Evaluasi)': includeDraft ? k.totalRealisasi : k.totalDicacah,
     'Total Dicacah': k.totalDicacah,
     'Total Diolah': k.totalDiolah,
     'Total Draft': k.totalDraft,
