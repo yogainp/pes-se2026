@@ -298,8 +298,13 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
                       </td>
 
                       {/* Alokasi */}
-                      <td className="py-3 px-3 text-right font-semibold text-slate-800 text-sm">
-                        {p.assigned}
+                      <td className="py-3 px-3 text-right text-sm">
+                        <span className="font-semibold text-slate-800 block">{p.assigned}</span>
+                        {p.kontrolKeluarga !== undefined && p.kontrolKeluarga > 0 && (
+                          <span className="text-[11px] text-blue-600 font-medium block" title="Data Kontrol Keluarga dari Hasil Sensus Ekonomi 2026">
+                            SE: {p.kontrolKeluarga}
+                          </span>
+                        )}
                       </td>
 
                       {/* Target Harian */}
@@ -313,6 +318,11 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
                         <span className="font-bold text-slate-900">{p.dicacah}</span>
                         {p.draft > 0 && (
                           <span className="text-xs text-amber-700 font-medium block">+{p.draft} draft</span>
+                        )}
+                        {p.coverageKeluargaSE !== undefined && p.coverageKeluargaSE > 0 && (
+                          <span className="text-[11px] text-emerald-600 font-medium block" title="Persentase cakupan terhadap baseline keluarga hasil SE">
+                            {p.coverageKeluargaSE}% SE
+                          </span>
                         )}
                       </td>
 
@@ -406,6 +416,26 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
                                 <div className="p-2 bg-white rounded border border-slate-200">Complete: <strong className="text-slate-900">{p.complete}</strong></div>
                                 <div className="p-2 bg-white rounded border border-slate-200">Diolah: <strong className="text-slate-900">{p.diolah}</strong></div>
                               </div>
+
+                              {/* Benchmark Kontrol SE */}
+                              {p.kontrolKeluarga !== undefined && p.kontrolKeluarga > 0 && (
+                                <div className="mt-3 p-2.5 bg-blue-50/70 rounded-lg border border-blue-200/80 text-xs">
+                                  <span className="font-bold text-blue-900 block mb-1">
+                                    Benchmark Kontrol Sensus Ekonomi (SE2026):
+                                  </span>
+                                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-slate-700">
+                                    <span>Target Keluarga SE: <strong className="text-blue-950">{p.kontrolKeluarga}</strong></span>
+                                    <span>Realisasi Dicacah: <strong className="text-emerald-700">{p.dicacah}</strong></span>
+                                    <span>Coverage SE: <strong className="text-blue-900">{p.coverageKeluargaSE}%</strong></span>
+                                    <span>
+                                      Deviasi Beban:{' '}
+                                      <strong className={p.gapKontrolKeluarga && p.gapKontrolKeluarga > 0 ? 'text-amber-700' : 'text-slate-800'}>
+                                        {p.gapKontrolKeluarga !== undefined && p.gapKontrolKeluarga > 0 ? `+${p.gapKontrolKeluarga}` : p.gapKontrolKeluarga}
+                                      </strong>
+                                    </span>
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </td>

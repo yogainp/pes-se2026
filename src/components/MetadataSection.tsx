@@ -119,6 +119,10 @@ export const MetadataSection: React.FC = () => {
               <strong className="text-slate-800 block font-semibold">Mekanisme Sinkronisasi:</strong>
               Terenkapsulasi dalam repositori Git (<em className="text-slate-700">Single Source of Truth</em>). Setiap pembaruan file Excel di Git otomatis memperbarui data pada portal monitoring.
             </li>
+            <li>
+              <strong className="text-blue-900 block font-semibold">Data Kontrol Sensus Ekonomi (SE2026):</strong>
+              Angka <em className="text-slate-700">Total Prelist & Hasil Keluarga</em> pada 129 SLS Sampel PES hasil SE2026 diintegrasikan sebagai patokan kontrol beban mandiri untuk mengevaluasi kelayakan penugasan Fasih dan memantau persentase cakupan (<em className="text-slate-700">coverage</em>) riil di lapangan.
+            </li>
           </ul>
         </div>
 

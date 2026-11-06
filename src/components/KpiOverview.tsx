@@ -21,6 +21,7 @@ export const KpiOverview: React.FC<KpiOverviewProps> = ({
   const totalDiolah = analyzedRecords.reduce((sum, p) => sum + p.diolah, 0);
   const totalDraft = analyzedRecords.reduce((sum, p) => sum + p.draft, 0);
   const totalRealisasi = includeDraft ? totalDicacah + totalDraft : totalDicacah;
+  const totalKontrolKeluarga = analyzedRecords.reduce((sum, p) => sum + (p.kontrolKeluarga || 0), 0);
 
   const isCleaningPhase = currentDay > fieldDays;
   const targetKumulatif = isCleaningPhase
@@ -30,6 +31,7 @@ export const KpiOverview: React.FC<KpiOverviewProps> = ({
   const idealPct = Math.min(100, (currentDay / fieldDays) * 100);
   const actualPct = totalAssigned > 0 ? (totalRealisasi / totalAssigned) * 100 : 0;
   const vsTargetPct = targetKumulatif > 0 ? (totalRealisasi / targetKumulatif) * 100 : 0;
+  const vsKontrolPct = totalKontrolKeluarga > 0 ? (totalRealisasi / totalKontrolKeluarga) * 100 : 0;
 
   const zeroPetugas = analyzedRecords.filter((p) => p.status === 'zero');
   const criticalPetugas = analyzedRecords.filter((p) => p.status === 'critical');
@@ -54,15 +56,20 @@ export const KpiOverview: React.FC<KpiOverviewProps> = ({
         <div className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
           {totalAssigned.toLocaleString()}
         </div>
-        <div className="mt-1.5 text-sm text-slate-500">
-          {totalPetugas} Petugas PPL
+        <div className="mt-1.5 text-xs text-slate-500 flex items-center justify-between">
+          <span>{totalPetugas} PPL</span>
+          {totalKontrolKeluarga > 0 && (
+            <span className="font-semibold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded text-[11px]" title="Total Keluarga Data Kontrol Hasil Sensus Ekonomi 2026">
+              SE: {totalKontrolKeluarga.toLocaleString()} Kel
+            </span>
+          )}
         </div>
       </div>
 
       {/* 2. Realisasi Dicacah */}
       <div 
         className="bg-white rounded-lg p-4 border border-slate-200 shadow-2xs"
-        title="Kuesioner yang telah selesai pendataan (Submit + Approve + Complete)"
+        title={`Kuesioner yang telah selesai pendataan (Submit + Approve + Complete). Diolah: ${totalDiolah.toLocaleString()}`}
       >
         <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
           Realisasi Selesai
@@ -70,9 +77,13 @@ export const KpiOverview: React.FC<KpiOverviewProps> = ({
         <div className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
           {totalRealisasi.toLocaleString()}
         </div>
-        <div className="mt-1.5 text-sm text-slate-600 flex items-center justify-between">
-          <span className="font-semibold text-slate-800">{actualPct.toFixed(1)}% total</span>
-          <span className="text-slate-400 text-xs">Diolah: {totalDiolah.toLocaleString()}</span>
+        <div className="mt-1.5 text-xs text-slate-600 flex items-center justify-between">
+          <span className="font-semibold text-slate-800">{actualPct.toFixed(1)}% alokasi</span>
+          {totalKontrolKeluarga > 0 && (
+            <span className="font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded text-[11px]" title="Persentase cakupan terhadap data kontrol keluarga hasil SE">
+              {vsKontrolPct.toFixed(1)}% SE
+            </span>
+          )}
         </div>
       </div>
 

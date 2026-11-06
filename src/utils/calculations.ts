@@ -113,6 +113,11 @@ export function calculateKabupatenSummary(analyzedRecords: PetugasAnalysis[]): K
       ? Number((totalSisaTarget / sisaHari).toFixed(1))
       : totalSisaTarget;
 
+    const totalKontrolKeluarga = list.reduce((sum, item) => sum + (item.kontrolKeluarga || 0), 0);
+    const coverageKeluargaSE = totalKontrolKeluarga > 0
+      ? Number(((totalDicacah / totalKontrolKeluarga) * 100).toFixed(1))
+      : 0;
+
     return {
       kode: list[0]?.kabupatenKode || '',
       nama: list[0]?.kabupatenNama || key,
@@ -131,6 +136,8 @@ export function calculateKabupatenSummary(analyzedRecords: PetugasAnalysis[]): K
       petugasOnTrack,
       petugasZero,
       avgRunRate,
+      totalKontrolKeluarga,
+      coverageKeluargaSE,
     };
   });
 

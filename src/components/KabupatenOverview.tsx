@@ -121,10 +121,15 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
               {/* Metrics Detail */}
               <div className="mt-3.5 pt-2.5 border-t border-slate-100 grid grid-cols-2 gap-2 text-sm">
                 <div>
-                  <span className="text-slate-500 block text-xs">Realisasi</span>
+                  <span className="text-slate-500 block text-xs">Realisasi / Alokasi</span>
                   <span className="font-bold text-slate-800">
                     {kab.totalDicacah.toLocaleString()} <span className="text-slate-400 font-normal text-xs">/ {kab.totalAssigned}</span>
                   </span>
+                  {kab.totalKontrolKeluarga ? (
+                    <span className="text-[11px] text-blue-600 block mt-0.5" title="Data Kontrol Keluarga dari Hasil Sensus Ekonomi 2026">
+                      SE: {kab.totalKontrolKeluarga.toLocaleString()} Kel ({kab.coverageKeluargaSE}%)
+                    </span>
+                  ) : null}
                 </div>
                 <div>
                   <span className="text-slate-500 block text-xs">Beban Sisa</span>

@@ -21,6 +21,11 @@ export interface PetugasRecord {
   revoke: number;
   reject: number;
   diolah: number;
+  kontrolKeluarga?: number;
+  kontrolUsaha?: number;
+  keluargaAktifSE?: number;
+  gapKontrolKeluarga?: number;
+  coverageKeluargaSE?: number;
 }
 
 export interface PetugasAnalysis extends PetugasRecord {
@@ -37,6 +42,11 @@ export interface PetugasAnalysis extends PetugasRecord {
   status: WarningStatus;
   statusLabel: string;
   isCleaningPhase: boolean;
+  kontrolKeluarga?: number;
+  kontrolUsaha?: number;
+  keluargaAktifSE?: number;
+  gapKontrolKeluarga?: number;
+  coverageKeluargaSE?: number;
 }
 
 export interface KabupatenSummary {
@@ -57,6 +67,8 @@ export interface KabupatenSummary {
   petugasOnTrack: number;
   petugasZero: number;
   avgRunRate: number;
+  totalKontrolKeluarga?: number;
+  coverageKeluargaSE?: number;
 }
 
 export interface DashboardState {
