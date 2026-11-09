@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share2, Download, Calendar, Info } from 'lucide-react';
+import { Share2, Download, Calendar, Info, Camera } from 'lucide-react';
 
 interface HeaderProps {
   currentDay: number;
@@ -13,6 +13,7 @@ interface HeaderProps {
   onOpenShareModal: () => void;
   onExportExcel: () => void;
   onScrollToMetadata: () => void;
+  onExportImage?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -27,6 +28,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenShareModal,
   onExportExcel,
   onScrollToMetadata,
+  onExportImage,
 }) => {
   const isCleaningPhase = currentDay > fieldDays;
   const idealPct = Math.min(100, (currentDay / fieldDays) * 100);
@@ -86,6 +88,17 @@ export const Header: React.FC<HeaderProps> = ({
               <Download className="w-4 h-4 text-slate-500" />
               <span>Ekspor Excel</span>
             </button>
+
+            {onExportImage && (
+              <button
+                onClick={onExportImage}
+                className="inline-flex items-center px-3.5 py-2 text-sm font-medium rounded-lg text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors gap-2 cursor-pointer shadow-xs"
+                title="Ekspor tampilan monitoring wilayah ke format gambar (PNG/JPG)"
+              >
+                <Camera className="w-4 h-4 text-blue-600" />
+                <span>Ekspor Gambar</span>
+              </button>
+            )}
           </div>
         </div>
 

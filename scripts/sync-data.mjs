@@ -153,6 +153,31 @@ function loadCsvMapping() {
     }
   }
 
+  // 4. Muat Alokasi Pencacah Manual (misal dari alokasi.docx / alokasi_pencacah_manual.json)
+  const manualPplPath = path.join(rootDir, 'data_awal', 'alokasi_pencacah_manual.json');
+  if (fs.existsSync(manualPplPath)) {
+    try {
+      const manualPpl = JSON.parse(fs.readFileSync(manualPplPath, 'utf-8'));
+      if (Array.isArray(manualPpl.allocations)) {
+        manualPpl.allocations.forEach((a) => {
+          if (a.isMaster && a.slsCode && a.email) {
+            slsToPplMap.set(a.slsCode, a.email);
+            if (a.slsName) {
+              slsToPplMap.set(a.slsName.toUpperCase(), a.email);
+            }
+            if (!pencacahSlsMap.has(a.email)) pencacahSlsMap.set(a.email, new Set());
+            if (!pencacahSlsCodeMap.has(a.email)) pencacahSlsCodeMap.set(a.email, new Set());
+            if (a.slsName) pencacahSlsMap.get(a.email).add(a.slsName);
+            pencacahSlsCodeMap.get(a.email).add(a.slsCode);
+          }
+        });
+        console.log(`📑 Memuat ${manualPpl.allocations.length} alokasi manual PPL dari: ${path.basename(manualPplPath)}`);
+      }
+    } catch (e) {
+      console.warn('⚠️ Gagal memuat alokasi pencacah manual:', e.message);
+    }
+  }
+
   // Khusus penyesuaian SLS Wonosobo Sintang (di file mapping berupa '-' pada akun mangkok5000@gmail.com)
   const wonosoboName = 'RT 006 RW 002 DUSUN WONOSOBO';
   const wonosoboCode = '6107130005000600';
@@ -165,27 +190,20 @@ function loadCsvMapping() {
     pencacahSlsCodeMap.get('mangkok5000@gmail.com').add(wonosoboCode);
   }
 
-  // Penyesuaian SLS Kapuas Kanan Hulu Sintang (RT 006 RW 002 kode 6107140006000602 di akun rezafauzan639@gmail.com)
-  const kapuasKananCode = '6107140006000602';
-  slsToPplMap.set(kapuasKananCode, 'rezafauzan639@gmail.com');
-  if (pencacahSlsMap.has('rezafauzan639@gmail.com')) {
-    pencacahSlsMap.get('rezafauzan639@gmail.com').add('RT 006 RW 002');
-  }
-  if (pencacahSlsCodeMap.has('rezafauzan639@gmail.com')) {
-    pencacahSlsCodeMap.get('rezafauzan639@gmail.com').add(kapuasKananCode);
-  }
-
-  // Cross map pencacah -> pengawas via SLS nama & kode
+  // Cross map pencacah -> pengawas via SLS kode unik 16-digit (prioritas), fallback ke nama
   pencacahSlsMap.forEach((slsSet, pencacahEmail) => {
     const pengawasSet = new Set();
-    slsSet.forEach((sls) => {
-      const pml = slsPengawasMap.get(sls.toUpperCase());
-      if (pml) pengawasSet.add(pml);
-    });
     const codeSet = pencacahSlsCodeMap.get(pencacahEmail);
-    if (codeSet) {
+    if (codeSet && codeSet.size > 0) {
       codeSet.forEach((code) => {
         const pml = slsPengawasMap.get(code);
+        if (pml) pengawasSet.add(pml);
+      });
+    }
+    // Fallback ke nama jika belum terpetakan via kode
+    if (pengawasSet.size === 0) {
+      slsSet.forEach((sls) => {
+        const pml = slsPengawasMap.get(sls.toUpperCase());
         if (pml) pengawasSet.add(pml);
       });
     }

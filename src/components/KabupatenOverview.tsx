@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { 
   Share2, 
   ChevronRight, 
@@ -11,9 +11,18 @@ import {
   AlertCircle,
   Clock,
   CheckCircle2,
-  Filter
+  Check,
+  Filter,
+  Camera,
+  ChevronDown,
+  Download,
+  Copy,
+  Loader2,
+  Image as ImageIcon
 } from 'lucide-react';
 import { KabupatenSummary } from '../types';
+import { exportElementToImage, copyElementToClipboard, generateElementDataUrl } from '../utils/imageExporter';
+import { ImageExportModal } from './ImageExportModal';
 
 interface KabupatenOverviewProps {
   summaries: KabupatenSummary[];
@@ -25,6 +34,7 @@ interface KabupatenOverviewProps {
   fieldDays?: number;
   totalDays?: number;
   includeDraft?: boolean;
+  lastUpdated?: string;
 }
 
 type KabSortField = 
@@ -49,10 +59,121 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
   currentDay,
   fieldDays = 23,
   includeDraft = false,
+  lastUpdated,
 }) => {
   const [viewMode, setViewMode] = useState<'card' | 'table'>('card');
   const [sortField, setSortField] = useState<KabSortField>('kode');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+
+  // Export & Preview State
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isExportDropdownOpen, setIsExportDropdownOpen] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Modal Preview state
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [previewDataUrl, setPreviewDataUrl] = useState<string | null>(null);
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsExportDropdownOpen(false);
+      }
+    };
+    if (isExportDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isExportDropdownOpen]);
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3500);
+  };
+
+  const getExportFilename = () => {
+    const now = new Date();
+    const dd = String(now.getDate()).padStart(2, '0');
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const yy = String(now.getFullYear()).slice(-2);
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+    return `Monitoring Progres Pendataan PES SE2026 ${dd}${mm}${yy}_${hour}${minute}`;
+  };
+
+  const handleDownloadImage = async (format: 'png' | 'jpeg') => {
+    if (!containerRef.current) return;
+    setIsExportDropdownOpen(false);
+    setIsExporting(true);
+    try {
+      const filename = getExportFilename();
+      await exportElementToImage({
+        element: containerRef.current,
+        filename,
+        format,
+        pixelRatio: 2,
+      });
+      showToast(`Gambar ${format.toUpperCase()} berhasil diunduh!`);
+    } catch (err) {
+      console.error('Gagal mengunduh gambar:', err);
+      showToast('Gagal mengunduh gambar. Silakan coba lagi.');
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  const handleCopyImage = async () => {
+    if (!containerRef.current) return false;
+    setIsExportDropdownOpen(false);
+    setIsExporting(true);
+    try {
+      await copyElementToClipboard({
+        element: containerRef.current,
+        pixelRatio: 2,
+      });
+      showToast('Gambar berhasil disalin ke clipboard! Siap di-paste (Ctrl+V) ke WhatsApp.');
+      return true;
+    } catch (err: any) {
+      console.error('Gagal menyalin gambar:', err);
+      showToast('Clipboard diblokir browser. Mengunduh file PNG sebagai gantinya...');
+      await exportElementToImage({
+        element: containerRef.current,
+        filename: getExportFilename(),
+        format: 'png',
+      });
+      return false;
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  const handleOpenPreview = async () => {
+    if (!containerRef.current) return;
+    setIsExportDropdownOpen(false);
+    setIsPreviewOpen(true);
+    setIsPreviewLoading(true);
+    try {
+      const url = await generateElementDataUrl({
+        element: containerRef.current,
+        format: 'png',
+        pixelRatio: 2,
+      });
+      setPreviewDataUrl(url);
+    } catch (err) {
+      console.error('Gagal memuat pratinjau:', err);
+      showToast('Gagal memuat pratinjau gambar.');
+    } finally {
+      setIsPreviewLoading(false);
+    }
+  };
 
   const idealPct = Math.min(100, (currentDay / fieldDays) * 100);
 
@@ -134,8 +255,50 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200 p-5 mb-6 shadow-2xs">
+    <div ref={containerRef} id="kabupaten-overview-card" className="bg-white rounded-lg border border-slate-200 p-5 mb-6 shadow-2xs relative">
       
+      {/* Export-Only Official Infographic Header Banner */}
+      <div className="hidden export-only mb-5 pb-4 border-b-2 border-slate-200">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-lg bg-[#005596] flex items-center justify-center text-white font-bold text-lg tracking-wider shrink-0 shadow-xs">
+              BPS
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">
+                  Monitoring Harian Petugas PES SE2026
+                </h1>
+                <span className="text-xs font-semibold px-2.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 font-medium">
+                  Provinsi Kalimantan Barat
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Monitoring Evaluasi Progres Lapangan Wilayah (8 Kabupaten/Kota) • Target Lapangan: 1 s.d. {fieldDays} November 2026
+              </p>
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800">
+              <span>Hari ke-{currentDay} ({currentDay} Nov)</span>
+              <span>•</span>
+              <span>Target Ideal: {idealPct.toFixed(1)}%</span>
+              {includeDraft && (
+                <>
+                  <span>•</span>
+                  <span className="text-blue-700 font-medium">+Hitung Draft</span>
+                </>
+              )}
+            </div>
+            {lastUpdated && (
+              <div className="text-[11px] text-slate-500 mt-1">
+                Data Fasih: <span className="font-semibold text-slate-700">{lastUpdated}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Header Section */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4 pb-3.5 border-b border-slate-100">
         <div>
@@ -152,10 +315,10 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
           </p>
         </div>
         
-        {/* View Switcher & Legend */}
+        {/* View Switcher, Legend & Image Exporter */}
         <div className="flex flex-wrap items-center gap-3 self-start lg:self-auto">
           {/* Toggle Button Kartu vs Tabel */}
-          <div className="inline-flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs">
+          <div className="inline-flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs export-exclude">
             <button
               type="button"
               onClick={() => setViewMode('card')}
@@ -197,6 +360,88 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
               <span className="w-2 h-2 rounded-full bg-rose-600 inline-block" /> Kritis (&lt;70%)
             </span>
           </div>
+
+          {/* Tombol Ekspor Gambar Dropdown */}
+          <div className="relative export-exclude" ref={dropdownRef}>
+            <button
+              type="button"
+              onClick={() => setIsExportDropdownOpen(!isExportDropdownOpen)}
+              disabled={isExporting}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs transition-colors cursor-pointer shadow-2xs disabled:opacity-60"
+              title="Ekspor tampilan monitoring progres ini menjadi gambar (PNG/JPG)"
+            >
+              {isExporting ? (
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-[#005596]" />
+              ) : (
+                <Camera className="w-3.5 h-3.5 text-slate-600" />
+              )}
+              <span>{isExporting ? 'Memproses...' : 'Ekspor Gambar'}</span>
+              <ChevronDown className="w-3 h-3 text-slate-400" />
+            </button>
+
+            {isExportDropdownOpen && (
+              <div className="absolute right-0 mt-1.5 w-64 bg-white rounded-lg shadow-xl border border-slate-200 py-1.5 z-40 text-xs animate-fade-in">
+                <div className="px-3 py-1 border-b border-slate-100 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                  Pilih Format Ekspor
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => handleDownloadImage('png')}
+                  className="w-full text-left px-3 py-2 hover:bg-slate-50 flex items-start gap-2.5 transition-colors cursor-pointer group"
+                >
+                  <div className="p-1 rounded bg-blue-50 text-blue-700 mt-0.5 group-hover:bg-blue-100">
+                    <Download className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-slate-800">Unduh PNG (.png)</div>
+                    <div className="text-[11px] text-slate-500">Resolusi tinggi retina & teks tajam</div>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleDownloadImage('jpeg')}
+                  className="w-full text-left px-3 py-2 hover:bg-slate-50 flex items-start gap-2.5 transition-colors cursor-pointer group"
+                >
+                  <div className="p-1 rounded bg-slate-100 text-slate-700 mt-0.5 group-hover:bg-slate-200">
+                    <Download className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-slate-800">Unduh JPG (.jpg)</div>
+                    <div className="text-[11px] text-slate-500">Format ringkas terkompresi</div>
+                  </div>
+                </button>
+
+                <div className="my-1 border-t border-slate-100" />
+
+                <button
+                  type="button"
+                  onClick={handleCopyImage}
+                  className="w-full text-left px-3 py-2 hover:bg-emerald-50/60 flex items-start gap-2.5 transition-colors cursor-pointer group"
+                >
+                  <div className="p-1 rounded bg-emerald-50 text-emerald-700 mt-0.5 group-hover:bg-emerald-100">
+                    <Copy className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-emerald-900">Salin ke WhatsApp</div>
+                    <div className="text-[11px] text-slate-500">Bisa langsung Ctrl+V di chat WA</div>
+                  </div>
+                </button>
+
+                <div className="my-1 border-t border-slate-100" />
+
+                <button
+                  type="button"
+                  onClick={handleOpenPreview}
+                  className="w-full text-left px-3 py-1.5 hover:bg-slate-50 flex items-center gap-2.5 text-slate-600 transition-colors cursor-pointer"
+                >
+                  <ImageIcon className="w-3.5 h-3.5 text-slate-400 ml-1" />
+                  <span>Pratinjau Gambar (Preview)...</span>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -204,7 +449,7 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
       {/* 1. TAMPILAN KARTU (CARD VIEW)                             */}
       {/* ========================================================= */}
       {viewMode === 'card' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 export-grid-4">
           {summaries.map((kab) => {
             const isSelected = selectedKabupaten === kab.kode;
             const isAhead = kab.persenCapaian >= 100;
@@ -244,7 +489,7 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
                         e.stopPropagation();
                         onShareKabupaten(kab);
                       }}
-                      className="p-1.5 text-slate-400 hover:text-emerald-700 hover:bg-emerald-50 rounded transition-colors cursor-pointer"
+                      className="p-1.5 text-slate-400 hover:text-emerald-700 hover:bg-emerald-50 rounded transition-colors cursor-pointer export-exclude"
                       title={`Salin ringkasan WA untuk ${kab.nama}`}
                     >
                       <Share2 className="w-4 h-4" />
@@ -398,7 +643,7 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
                     </span>
                   )}
 
-                  <span className="text-blue-700 font-semibold flex items-center gap-0.5 ml-1">
+                  <span className="text-blue-700 font-semibold flex items-center gap-0.5 ml-1 export-exclude">
                     {isSelected ? 'Terpilih' : 'Filter'} <ChevronRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
@@ -535,7 +780,7 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
                   </div>
                 </th>
 
-                <th className="py-3 px-3 text-center w-24">Aksi</th>
+                <th className="py-3 px-3 text-center w-24 export-exclude">Aksi</th>
               </tr>
             </thead>
 
@@ -692,7 +937,7 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
                     </td>
 
                     {/* Aksi */}
-                    <td className="py-3 px-3 text-center" onClick={(e) => e.stopPropagation()}>
+                    <td className="py-3 px-3 text-center export-exclude" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center justify-center gap-1">
                         <button
                           type="button"
@@ -773,7 +1018,7 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
                   {provinceTotals.avgRunRate}
                   <span className="text-[11px] text-slate-500 block font-normal">/hari</span>
                 </td>
-                <td className="py-3 px-3 text-center text-xs text-slate-400">
+                <td className="py-3 px-3 text-center text-xs text-slate-400 export-exclude">
                   -
                 </td>
               </tr>
@@ -782,6 +1027,40 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
         </div>
       )}
 
+      {/* Export-Only Official Infographic Footer Watermark */}
+      <div className="hidden export-only mt-5 pt-3 border-t border-slate-200 text-xs text-slate-500">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-slate-700">Badan Pusat Statistik Provinsi Kalimantan Barat</span>
+            <span>•</span>
+            <span>Sistem Monitoring Lapangan PES SE2026</span>
+          </div>
+          <div className="text-slate-400 text-[11px]">
+            Format: {viewMode === 'card' ? 'Kartu Ringkasan Wilayah' : 'Tabel Komparasi Wilayah'} • Digenerate otomatis
+          </div>
+        </div>
+      </div>
+
+      {/* Modal Pratinjau Gambar */}
+      <ImageExportModal
+        isOpen={isPreviewOpen}
+        onClose={() => setIsPreviewOpen(false)}
+        imageDataUrl={previewDataUrl}
+        isLoading={isPreviewLoading}
+        onDownloadPng={() => handleDownloadImage('png')}
+        onDownloadJpeg={() => handleDownloadImage('jpeg')}
+        onCopyToClipboard={handleCopyImage}
+        title="Pratinjau Monitoring Progres Wilayah"
+        subtitle={`Posisi Hari ke-${currentDay} • Mode: ${viewMode === 'card' ? 'Kartu Wilayah' : 'Tabel Ringkasan'}`}
+      />
+
+      {/* Toast Feedback */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-3 rounded-lg shadow-2xl text-xs sm:text-sm font-medium flex items-center gap-2.5 animate-fade-in border border-slate-800">
+          <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
     </div>
   );
 };

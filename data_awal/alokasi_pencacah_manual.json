@@ -1,0 +1,204 @@
+{
+  "updatedAt": "2026-11-09T12:08:45.507334",
+  "sourceFile": "alokasi.docx",
+  "totalAllocations": 28,
+  "masterAllocations": 23,
+  "allocations": [
+    {
+      "email": "aninditafaira@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107110005001200",
+      "slsName": "RT 10 DUSUN KERENTANAK",
+      "isMaster": true
+    },
+    {
+      "email": "aninditafaira@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107110036000600",
+      "slsName": "RT 006 DUSUN LUBUK TAJAK",
+      "isMaster": true
+    },
+    {
+      "email": "aninditafaira@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107110039000500",
+      "slsName": "RT 005 DUSUN BUNGKONG",
+      "isMaster": true
+    },
+    {
+      "email": "aninditafaira@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107130005000600",
+      "slsName": "RT 006 RW 002 DUSUN WONOSOBO",
+      "isMaster": true
+    },
+    {
+      "email": "aninditafaira@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107130005001000",
+      "slsName": "RT 010 RW 003 DUSUN NIAGA MANDIRI",
+      "isMaster": true
+    },
+    {
+      "email": "aninditafaira@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210029000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "antosintang00@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210029000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "antosintang00@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107150001000200",
+      "slsName": "RT 002 DUSUN BANYUWANGI",
+      "isMaster": true
+    },
+    {
+      "email": "antosintang00@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107170006001400",
+      "slsName": "RT 014 DUSUN BANING MULYA",
+      "isMaster": true
+    },
+    {
+      "email": "antosintang00@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107160008000100",
+      "slsName": "RT 01 DUSUN KERAPAN SEPAN",
+      "isMaster": true
+    },
+    {
+      "email": "antosintang00@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107160017000500",
+      "slsName": "RT 01 DUSUN ITET PENYOLI",
+      "isMaster": true
+    },
+    {
+      "email": "heriefendi@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107140006000602",
+      "slsName": "RT 006 RW 002",
+      "isMaster": true
+    },
+    {
+      "email": "heriefendi@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107190003400400",
+      "slsName": "KANTOR DAN BARAK PT DRM",
+      "isMaster": true
+    },
+    {
+      "email": "heriefendi@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107190014000200",
+      "slsName": "RT 02 DUSUN SINAR ENTEBUS",
+      "isMaster": true
+    },
+    {
+      "email": "heriefendi@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210005000100",
+      "slsName": "RT 01 DUSUN ENGKARAM",
+      "isMaster": true
+    },
+    {
+      "email": "heriefendi@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210024000800",
+      "slsName": "RT 008 DUSUN SEMUJAN",
+      "isMaster": true
+    },
+    {
+      "email": "heriefendi@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210029000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "mangkok5000@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107060026000300",
+      "slsName": "RT 003 DUSUN KARYA JAYA",
+      "isMaster": true
+    },
+    {
+      "email": "mangkok5000@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107070012000200",
+      "slsName": "RT 02 DUSUN BUNTUT PURUN",
+      "isMaster": true
+    },
+    {
+      "email": "mangkok5000@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107070013000500",
+      "slsName": "RT 003 DUSUN SINGA JELUM",
+      "isMaster": true
+    },
+    {
+      "email": "mangkok5000@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107070020000700",
+      "slsName": "RT 007 DUSUN KEMANGAI 2",
+      "isMaster": true
+    },
+    {
+      "email": "mangkok5000@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107130005000600",
+      "slsName": "RT 006 RW 002 DUSUN WONOSOBO",
+      "isMaster": true
+    },
+    {
+      "email": "mangkok5000@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210029000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "rezafauzan639@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107140006002800",
+      "slsName": "RT 029 RW 006",
+      "isMaster": true
+    },
+    {
+      "email": "rezafauzan639@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107190003400400",
+      "slsName": "KANTOR DAN BARAK PT DRM",
+      "isMaster": true
+    },
+    {
+      "email": "rezafauzan639@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107140023000600",
+      "slsName": "RT 006 RW 003",
+      "isMaster": true
+    },
+    {
+      "email": "rezafauzan639@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107180006001000",
+      "slsName": "RT 10 RW 002 DUSUN TINTING MELAPI",
+      "isMaster": true
+    },
+    {
+      "email": "rezafauzan639@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210029000000",
+      "slsName": "-",
+      "isMaster": false
+    }
+  ]
+}

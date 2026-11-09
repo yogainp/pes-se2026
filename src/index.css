@@ -22,3 +22,38 @@
 .animate-fade-in {
   animation: fadeIn 0.15s ease-out forwards;
 }
+
+/* ========================================================================= */
+/* Image Export Styles (Tangkapan Layar Gambar Berkualitas Tinggi)           */
+/* ========================================================================= */
+.is-exporting {
+  width: 1200px !important;
+  max-width: 1200px !important;
+  min-width: 1200px !important;
+  box-shadow: none !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  background-color: #ffffff !important;
+  padding: 24px !important;
+  overflow: visible !important;
+}
+
+.is-exporting .overflow-x-auto {
+  overflow: visible !important;
+}
+
+.is-exporting .export-exclude {
+  display: none !important;
+}
+
+.is-exporting .export-only {
+  display: block !important;
+}
+
+.is-exporting .export-only-flex {
+  display: flex !important;
+}
+
+.is-exporting .export-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}

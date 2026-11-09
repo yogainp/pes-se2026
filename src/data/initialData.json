@@ -118,7 +118,8 @@
         "RT 010 RW 003 DUSUN NIAGA MANDIRI",
         "RT 005 DUSUN BUNGKONG",
         "RT 10 DUSUN KERENTANAK",
-        "RT 006 DUSUN LUBUK TAJAK"
+        "RT 006 DUSUN LUBUK TAJAK",
+        "RT 006 RW 002 DUSUN WONOSOBO"
       ],
       "assigned": 124,
       "open": 122,
@@ -245,8 +246,7 @@
       "pencacah": "dellayu.dewi@gmail.com",
       "pengawas": "rumyatipujiastuti95@gmail.com",
       "semuaPengawas": [
-        "rumyatipujiastuti95@gmail.com",
-        "opposkw338@gmail.com"
+        "rumyatipujiastuti95@gmail.com"
       ],
       "slsList": [
         "RT 003 RW 024",
@@ -572,8 +572,7 @@
       "pencacah": "ginalistia2@gmail.com",
       "pengawas": "iwan84376@gmail.com",
       "semuaPengawas": [
-        "iwan84376@gmail.com",
-        "trisuprapti8377@gmail.com"
+        "iwan84376@gmail.com"
       ],
       "slsList": [
         "RT 014 RW 005",
@@ -612,10 +611,11 @@
         "RT 02 DUSUN SINAR ENTEBUS",
         "RT 01 DUSUN ENGKARAM",
         "RT 008 DUSUN SEMUJAN",
-        "KANTOR DAN BARAK PT DRM"
+        "KANTOR DAN BARAK PT DRM",
+        "RT 006 RW 002"
       ],
-      "assigned": 123,
-      "open": 82,
+      "assigned": 152,
+      "open": 111,
       "draft": 0,
       "dicacah": 41,
       "submit": 41,
@@ -625,11 +625,11 @@
       "revoke": 0,
       "reject": 0,
       "diolah": 0,
-      "kontrolKeluarga": 99,
-      "kontrolUsaha": 6,
-      "keluargaAktifSE": 80,
-      "gapKontrolKeluarga": 24,
-      "coverageKeluargaSE": 41.4
+      "kontrolKeluarga": 121,
+      "kontrolUsaha": 15,
+      "keluargaAktifSE": 101,
+      "gapKontrolKeluarga": 31,
+      "coverageKeluargaSE": 33.9
     },
     {
       "id": "PPL-19",
@@ -1292,18 +1292,16 @@
       "pencacah": "rezafauzan639@gmail.com",
       "pengawas": "esti@gmail.com",
       "semuaPengawas": [
-        "esti@gmail.com",
-        "1isakdora86@gmail.com"
+        "esti@gmail.com"
       ],
       "slsList": [
         "RT 029 RW 006",
         "KANTOR DAN BARAK PT DRM",
         "RT 006 RW 003",
-        "RT 10 RW 002 DUSUN TINTING MELAPI",
-        "RT 006 RW 002"
+        "RT 10 RW 002 DUSUN TINTING MELAPI"
       ],
-      "assigned": 345,
-      "open": 274,
+      "assigned": 316,
+      "open": 245,
       "draft": 0,
       "dicacah": 71,
       "submit": 70,
@@ -1313,11 +1311,11 @@
       "revoke": 0,
       "reject": 0,
       "diolah": 1,
-      "kontrolKeluarga": 334,
-      "kontrolUsaha": 164,
-      "keluargaAktifSE": 261,
-      "gapKontrolKeluarga": 11,
-      "coverageKeluargaSE": 21.3
+      "kontrolKeluarga": 312,
+      "kontrolUsaha": 155,
+      "keluargaAktifSE": 240,
+      "gapKontrolKeluarga": 4,
+      "coverageKeluargaSE": 22.8
     },
     {
       "id": "PPL-40",
@@ -1650,9 +1648,8 @@
       "kabupatenKode": "6172",
       "kabupatenNama": "SINGKAWANG",
       "pencacah": "wanaulfa1103@gmail.com",
-      "pengawas": "trisuprapti8377@gmail.com",
+      "pengawas": "iwan84376@gmail.com",
       "semuaPengawas": [
-        "trisuprapti8377@gmail.com",
         "iwan84376@gmail.com"
       ],
       "slsList": [

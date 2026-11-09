@@ -87,6 +87,13 @@ export default function App() {
     }
   };
 
+  const handleScrollToOverview = () => {
+    const el = document.getElementById('kabupaten-overview-card');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800">
       
@@ -103,6 +110,7 @@ export default function App() {
         onOpenShareModal={handleOpenGeneralShare}
         onExportExcel={handleExportExcel}
         onScrollToMetadata={handleScrollToMetadata}
+        onExportImage={handleScrollToOverview}
       />
 
       {/* Main Content */}
@@ -128,6 +136,7 @@ export default function App() {
           fieldDays={fieldDays}
           totalDays={totalDays}
           includeDraft={includeDraft}
+          lastUpdated={lastUpdated}
         />
 
         {/* Tabel Monitoring Detail Petugas (PPL) */}
