@@ -78,7 +78,9 @@ export const KpiOverview: React.FC<KpiOverviewProps> = ({
           {totalRealisasi.toLocaleString()}
         </div>
         <div className="mt-1.5 text-xs text-slate-600 flex items-center justify-between">
-          <span className="font-semibold text-slate-800">{actualPct.toFixed(1)}% alokasi</span>
+          <span className="font-semibold text-slate-800" title="Progres Pendataan terhadap total alokasi">
+            {actualPct.toFixed(1)}% pendataan
+          </span>
           {totalKontrolKeluarga > 0 && (
             <span className="font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded text-[11px]" title="Persentase cakupan terhadap data kontrol keluarga hasil SE">
               {vsKontrolPct.toFixed(1)}% SE
@@ -100,8 +102,11 @@ export const KpiOverview: React.FC<KpiOverviewProps> = ({
         </div>
         <div className="mt-1.5 text-sm text-slate-600 flex items-center justify-between">
           <span>Ideal: {idealPct.toFixed(1)}%</span>
-          <span className={`font-semibold ${vsTargetPct >= 100 ? 'text-emerald-700' : 'text-amber-700'}`}>
-            {vsTargetPct.toFixed(0)}% tercapai
+          <span 
+            className={`font-semibold ${vsTargetPct >= 100 ? 'text-emerald-700' : 'text-amber-700'}`}
+            title="Capaian dari Target Kumulatif Harian"
+          >
+            {vsTargetPct.toFixed(1)}% capaian
           </span>
         </div>
       </div>

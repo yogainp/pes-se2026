@@ -44,7 +44,7 @@ export function generateProvinceWhatsAppText(
   kabupatenSummaries.forEach((k) => {
     const statusNote = k.petugasZero > 0 ? `(${k.petugasZero} PPL 0%)` : `(Semua aktif)`;
     const kReal = includeDraft ? k.totalRealisasi : k.totalDicacah;
-    text += `• ${k.nama}: ${k.persenCapaian}% target ideal (${kReal}/${k.totalAssigned}) - ${statusNote}\n`;
+    text += `• ${k.nama}: Progres Pendataan ${k.persenTotal}% (Capaian Target Kumulatif: ${k.persenCapaian}%) [${kReal}/${k.totalAssigned}] - ${statusNote}\n`;
   });
 
   if (zeroPetugas.length > 0) {
@@ -90,7 +90,8 @@ export function generateKabupatenWhatsAppText(
   } else {
     text += `• Realisasi Dicacah: ${kabupaten.totalDicacah.toLocaleString()} (${kabupaten.persenTotal}% total)\n`;
   }
-  text += `• Capaian vs Target Ideal: ${kabupaten.persenCapaian}% (Ideal: ${idealPct}%)\n`;
+  text += `• Progres Pendataan: ${kabupaten.persenTotal}% (Target Ideal: ${idealPct}%)\n`;
+  text += `• Capaian dari Target Kumulatif Harian: ${kabupaten.persenCapaian}%\n`;
   text += `• Rata-rata Beban Sisa: ${kabupaten.avgRunRate} sampel/hari\n\n`;
 
   text += `*STATUS PETUGAS (${kabupaten.totalPetugas} PPL):*\n`;
@@ -98,7 +99,7 @@ export function generateKabupatenWhatsAppText(
     const pReal = includeDraft ? p.realisasi : p.dicacah;
     const draftNote = includeDraft && p.draft > 0 ? ` (${p.dicacah}+${p.draft} draft)` : '';
     text += `• ${p.pencacah}\n`;
-    text += `  Realisasi: ${pReal}/${p.assigned}${draftNote} (${p.persenCapaian}% target ideal) [Status: ${p.statusLabel}]\n`;
+    text += `  Realisasi: ${pReal}/${p.assigned}${draftNote} (Progres: ${p.persenTotal}% | Capaian Kumulatif: ${p.persenCapaian}%) [Status: ${p.statusLabel}]\n`;
     text += `  Beban sisa: ${p.runRateRequired} sampel/hari\n`;
   });
 

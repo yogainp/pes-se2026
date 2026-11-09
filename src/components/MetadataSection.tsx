@@ -142,17 +142,17 @@ export const MetadataSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
-          {/* Card 1: % Capaian Target */}
+          {/* Card 1: % Capaian dari Target Kumulatif Harian */}
           <div className="bg-slate-50/80 border border-slate-200 rounded-lg p-4 flex flex-col justify-between">
             <div>
               <span className="font-bold text-slate-900 block mb-1">
-                1. % Capaian Target (Ritme Lapangan)
+                1. % Capaian dari Target Kumulatif Harian
               </span>
               <div className="bg-white border border-slate-200 rounded p-2.5 font-mono text-xs text-blue-900 font-semibold mb-2.5 shadow-2xs">
-                % Capaian = (Realisasi / Target Kumulatif) × 100%
+                % Capaian = (Realisasi / Target Kumulatif Harian) × 100%
               </div>
               <p className="text-slate-600 text-xs leading-relaxed">
-                Menjadi angka utama dan warna bar evaluasi kinerja. Mengukur kepatuhan petugas terhadap ritme kerja ideal s.d. hari ini:
+                Mengukur pemenuhan target terhadap ekspektasi kumulatif hari pemantauan (H-n). Menjadi dasar klasifikasi status pengawasan:
               </p>
               <ul className="mt-1.5 space-y-1 text-slate-600 text-xs list-disc list-inside">
                 <li><code className="bg-slate-100 px-1 py-0.2 rounded font-mono text-[11px] font-semibold">Target Kumulatif = (Alokasi / 23) × Hari Pemantauan</code></li>
@@ -164,17 +164,17 @@ export const MetadataSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 2: % Realisasi Total */}
+          {/* Card 2: % Progres Pendataan */}
           <div className="bg-slate-50/80 border border-slate-200 rounded-lg p-4 flex flex-col justify-between">
             <div>
               <span className="font-bold text-slate-900 block mb-1">
-                2. % Realisasi Total & Beban Sisa
+                2. % Progres Pendataan (vs Target Ideal)
               </span>
               <div className="bg-white border border-slate-200 rounded p-2.5 font-mono text-xs text-blue-900 font-semibold mb-2.5 shadow-2xs">
-                % Total = (Realisasi / Total Alokasi Assigned) × 100%
+                % Progres Pendataan = (Realisasi / Total Alokasi) × 100%
               </div>
               <p className="text-slate-600 text-xs leading-relaxed">
-                Ditampilkan dengan label abu-abu kecil <code className="bg-slate-100 px-1 py-0.2 rounded font-mono text-[11px] font-semibold">% tot</code> di samping % Capaian. Mengukur akumulasi volume penyelesaian keseluruhan beban penugasan selama bulan November.
+                Mengukur persentase sampel yang telah selesai dikerjakan dari seluruh alokasi kegiatan. Angka ini dibandingkan langsung secara apel-ke-apel dengan <strong>Target Ideal H-n</strong> (misal H-9 = 39,1%).
               </p>
               <div className="mt-2 text-xs text-slate-600">
                 <span className="font-semibold text-slate-700 block mb-0.5">Beban Sisa Harian (Run-Rate):</span>

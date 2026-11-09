@@ -25,6 +25,7 @@ export default function App() {
 
   const [includeDraft, setIncludeDraft] = useState<boolean>(false);
   const [selectedKabupaten, setSelectedKabupaten] = useState<string>('all');
+  const [statusFilter, setStatusFilter] = useState<string>('all');
 
   // Share modal state
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -121,6 +122,7 @@ export default function App() {
           summaries={kabupatenSummaries}
           selectedKabupaten={selectedKabupaten}
           onSelectKabupaten={setSelectedKabupaten}
+          onSelectStatus={setStatusFilter}
           onShareKabupaten={handleShareKabupaten}
           currentDay={currentDay}
           fieldDays={fieldDays}
@@ -133,6 +135,8 @@ export default function App() {
           records={analyzedRecords}
           selectedKabupaten={selectedKabupaten}
           onSelectKabupaten={setSelectedKabupaten}
+          statusFilter={statusFilter}
+          onStatusFilterChange={setStatusFilter}
           kabupatenList={kabupatenList}
           currentDay={currentDay}
           fieldDays={fieldDays}

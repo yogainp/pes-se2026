@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-11-06 10:04:38",
-  "fileName": "20261106_100438.xlsx",
-  "defaultDay": 6,
+  "timestamp": "2026-11-09 08:15:16",
+  "fileName": "20261109_081516.xlsx",
+  "defaultDay": 9,
   "fieldDays": 23,
   "cleaningDays": 7,
   "totalDays": 30,
@@ -14,8 +14,10 @@
       "kabupatenKode": "6101",
       "kabupatenNama": "SAMBAS",
       "pencacah": "ad0479371@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "rabuni77@gmail.com",
+      "semuaPengawas": [
+        "rabuni77@gmail.com"
+      ],
       "slsList": [
         "RT 011 RW 006 DUSUN SURYA",
         "RT 017 RW 003 DUSUN SENABAH"
@@ -24,13 +26,13 @@
       "open": 96,
       "draft": 0,
       "dicacah": 54,
-      "submit": 52,
+      "submit": 33,
       "approve": 0,
-      "complete": 2,
+      "complete": 21,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 2,
+      "diolah": 21,
       "kontrolKeluarga": 178,
       "kontrolUsaha": 44,
       "keluargaAktifSE": 140,
@@ -51,22 +53,22 @@
       "slsList": [
         "RT 027 RW 011"
       ],
-      "assigned": 191,
-      "open": 135,
+      "assigned": 206,
+      "open": 127,
       "draft": 0,
-      "dicacah": 56,
-      "submit": 41,
+      "dicacah": 79,
+      "submit": 16,
       "approve": 0,
-      "complete": 15,
+      "complete": 63,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 15,
+      "diolah": 63,
       "kontrolKeluarga": 155,
       "kontrolUsaha": 138,
       "keluargaAktifSE": 96,
-      "gapKontrolKeluarga": 36,
-      "coverageKeluargaSE": 36.1
+      "gapKontrolKeluarga": 51,
+      "coverageKeluargaSE": 51
     },
     {
       "id": "PPL-2",
@@ -75,29 +77,31 @@
       "kabupatenKode": "6102",
       "kabupatenNama": "BENGKAYANG",
       "pencacah": "aldrimuspratama08@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "sayurasam295@gmail.com",
+      "semuaPengawas": [
+        "sayurasam295@gmail.com"
+      ],
       "slsList": [
         "RT 010 DUSUN SETIA USAHA",
         "RT 10 RW 04 DUSUN PIJU",
         "RT 006 RW 00 DUSUN SANGGAU KOTA"
       ],
       "assigned": 218,
-      "open": 147,
-      "draft": 70,
-      "dicacah": 1,
+      "open": 131,
+      "draft": 82,
+      "dicacah": 5,
       "submit": 0,
       "approve": 0,
-      "complete": 1,
+      "complete": 5,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 1,
+      "diolah": 5,
       "kontrolKeluarga": 201,
       "kontrolUsaha": 113,
       "keluargaAktifSE": 158,
       "gapKontrolKeluarga": 17,
-      "coverageKeluargaSE": 0.5
+      "coverageKeluargaSE": 2.5
     },
     {
       "id": "PPL-3",
@@ -106,13 +110,15 @@
       "kabupatenKode": "6107",
       "kabupatenNama": "SINTANG",
       "pencacah": "aninditafaira@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "1isakdora86@gmail.com",
+      "semuaPengawas": [
+        "1isakdora86@gmail.com"
+      ],
       "slsList": [
-        "RT 10 DUSUN KERENTANAK",
-        "RT 006 DUSUN LUBUK TAJAK",
         "RT 010 RW 003 DUSUN NIAGA MANDIRI",
-        "RT 005 DUSUN BUNGKONG"
+        "RT 005 DUSUN BUNGKONG",
+        "RT 10 DUSUN KERENTANAK",
+        "RT 006 DUSUN LUBUK TAJAK"
       ],
       "assigned": 124,
       "open": 122,
@@ -143,27 +149,27 @@
         "esti@gmail.com"
       ],
       "slsList": [
-        "RT 01 DUSUN ITET PENYOLI",
         "RT 002 DUSUN BANYUWANGI",
         "RT 014 DUSUN BANING MULYA",
-        "RT 01 DUSUN KERAPAN SEPAN"
+        "RT 01 DUSUN KERAPAN SEPAN",
+        "RT 01 DUSUN ITET PENYOLI"
       ],
-      "assigned": 145,
-      "open": 79,
-      "draft": 9,
-      "dicacah": 57,
-      "submit": 57,
+      "assigned": 146,
+      "open": 60,
+      "draft": 4,
+      "dicacah": 80,
+      "submit": 79,
       "approve": 0,
-      "complete": 0,
+      "complete": 1,
       "edit": 0,
       "revoke": 0,
-      "reject": 0,
-      "diolah": 0,
+      "reject": 2,
+      "diolah": 1,
       "kontrolKeluarga": 146,
       "kontrolUsaha": 15,
       "keluargaAktifSE": 109,
-      "gapKontrolKeluarga": -1,
-      "coverageKeluargaSE": 39
+      "gapKontrolKeluarga": 0,
+      "coverageKeluargaSE": 54.8
     },
     {
       "id": "PPL-5",
@@ -172,17 +178,19 @@
       "kabupatenKode": "6171",
       "kabupatenNama": "PONTIANAK",
       "pencacah": "ardies1985@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
-      "slsList": [
-        "RT 003 RW 034",
-        "RT 004 RW 034"
+      "pengawas": "rumyatipujiastuti95@gmail.com",
+      "semuaPengawas": [
+        "rumyatipujiastuti95@gmail.com"
       ],
-      "assigned": 195,
-      "open": 189,
-      "draft": 4,
-      "dicacah": 2,
-      "submit": 0,
+      "slsList": [
+        "RT 004 RW 034",
+        "RT 003 RW 034"
+      ],
+      "assigned": 196,
+      "open": 116,
+      "draft": 12,
+      "dicacah": 68,
+      "submit": 66,
       "approve": 0,
       "complete": 2,
       "edit": 0,
@@ -192,8 +200,8 @@
       "kontrolKeluarga": 132,
       "kontrolUsaha": 98,
       "keluargaAktifSE": 71,
-      "gapKontrolKeluarga": 63,
-      "coverageKeluargaSE": 1.5
+      "gapKontrolKeluarga": 64,
+      "coverageKeluargaSE": 51.5
     },
     {
       "id": "PPL-6",
@@ -202,29 +210,31 @@
       "kabupatenKode": "6102",
       "kabupatenNama": "BENGKAYANG",
       "pencacah": "arjunfarmandosaragih@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "sayurasam295@gmail.com",
+      "semuaPengawas": [
+        "sayurasam295@gmail.com"
+      ],
       "slsList": [
         "PT WKN BLOK G-7",
         "PERUMAHAN KARYAWAN ABLING I DAN ABLING II",
         "RT 005 RW 004 DUSUN KINDAU"
       ],
       "assigned": 81,
-      "open": 53,
-      "draft": 3,
-      "dicacah": 20,
+      "open": 41,
+      "draft": 5,
+      "dicacah": 35,
       "submit": 0,
       "approve": 0,
-      "complete": 20,
+      "complete": 35,
       "edit": 0,
       "revoke": 0,
-      "reject": 5,
-      "diolah": 20,
+      "reject": 0,
+      "diolah": 35,
       "kontrolKeluarga": 94,
       "kontrolUsaha": 23,
       "keluargaAktifSE": 62,
       "gapKontrolKeluarga": -13,
-      "coverageKeluargaSE": 21.3
+      "coverageKeluargaSE": 37.2
     },
     {
       "id": "PPL-7",
@@ -233,30 +243,31 @@
       "kabupatenKode": "6171",
       "kabupatenNama": "PONTIANAK",
       "pencacah": "dellayu.dewi@gmail.com",
-      "pengawas": "opposkw338@gmail.com",
+      "pengawas": "rumyatipujiastuti95@gmail.com",
       "semuaPengawas": [
+        "rumyatipujiastuti95@gmail.com",
         "opposkw338@gmail.com"
       ],
       "slsList": [
         "RT 003 RW 024",
         "RT 003 RW 001"
       ],
-      "assigned": 66,
-      "open": 66,
-      "draft": 0,
-      "dicacah": 0,
-      "submit": 0,
+      "assigned": 146,
+      "open": 118,
+      "draft": 6,
+      "dicacah": 22,
+      "submit": 22,
       "approve": 0,
       "complete": 0,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
       "diolah": 0,
-      "kontrolKeluarga": 72,
-      "kontrolUsaha": 24,
-      "keluargaAktifSE": 46,
-      "gapKontrolKeluarga": -6,
-      "coverageKeluargaSE": 0
+      "kontrolKeluarga": 115,
+      "kontrolUsaha": 80,
+      "keluargaAktifSE": 61,
+      "gapKontrolKeluarga": 31,
+      "coverageKeluargaSE": 19.1
     },
     {
       "id": "PPL-8",
@@ -265,29 +276,31 @@
       "kabupatenKode": "6102",
       "kabupatenNama": "BENGKAYANG",
       "pencacah": "dewa16081@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "triansori71@gmail.com",
+      "semuaPengawas": [
+        "triansori71@gmail.com"
+      ],
       "slsList": [
         "RT 02 DUSUN PASUKAYU",
         "RT 02 RW 01 DUSUN SERINDU",
         "RT 006 RW 001 DUSUN BERABAS BARU I"
       ],
-      "assigned": 148,
-      "open": 121,
+      "assigned": 152,
+      "open": 101,
       "draft": 0,
-      "dicacah": 27,
-      "submit": 25,
+      "dicacah": 51,
+      "submit": 26,
       "approve": 0,
-      "complete": 2,
+      "complete": 25,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 2,
+      "diolah": 25,
       "kontrolKeluarga": 156,
       "kontrolUsaha": 9,
       "keluargaAktifSE": 114,
-      "gapKontrolKeluarga": -8,
-      "coverageKeluargaSE": 17.3
+      "gapKontrolKeluarga": -4,
+      "coverageKeluargaSE": 32.7
     },
     {
       "id": "PPL-9",
@@ -296,17 +309,19 @@
       "kabupatenKode": "6101",
       "kabupatenNama": "SAMBAS",
       "pencacah": "didinngah@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "dedyadyan@gmail.com",
+      "semuaPengawas": [
+        "dedyadyan@gmail.com"
+      ],
       "slsList": [
         "RT 9 RW 05 DUSUN SELEKO",
         "RT 05 RW 01 DUSUN BUKIT RAYA"
       ],
-      "assigned": 149,
-      "open": 119,
+      "assigned": 150,
+      "open": 112,
       "draft": 12,
-      "dicacah": 18,
-      "submit": 10,
+      "dicacah": 26,
+      "submit": 18,
       "approve": 0,
       "complete": 8,
       "edit": 0,
@@ -316,8 +331,8 @@
       "kontrolKeluarga": 152,
       "kontrolUsaha": 31,
       "keluargaAktifSE": 128,
-      "gapKontrolKeluarga": -3,
-      "coverageKeluargaSE": 11.8
+      "gapKontrolKeluarga": -2,
+      "coverageKeluargaSE": 17.1
     },
     {
       "id": "PPL-10",
@@ -335,21 +350,21 @@
         "RT 001 RW 017"
       ],
       "assigned": 182,
-      "open": 156,
-      "draft": 19,
-      "dicacah": 7,
-      "submit": 6,
+      "open": 140,
+      "draft": 13,
+      "dicacah": 29,
+      "submit": 22,
       "approve": 0,
-      "complete": 1,
+      "complete": 7,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 1,
+      "diolah": 7,
       "kontrolKeluarga": 117,
       "kontrolUsaha": 70,
       "keluargaAktifSE": 76,
       "gapKontrolKeluarga": 65,
-      "coverageKeluargaSE": 6
+      "coverageKeluargaSE": 24.8
     },
     {
       "id": "PPL-11",
@@ -358,27 +373,29 @@
       "kabupatenKode": "6101",
       "kabupatenNama": "SAMBAS",
       "pencacah": "eema12995@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "rabuni77@gmail.com",
+      "semuaPengawas": [
+        "rabuni77@gmail.com"
+      ],
       "slsList": [
         "RT 027 RW 014 DUSUN KENANGA 2"
       ],
-      "assigned": 171,
-      "open": 129,
-      "draft": 19,
-      "dicacah": 23,
-      "submit": 15,
+      "assigned": 172,
+      "open": 97,
+      "draft": 48,
+      "dicacah": 27,
+      "submit": 18,
       "approve": 0,
-      "complete": 8,
+      "complete": 9,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 8,
+      "diolah": 9,
       "kontrolKeluarga": 150,
       "kontrolUsaha": 53,
       "keluargaAktifSE": 111,
-      "gapKontrolKeluarga": 21,
-      "coverageKeluargaSE": 15.3
+      "gapKontrolKeluarga": 22,
+      "coverageKeluargaSE": 18
     },
     {
       "id": "PPL-12",
@@ -387,24 +404,26 @@
       "kabupatenKode": "6106",
       "kabupatenNama": "KETAPANG",
       "pencacah": "eeyen0135@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "qwerty.ade00@gmail.com",
+      "semuaPengawas": [
+        "qwerty.ade00@gmail.com"
+      ],
       "slsList": [
+        "KEBUN PLASMA",
         "RT 02 RW 01 DUSUN DERANUK",
-        "RT 006 DUSUN LEMBAH MURAI",
-        "KEBUN PLASMA"
+        "RT 006 DUSUN LEMBAH MURAI"
       ],
       "assigned": 91,
       "open": 83,
       "draft": 0,
       "dicacah": 8,
-      "submit": 3,
+      "submit": 2,
       "approve": 0,
-      "complete": 5,
+      "complete": 6,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 5,
+      "diolah": 6,
       "kontrolKeluarga": 98,
       "kontrolUsaha": 9,
       "keluargaAktifSE": 60,
@@ -418,18 +437,20 @@
       "kabupatenKode": "6101",
       "kabupatenNama": "SAMBAS",
       "pencacah": "embunsbs@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "rabuni77@gmail.com",
+      "semuaPengawas": [
+        "rabuni77@gmail.com"
+      ],
       "slsList": [
         "RT 003 RW 002 DUSUN SEI TUBA",
         "RT 006 RW 01 DUSUN KAUM",
         "RT 021 RW 010 DUSUN SUNGAI BARU"
       ],
-      "assigned": 124,
-      "open": 75,
-      "draft": 9,
-      "dicacah": 40,
-      "submit": 36,
+      "assigned": 128,
+      "open": 63,
+      "draft": 2,
+      "dicacah": 63,
+      "submit": 59,
       "approve": 0,
       "complete": 4,
       "edit": 0,
@@ -439,8 +460,8 @@
       "kontrolKeluarga": 113,
       "kontrolUsaha": 40,
       "keluargaAktifSE": 87,
-      "gapKontrolKeluarga": 11,
-      "coverageKeluargaSE": 35.4
+      "gapKontrolKeluarga": 15,
+      "coverageKeluargaSE": 55.8
     },
     {
       "id": "PPL-14",
@@ -449,29 +470,31 @@
       "kabupatenKode": "6102",
       "kabupatenNama": "BENGKAYANG",
       "pencacah": "filmafadlika123@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "triansori71@gmail.com",
+      "semuaPengawas": [
+        "triansori71@gmail.com"
+      ],
       "slsList": [
         "RT 003 RW 001 DUSUN PANGKALAN DARAT",
         "RT 003 RW 003 DUSUN BHAKTI",
         "RT 006 RW 001 DUSUN TANJUNG GUNDUL"
       ],
       "assigned": 281,
-      "open": 218,
-      "draft": 2,
-      "dicacah": 61,
-      "submit": 51,
+      "open": 200,
+      "draft": 13,
+      "dicacah": 68,
+      "submit": 54,
       "approve": 0,
-      "complete": 10,
+      "complete": 14,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 10,
+      "diolah": 14,
       "kontrolKeluarga": 300,
       "kontrolUsaha": 87,
       "keluargaAktifSE": 201,
       "gapKontrolKeluarga": -19,
-      "coverageKeluargaSE": 20.3
+      "coverageKeluargaSE": 22.7
     },
     {
       "id": "PPL-15",
@@ -485,16 +508,16 @@
         "fahrysamsul1@gmail.com"
       ],
       "slsList": [
-        "RT 002 DUSUN MUARA KARYA",
-        "RT 003 DUSUN SUKA MAKMUR",
         "RT 003 DUSUN TANI",
-        "RT 021 DUSUN SIDAKAYA"
+        "RT 021 DUSUN SIDAKAYA",
+        "RT 002 DUSUN MUARA KARYA",
+        "RT 003 DUSUN SUKA MAKMUR"
       ],
-      "assigned": 121,
-      "open": 111,
-      "draft": 5,
-      "dicacah": 5,
-      "submit": 5,
+      "assigned": 126,
+      "open": 98,
+      "draft": 21,
+      "dicacah": 7,
+      "submit": 7,
       "approve": 0,
       "complete": 0,
       "edit": 0,
@@ -504,8 +527,8 @@
       "kontrolKeluarga": 111,
       "kontrolUsaha": 54,
       "keluargaAktifSE": 85,
-      "gapKontrolKeluarga": 10,
-      "coverageKeluargaSE": 4.5
+      "gapKontrolKeluarga": 15,
+      "coverageKeluargaSE": 6.3
     },
     {
       "id": "PPL-16",
@@ -514,28 +537,31 @@
       "kabupatenKode": "6102",
       "kabupatenNama": "BENGKAYANG",
       "pencacah": "fransdedhie@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "triansori71@gmail.com",
+      "semuaPengawas": [
+        "triansori71@gmail.com",
+        "sayurasam295@gmail.com"
+      ],
       "slsList": [
         "RT 05 DUSUN SEMANGAT",
         "RT 002 DUSUN SUNGAI DAYA"
       ],
       "assigned": 70,
-      "open": 36,
-      "draft": 26,
-      "dicacah": 8,
+      "open": 32,
+      "draft": 0,
+      "dicacah": 38,
       "submit": 0,
       "approve": 0,
-      "complete": 8,
+      "complete": 38,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 8,
+      "diolah": 38,
       "kontrolKeluarga": 74,
       "kontrolUsaha": 4,
       "keluargaAktifSE": 61,
       "gapKontrolKeluarga": -4,
-      "coverageKeluargaSE": 10.8
+      "coverageKeluargaSE": 51.4
     },
     {
       "id": "PPL-17",
@@ -546,28 +572,29 @@
       "pencacah": "ginalistia2@gmail.com",
       "pengawas": "iwan84376@gmail.com",
       "semuaPengawas": [
-        "iwan84376@gmail.com"
+        "iwan84376@gmail.com",
+        "trisuprapti8377@gmail.com"
       ],
       "slsList": [
-        "RT 001 RW 001",
-        "RT 014 RW 005"
+        "RT 014 RW 005",
+        "RT 001 RW 001"
       ],
-      "assigned": 122,
-      "open": 122,
-      "draft": 0,
-      "dicacah": 0,
-      "submit": 0,
+      "assigned": 341,
+      "open": 216,
+      "draft": 85,
+      "dicacah": 37,
+      "submit": 9,
       "approve": 0,
-      "complete": 0,
+      "complete": 28,
       "edit": 0,
       "revoke": 0,
-      "reject": 0,
-      "diolah": 0,
-      "kontrolKeluarga": 74,
-      "kontrolUsaha": 65,
-      "keluargaAktifSE": 43,
-      "gapKontrolKeluarga": 48,
-      "coverageKeluargaSE": 0
+      "reject": 3,
+      "diolah": 28,
+      "kontrolKeluarga": 200,
+      "kontrolUsaha": 150,
+      "keluargaAktifSE": 115,
+      "gapKontrolKeluarga": 141,
+      "coverageKeluargaSE": 18.5
     },
     {
       "id": "PPL-18",
@@ -578,30 +605,31 @@
       "pencacah": "heriefendi@gmail.com",
       "pengawas": "1isakdora86@gmail.com",
       "semuaPengawas": [
-        "1isakdora86@gmail.com"
+        "1isakdora86@gmail.com",
+        "esti@gmail.com"
       ],
       "slsList": [
-        "RT 006 RW 002",
         "RT 02 DUSUN SINAR ENTEBUS",
         "RT 01 DUSUN ENGKARAM",
-        "RT 008 DUSUN SEMUJAN"
+        "RT 008 DUSUN SEMUJAN",
+        "KANTOR DAN BARAK PT DRM"
       ],
-      "assigned": 131,
-      "open": 121,
+      "assigned": 123,
+      "open": 82,
       "draft": 0,
-      "dicacah": 10,
-      "submit": 10,
+      "dicacah": 41,
+      "submit": 41,
       "approve": 0,
       "complete": 0,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
       "diolah": 0,
-      "kontrolKeluarga": 121,
-      "kontrolUsaha": 15,
-      "keluargaAktifSE": 101,
-      "gapKontrolKeluarga": 10,
-      "coverageKeluargaSE": 8.3
+      "kontrolKeluarga": 99,
+      "kontrolUsaha": 6,
+      "keluargaAktifSE": 80,
+      "gapKontrolKeluarga": 24,
+      "coverageKeluargaSE": 41.4
     },
     {
       "id": "PPL-19",
@@ -619,11 +647,11 @@
         "RT 002 DUSUN SIMPANG EMPAT",
         "KEBUN"
       ],
-      "assigned": 209,
-      "open": 159,
-      "draft": 35,
-      "dicacah": 15,
-      "submit": 15,
+      "assigned": 215,
+      "open": 137,
+      "draft": 59,
+      "dicacah": 19,
+      "submit": 19,
       "approve": 0,
       "complete": 0,
       "edit": 0,
@@ -633,8 +661,8 @@
       "kontrolKeluarga": 202,
       "kontrolUsaha": 72,
       "keluargaAktifSE": 151,
-      "gapKontrolKeluarga": 7,
-      "coverageKeluargaSE": 7.4
+      "gapKontrolKeluarga": 13,
+      "coverageKeluargaSE": 9.4
     },
     {
       "id": "PPL-20",
@@ -643,8 +671,10 @@
       "kabupatenKode": "6106",
       "kabupatenNama": "KETAPANG",
       "pencacah": "ihsanul.khairo12345@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "gustirantau4@gmail.com",
+      "semuaPengawas": [
+        "gustirantau4@gmail.com"
+      ],
       "slsList": [
         "RT 013 DUSUN BATU KAMBING",
         "RT 010 DUSUN TEBING TINGGI"
@@ -681,22 +711,22 @@
         "RT 022 RW 008",
         "RT 018 RW 004"
       ],
-      "assigned": 191,
-      "open": 141,
-      "draft": 22,
-      "dicacah": 27,
-      "submit": 0,
+      "assigned": 194,
+      "open": 134,
+      "draft": 28,
+      "dicacah": 32,
+      "submit": 3,
       "approve": 0,
-      "complete": 27,
+      "complete": 29,
       "edit": 0,
       "revoke": 0,
-      "reject": 1,
-      "diolah": 27,
+      "reject": 0,
+      "diolah": 29,
       "kontrolKeluarga": 106,
       "kontrolUsaha": 171,
       "keluargaAktifSE": 54,
-      "gapKontrolKeluarga": 85,
-      "coverageKeluargaSE": 25.5
+      "gapKontrolKeluarga": 88,
+      "coverageKeluargaSE": 30.2
     },
     {
       "id": "PPL-22",
@@ -713,22 +743,22 @@
         "RT 14 DUSUN SUNGAI MELING (DESA PERSIAPAN SUNGAI KENAIK)",
         "RT 04 DUSUN NEKCIKAM"
       ],
-      "assigned": 78,
-      "open": 65,
+      "assigned": 79,
+      "open": 58,
       "draft": 0,
-      "dicacah": 10,
-      "submit": 0,
+      "dicacah": 20,
+      "submit": 8,
       "approve": 0,
-      "complete": 10,
+      "complete": 12,
       "edit": 0,
       "revoke": 0,
-      "reject": 3,
-      "diolah": 10,
+      "reject": 1,
+      "diolah": 12,
       "kontrolKeluarga": 77,
       "kontrolUsaha": 12,
       "keluargaAktifSE": 63,
-      "gapKontrolKeluarga": 1,
-      "coverageKeluargaSE": 13
+      "gapKontrolKeluarga": 2,
+      "coverageKeluargaSE": 26
     },
     {
       "id": "PPL-23",
@@ -742,14 +772,14 @@
         "chairulamri.1990@gmail.com"
       ],
       "slsList": [
-        "RT 16 RW 003 DUSUN PELAIK",
-        "RT 012 DUSUN SEBULOH"
+        "RT 012 DUSUN SEBULOH",
+        "RT 16 RW 003 DUSUN PELAIK"
       ],
-      "assigned": 82,
-      "open": 79,
-      "draft": 1,
-      "dicacah": 2,
-      "submit": 2,
+      "assigned": 85,
+      "open": 64,
+      "draft": 13,
+      "dicacah": 8,
+      "submit": 8,
       "approve": 0,
       "complete": 0,
       "edit": 0,
@@ -759,8 +789,8 @@
       "kontrolKeluarga": 88,
       "kontrolUsaha": 5,
       "keluargaAktifSE": 74,
-      "gapKontrolKeluarga": -6,
-      "coverageKeluargaSE": 2.3
+      "gapKontrolKeluarga": -3,
+      "coverageKeluargaSE": 9.1
     },
     {
       "id": "PPL-24",
@@ -774,26 +804,26 @@
         "fahrysamsul1@gmail.com"
       ],
       "slsList": [
-        "RT 019 DUSUN SUTERA B3",
         "KEBUN SAWIT PERUSAHAAN",
-        "RT 016 DUSUN KARYA BARU"
+        "RT 016 DUSUN KARYA BARU",
+        "RT 019 DUSUN SUTERA B3"
       ],
-      "assigned": 63,
-      "open": 59,
-      "draft": 0,
-      "dicacah": 4,
-      "submit": 4,
+      "assigned": 72,
+      "open": 57,
+      "draft": 2,
+      "dicacah": 13,
+      "submit": 10,
       "approve": 0,
-      "complete": 0,
+      "complete": 3,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 0,
+      "diolah": 3,
       "kontrolKeluarga": 122,
       "kontrolUsaha": 59,
       "keluargaAktifSE": 111,
-      "gapKontrolKeluarga": -59,
-      "coverageKeluargaSE": 3.3
+      "gapKontrolKeluarga": -50,
+      "coverageKeluargaSE": 10.7
     },
     {
       "id": "PPL-25",
@@ -812,54 +842,54 @@
         "RT 006 RW 002 DUSUN SIMPATI",
         "RT 008 RW 012 DUSUN SINAM"
       ],
-      "assigned": 117,
-      "open": 46,
-      "draft": 1,
-      "dicacah": 69,
-      "submit": 0,
+      "assigned": 130,
+      "open": 21,
+      "draft": 35,
+      "dicacah": 73,
+      "submit": 2,
       "approve": 0,
-      "complete": 69,
+      "complete": 71,
       "edit": 0,
       "revoke": 0,
       "reject": 1,
-      "diolah": 69,
+      "diolah": 71,
       "kontrolKeluarga": 51,
       "kontrolUsaha": 83,
       "keluargaAktifSE": 35,
-      "gapKontrolKeluarga": 66,
-      "coverageKeluargaSE": 135.3
+      "gapKontrolKeluarga": 79,
+      "coverageKeluargaSE": 143.1
     },
     {
       "id": "PPL-26",
       "provinsi": "61 - KALIMANTAN BARAT",
-      "kabupaten": "6171 - PONTIANAK",
-      "kabupatenKode": "6171",
-      "kabupatenNama": "PONTIANAK",
+      "kabupaten": "6172 - SINGKAWANG",
+      "kabupatenKode": "6172",
+      "kabupatenNama": "SINGKAWANG",
       "pencacah": "linalinaherlina490@gmail.com",
       "pengawas": "opposkw338@gmail.com",
       "semuaPengawas": [
         "opposkw338@gmail.com"
       ],
       "slsList": [
-        "RT 003 RW 001",
-        "RT 008 RW 003"
+        "RT 008 RW 003",
+        "RT 003 RW 001"
       ],
-      "assigned": 225,
-      "open": 202,
-      "draft": 2,
-      "dicacah": 19,
-      "submit": 5,
+      "assigned": 150,
+      "open": 107,
+      "draft": 0,
+      "dicacah": 41,
+      "submit": 25,
       "approve": 0,
-      "complete": 14,
+      "complete": 16,
       "edit": 0,
       "revoke": 0,
       "reject": 2,
-      "diolah": 14,
-      "kontrolKeluarga": 202,
-      "kontrolUsaha": 147,
-      "keluargaAktifSE": 119,
-      "gapKontrolKeluarga": 23,
-      "coverageKeluargaSE": 9.4
+      "diolah": 16,
+      "kontrolKeluarga": 159,
+      "kontrolUsaha": 91,
+      "keluargaAktifSE": 104,
+      "gapKontrolKeluarga": -9,
+      "coverageKeluargaSE": 25.8
     },
     {
       "id": "PPL-27",
@@ -876,22 +906,22 @@
         "RT 039 RW 007",
         "RT 055 RW 008"
       ],
-      "assigned": 376,
-      "open": 347,
-      "draft": 8,
-      "dicacah": 21,
-      "submit": 17,
+      "assigned": 398,
+      "open": 243,
+      "draft": 52,
+      "dicacah": 99,
+      "submit": 16,
       "approve": 0,
-      "complete": 4,
+      "complete": 83,
       "edit": 0,
       "revoke": 0,
-      "reject": 0,
-      "diolah": 4,
+      "reject": 4,
+      "diolah": 83,
       "kontrolKeluarga": 271,
       "kontrolUsaha": 174,
       "keluargaAktifSE": 122,
-      "gapKontrolKeluarga": 105,
-      "coverageKeluargaSE": 7.7
+      "gapKontrolKeluarga": 127,
+      "coverageKeluargaSE": 36.5
     },
     {
       "id": "PPL-28",
@@ -912,8 +942,8 @@
         "RT 006 RW 002 DUSUN WONOSOBO"
       ],
       "assigned": 142,
-      "open": 138,
-      "draft": 0,
+      "open": 135,
+      "draft": 3,
       "dicacah": 4,
       "submit": 4,
       "approve": 0,
@@ -935,29 +965,32 @@
       "kabupatenKode": "6102",
       "kabupatenNama": "BENGKAYANG",
       "pencacah": "marnoja@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "triansori71@gmail.com",
+      "semuaPengawas": [
+        "triansori71@gmail.com",
+        "sayurasam295@gmail.com"
+      ],
       "slsList": [
         "RT 014 RW 008",
         "RT 02 DUSUN TANJUNG",
         "RT 005 DUSUN SEPOGOT"
       ],
       "assigned": 483,
-      "open": 456,
-      "draft": 20,
-      "dicacah": 7,
-      "submit": 0,
+      "open": 418,
+      "draft": 18,
+      "dicacah": 47,
+      "submit": 7,
       "approve": 0,
-      "complete": 7,
+      "complete": 40,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 7,
+      "diolah": 40,
       "kontrolKeluarga": 266,
       "kontrolUsaha": 361,
       "keluargaAktifSE": 167,
       "gapKontrolKeluarga": 217,
-      "coverageKeluargaSE": 2.6
+      "coverageKeluargaSE": 17.7
     },
     {
       "id": "PPL-30",
@@ -976,11 +1009,11 @@
         "RT 001 RW 009 DUSUN PLAMBOYAN",
         "RT 006 RW 002 DUSUN SIMPATI"
       ],
-      "assigned": 331,
-      "open": 291,
-      "draft": 21,
-      "dicacah": 19,
-      "submit": 13,
+      "assigned": 344,
+      "open": 257,
+      "draft": 59,
+      "dicacah": 28,
+      "submit": 22,
       "approve": 0,
       "complete": 6,
       "edit": 0,
@@ -990,8 +1023,8 @@
       "kontrolKeluarga": 332,
       "kontrolUsaha": 92,
       "keluargaAktifSE": 259,
-      "gapKontrolKeluarga": -1,
-      "coverageKeluargaSE": 5.7
+      "gapKontrolKeluarga": 12,
+      "coverageKeluargaSE": 8.4
     },
     {
       "id": "PPL-31",
@@ -1000,30 +1033,30 @@
       "kabupatenKode": "6172",
       "kabupatenNama": "SINGKAWANG",
       "pencacah": "metarimeta338@gmail.com",
-      "pengawas": "iwan84376@gmail.com",
+      "pengawas": "trisuprapti8377@gmail.com",
       "semuaPengawas": [
-        "iwan84376@gmail.com"
+        "trisuprapti8377@gmail.com"
       ],
       "slsList": [
-        "RT 001 RW 001",
-        "RT 011 RW 001"
+        "RT 011 RW 001",
+        "RT 001 RW 001"
       ],
-      "assigned": 170,
-      "open": 152,
-      "draft": 8,
-      "dicacah": 10,
-      "submit": 1,
+      "assigned": 201,
+      "open": 95,
+      "draft": 54,
+      "dicacah": 52,
+      "submit": 3,
       "approve": 0,
-      "complete": 9,
+      "complete": 49,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 9,
-      "kontrolKeluarga": 125,
-      "kontrolUsaha": 55,
-      "keluargaAktifSE": 105,
-      "gapKontrolKeluarga": 45,
-      "coverageKeluargaSE": 8
+      "diolah": 49,
+      "kontrolKeluarga": 132,
+      "kontrolUsaha": 126,
+      "keluargaAktifSE": 112,
+      "gapKontrolKeluarga": 69,
+      "coverageKeluargaSE": 39.4
     },
     {
       "id": "PPL-32",
@@ -1041,21 +1074,21 @@
         "RT 001 RW 009"
       ],
       "assigned": 275,
-      "open": 266,
-      "draft": 6,
-      "dicacah": 3,
-      "submit": 3,
+      "open": 239,
+      "draft": 9,
+      "dicacah": 27,
+      "submit": 10,
       "approve": 0,
-      "complete": 0,
+      "complete": 17,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 0,
+      "diolah": 17,
       "kontrolKeluarga": 146,
       "kontrolUsaha": 151,
       "keluargaAktifSE": 97,
       "gapKontrolKeluarga": 129,
-      "coverageKeluargaSE": 2.1
+      "coverageKeluargaSE": 18.5
     },
     {
       "id": "PPL-33",
@@ -1064,29 +1097,31 @@
       "kabupatenKode": "6101",
       "kabupatenNama": "SAMBAS",
       "pencacah": "nadiminselangkin@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "rabuni77@gmail.com",
+      "semuaPengawas": [
+        "rabuni77@gmail.com"
+      ],
       "slsList": [
-        "RT 002 RW 001 DUSUN SEMANAS",
         "RT 002 RW 001 DUSUN SEPANDAN",
-        "PT. WHS 2 DIVISI 4"
+        "PT. WHS 2 DIVISI 4",
+        "RT 002 RW 001 DUSUN SEMANAS"
       ],
       "assigned": 158,
-      "open": 124,
-      "draft": 24,
-      "dicacah": 10,
-      "submit": 10,
+      "open": 78,
+      "draft": 37,
+      "dicacah": 43,
+      "submit": 36,
       "approve": 0,
-      "complete": 0,
+      "complete": 7,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 0,
+      "diolah": 7,
       "kontrolKeluarga": 147,
       "kontrolUsaha": 47,
       "keluargaAktifSE": 101,
       "gapKontrolKeluarga": 11,
-      "coverageKeluargaSE": 6.8
+      "coverageKeluargaSE": 29.3
     },
     {
       "id": "PPL-34",
@@ -1100,14 +1135,14 @@
         "patrisia.selvina2020@gmail.com"
       ],
       "slsList": [
-        "RT 001 DUSUN SEDOWAI",
-        "RT 14 DUSUN MANUK LABONG"
+        "RT 14 DUSUN MANUK LABONG",
+        "RT 001 DUSUN SEDOWAI"
       ],
       "assigned": 61,
-      "open": 23,
-      "draft": 38,
-      "dicacah": 0,
-      "submit": 0,
+      "open": 12,
+      "draft": 27,
+      "dicacah": 22,
+      "submit": 22,
       "approve": 0,
       "complete": 0,
       "edit": 0,
@@ -1118,7 +1153,7 @@
       "kontrolUsaha": 23,
       "keluargaAktifSE": 80,
       "gapKontrolKeluarga": -28,
-      "coverageKeluargaSE": 0
+      "coverageKeluargaSE": 24.7
     },
     {
       "id": "PPL-35",
@@ -1137,10 +1172,10 @@
         "RT 001 DUSUN MENTAWA BIRING"
       ],
       "assigned": 274,
-      "open": 249,
-      "draft": 6,
-      "dicacah": 19,
-      "submit": 19,
+      "open": 241,
+      "draft": 13,
+      "dicacah": 20,
+      "submit": 20,
       "approve": 0,
       "complete": 0,
       "edit": 0,
@@ -1151,7 +1186,7 @@
       "kontrolUsaha": 79,
       "keluargaAktifSE": 123,
       "gapKontrolKeluarga": 51,
-      "coverageKeluargaSE": 8.5
+      "coverageKeluargaSE": 9
     },
     {
       "id": "PPL-36",
@@ -1160,17 +1195,19 @@
       "kabupatenKode": "6171",
       "kabupatenNama": "PONTIANAK",
       "pencacah": "nurulsuciafsari12@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
-      "slsList": [
-        "RT 001 RW 008",
-        "RT 001 RW 010"
+      "pengawas": "rumyatipujiastuti95@gmail.com",
+      "semuaPengawas": [
+        "rumyatipujiastuti95@gmail.com"
       ],
-      "assigned": 144,
-      "open": 135,
-      "draft": 9,
-      "dicacah": 0,
-      "submit": 0,
+      "slsList": [
+        "RT 001 RW 010",
+        "RT 001 RW 008"
+      ],
+      "assigned": 146,
+      "open": 105,
+      "draft": 0,
+      "dicacah": 41,
+      "submit": 41,
       "approve": 0,
       "complete": 0,
       "edit": 0,
@@ -1180,8 +1217,8 @@
       "kontrolKeluarga": 115,
       "kontrolUsaha": 79,
       "keluargaAktifSE": 68,
-      "gapKontrolKeluarga": 29,
-      "coverageKeluargaSE": 0
+      "gapKontrolKeluarga": 31,
+      "coverageKeluargaSE": 35.7
     },
     {
       "id": "PPL-37",
@@ -1199,21 +1236,21 @@
         "RT 008 RW 001"
       ],
       "assigned": 377,
-      "open": 308,
+      "open": 302,
       "draft": 0,
-      "dicacah": 67,
-      "submit": 16,
+      "dicacah": 64,
+      "submit": 1,
       "approve": 0,
-      "complete": 51,
+      "complete": 63,
       "edit": 0,
       "revoke": 0,
-      "reject": 2,
-      "diolah": 51,
+      "reject": 11,
+      "diolah": 63,
       "kontrolKeluarga": 272,
       "kontrolUsaha": 156,
       "keluargaAktifSE": 140,
       "gapKontrolKeluarga": 105,
-      "coverageKeluargaSE": 24.6
+      "coverageKeluargaSE": 23.5
     },
     {
       "id": "PPL-38",
@@ -1222,27 +1259,29 @@
       "kabupatenKode": "6172",
       "kabupatenNama": "SINGKAWANG",
       "pencacah": "rayaayahratih@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "opposkw338@gmail.com",
+      "semuaPengawas": [
+        "opposkw338@gmail.com"
+      ],
       "slsList": [
         "RT 021 RW 005"
       ],
-      "assigned": 234,
-      "open": 172,
-      "draft": 9,
-      "dicacah": 53,
-      "submit": 17,
+      "assigned": 260,
+      "open": 140,
+      "draft": 17,
+      "dicacah": 103,
+      "submit": 32,
       "approve": 0,
-      "complete": 36,
+      "complete": 71,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 36,
+      "diolah": 71,
       "kontrolKeluarga": 128,
       "kontrolUsaha": 222,
       "keluargaAktifSE": 97,
-      "gapKontrolKeluarga": 106,
-      "coverageKeluargaSE": 41.4
+      "gapKontrolKeluarga": 132,
+      "coverageKeluargaSE": 80.5
     },
     {
       "id": "PPL-39",
@@ -1253,30 +1292,32 @@
       "pencacah": "rezafauzan639@gmail.com",
       "pengawas": "esti@gmail.com",
       "semuaPengawas": [
-        "esti@gmail.com"
+        "esti@gmail.com",
+        "1isakdora86@gmail.com"
       ],
       "slsList": [
         "RT 029 RW 006",
         "KANTOR DAN BARAK PT DRM",
         "RT 006 RW 003",
-        "RT 10 RW 002 DUSUN TINTING MELAPI"
+        "RT 10 RW 002 DUSUN TINTING MELAPI",
+        "RT 006 RW 002"
       ],
-      "assigned": 314,
-      "open": 282,
+      "assigned": 345,
+      "open": 274,
       "draft": 0,
-      "dicacah": 32,
-      "submit": 32,
+      "dicacah": 71,
+      "submit": 70,
       "approve": 0,
-      "complete": 0,
+      "complete": 1,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 0,
-      "kontrolKeluarga": 312,
-      "kontrolUsaha": 155,
-      "keluargaAktifSE": 240,
-      "gapKontrolKeluarga": 2,
-      "coverageKeluargaSE": 10.3
+      "diolah": 1,
+      "kontrolKeluarga": 334,
+      "kontrolUsaha": 164,
+      "keluargaAktifSE": 261,
+      "gapKontrolKeluarga": 11,
+      "coverageKeluargaSE": 21.3
     },
     {
       "id": "PPL-40",
@@ -1293,22 +1334,22 @@
         "RT 003 RW 02 DUSUN TATAI KUJU",
         "RT 017 DUSUN MUNGGU ANYANG"
       ],
-      "assigned": 117,
-      "open": 86,
+      "assigned": 119,
+      "open": 71,
       "draft": 0,
-      "dicacah": 31,
-      "submit": 22,
+      "dicacah": 48,
+      "submit": 33,
       "approve": 0,
-      "complete": 9,
+      "complete": 15,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 9,
+      "diolah": 15,
       "kontrolKeluarga": 105,
       "kontrolUsaha": 23,
       "keluargaAktifSE": 85,
-      "gapKontrolKeluarga": 12,
-      "coverageKeluargaSE": 29.5
+      "gapKontrolKeluarga": 14,
+      "coverageKeluargaSE": 45.7
     },
     {
       "id": "PPL-41",
@@ -1317,16 +1358,18 @@
       "kabupatenKode": "6106",
       "kabupatenNama": "KETAPANG",
       "pencacah": "sasmirais6@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "qwerty.ade00@gmail.com",
+      "semuaPengawas": [
+        "qwerty.ade00@gmail.com"
+      ],
       "slsList": [
         "RT 1 DUSUN BANJAR SARI SELATAN",
         "RT 2 DUSUN BANGUN SARI",
         "RT 006 RW 002 DUSUN PARIT BERDIRI"
       ],
       "assigned": 341,
-      "open": 322,
-      "draft": 4,
+      "open": 321,
+      "draft": 5,
       "dicacah": 15,
       "submit": 0,
       "approve": 0,
@@ -1356,22 +1399,22 @@
         "RT 003 RW 020",
         "RT 006 RW 028"
       ],
-      "assigned": 151,
-      "open": 124,
-      "draft": 0,
-      "dicacah": 27,
-      "submit": 23,
+      "assigned": 156,
+      "open": 105,
+      "draft": 1,
+      "dicacah": 50,
+      "submit": 13,
       "approve": 0,
-      "complete": 4,
+      "complete": 37,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 4,
+      "diolah": 37,
       "kontrolKeluarga": 139,
       "kontrolUsaha": 29,
       "keluargaAktifSE": 87,
-      "gapKontrolKeluarga": 12,
-      "coverageKeluargaSE": 19.4
+      "gapKontrolKeluarga": 17,
+      "coverageKeluargaSE": 36
     },
     {
       "id": "PPL-43",
@@ -1380,17 +1423,19 @@
       "kabupatenKode": "6171",
       "kabupatenNama": "PONTIANAK",
       "pencacah": "siskasissielviana@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "rumyatipujiastuti95@gmail.com",
+      "semuaPengawas": [
+        "rumyatipujiastuti95@gmail.com"
+      ],
       "slsList": [
         "RT 005 RW 004",
         "RT 001 RW 006"
       ],
-      "assigned": 248,
-      "open": 241,
-      "draft": 3,
-      "dicacah": 4,
-      "submit": 4,
+      "assigned": 251,
+      "open": 213,
+      "draft": 19,
+      "dicacah": 19,
+      "submit": 19,
       "approve": 0,
       "complete": 0,
       "edit": 0,
@@ -1400,8 +1445,8 @@
       "kontrolKeluarga": 121,
       "kontrolUsaha": 148,
       "keluargaAktifSE": 75,
-      "gapKontrolKeluarga": 127,
-      "coverageKeluargaSE": 3.3
+      "gapKontrolKeluarga": 130,
+      "coverageKeluargaSE": 15.7
     },
     {
       "id": "PPL-44",
@@ -1418,11 +1463,11 @@
         "RT 02 DUSUN TANJUNG PERAK",
         "RT 11 RW 03 DUSUN SUMBER BARU"
       ],
-      "assigned": 106,
-      "open": 96,
-      "draft": 8,
-      "dicacah": 2,
-      "submit": 2,
+      "assigned": 108,
+      "open": 74,
+      "draft": 29,
+      "dicacah": 5,
+      "submit": 5,
       "approve": 0,
       "complete": 0,
       "edit": 0,
@@ -1432,8 +1477,8 @@
       "kontrolKeluarga": 106,
       "kontrolUsaha": 7,
       "keluargaAktifSE": 76,
-      "gapKontrolKeluarga": 0,
-      "coverageKeluargaSE": 1.9
+      "gapKontrolKeluarga": 2,
+      "coverageKeluargaSE": 4.7
     },
     {
       "id": "PPL-45",
@@ -1442,15 +1487,17 @@
       "kabupatenKode": "6111",
       "kabupatenNama": "KAYONG UTARA",
       "pencacah": "susantoogel@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "riakku1234@gmail.com",
+      "semuaPengawas": [
+        "riakku1234@gmail.com"
+      ],
       "slsList": [
         "RT 009 DUSUN TENAGA BARU",
         "RT 018 DUSUN MULIA USAHA"
       ],
-      "assigned": 90,
-      "open": 84,
-      "draft": 0,
+      "assigned": 92,
+      "open": 80,
+      "draft": 6,
       "dicacah": 6,
       "submit": 0,
       "approve": 0,
@@ -1462,7 +1509,7 @@
       "kontrolKeluarga": 94,
       "kontrolUsaha": 26,
       "keluargaAktifSE": 65,
-      "gapKontrolKeluarga": -4,
+      "gapKontrolKeluarga": -2,
       "coverageKeluargaSE": 6.4
     },
     {
@@ -1472,29 +1519,31 @@
       "kabupatenKode": "6106",
       "kabupatenNama": "KETAPANG",
       "pencacah": "thomycan21@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "qwerty.ade00@gmail.com",
+      "semuaPengawas": [
+        "qwerty.ade00@gmail.com"
+      ],
       "slsList": [
         "RT 002 RW 001 DUSUN PELEMPANGAN",
         "RT 013 DUSUN SUMBER SARI",
         "RT 014 DUSUN PEMINTUAN"
       ],
-      "assigned": 76,
-      "open": 76,
-      "draft": 0,
-      "dicacah": 0,
-      "submit": 0,
+      "assigned": 78,
+      "open": 35,
+      "draft": 26,
+      "dicacah": 14,
+      "submit": 10,
       "approve": 0,
-      "complete": 0,
+      "complete": 4,
       "edit": 0,
       "revoke": 0,
-      "reject": 0,
-      "diolah": 0,
+      "reject": 3,
+      "diolah": 4,
       "kontrolKeluarga": 84,
       "kontrolUsaha": 7,
       "keluargaAktifSE": 54,
-      "gapKontrolKeluarga": -8,
-      "coverageKeluargaSE": 0
+      "gapKontrolKeluarga": -6,
+      "coverageKeluargaSE": 16.7
     },
     {
       "id": "PPL-47",
@@ -1503,28 +1552,30 @@
       "kabupatenKode": "6172",
       "kabupatenNama": "SINGKAWANG",
       "pencacah": "titikyanti270919@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "trisuprapti8377@gmail.com",
+      "semuaPengawas": [
+        "trisuprapti8377@gmail.com"
+      ],
       "slsList": [
         "RT 005 RW 001",
         "RT 040 RW 011"
       ],
       "assigned": 201,
-      "open": 163,
+      "open": 157,
       "draft": 0,
-      "dicacah": 36,
-      "submit": 12,
+      "dicacah": 39,
+      "submit": 1,
       "approve": 0,
-      "complete": 24,
+      "complete": 38,
       "edit": 0,
       "revoke": 0,
-      "reject": 2,
-      "diolah": 24,
+      "reject": 5,
+      "diolah": 38,
       "kontrolKeluarga": 182,
       "kontrolUsaha": 188,
       "keluargaAktifSE": 123,
       "gapKontrolKeluarga": 19,
-      "coverageKeluargaSE": 19.8
+      "coverageKeluargaSE": 21.4
     },
     {
       "id": "PPL-48",
@@ -1533,28 +1584,30 @@
       "kabupatenKode": "6172",
       "kabupatenNama": "SINGKAWANG",
       "pencacah": "tridaryantoo15@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "trisuprapti8377@gmail.com",
+      "semuaPengawas": [
+        "trisuprapti8377@gmail.com"
+      ],
       "slsList": [
         "RT 002 RW 001",
         "RT 014 RW 004"
       ],
-      "assigned": 183,
+      "assigned": 184,
       "open": 128,
-      "draft": 13,
-      "dicacah": 42,
-      "submit": 21,
+      "draft": 0,
+      "dicacah": 52,
+      "submit": 7,
       "approve": 0,
-      "complete": 21,
+      "complete": 45,
       "edit": 0,
       "revoke": 0,
-      "reject": 0,
-      "diolah": 21,
+      "reject": 4,
+      "diolah": 45,
       "kontrolKeluarga": 165,
       "kontrolUsaha": 52,
       "keluargaAktifSE": 107,
-      "gapKontrolKeluarga": 18,
-      "coverageKeluargaSE": 25.5
+      "gapKontrolKeluarga": 19,
+      "coverageKeluargaSE": 31.5
     },
     {
       "id": "PPL-49",
@@ -1563,30 +1616,32 @@
       "kabupatenKode": "6111",
       "kabupatenNama": "KAYONG UTARA",
       "pencacah": "wahyudigituam@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "riakku1234@gmail.com",
+      "semuaPengawas": [
+        "riakku1234@gmail.com"
+      ],
       "slsList": [
+        "RT 001 DUSUN TANJUNG",
         "RT 003 DUSUN TANAH MERAH",
         "RT 005 DUSUN RANTAU PANJANG",
-        "RT 001 DUSUN LIMAU MANIS",
-        "RT 001 DUSUN TANJUNG"
+        "RT 001 DUSUN LIMAU MANIS"
       ],
-      "assigned": 296,
-      "open": 242,
-      "draft": 33,
-      "dicacah": 19,
-      "submit": 15,
+      "assigned": 302,
+      "open": 214,
+      "draft": 36,
+      "dicacah": 49,
+      "submit": 44,
       "approve": 0,
-      "complete": 4,
+      "complete": 5,
       "edit": 0,
       "revoke": 0,
-      "reject": 2,
-      "diolah": 4,
+      "reject": 3,
+      "diolah": 5,
       "kontrolKeluarga": 311,
       "kontrolUsaha": 94,
       "keluargaAktifSE": 232,
-      "gapKontrolKeluarga": -15,
-      "coverageKeluargaSE": 6.1
+      "gapKontrolKeluarga": -9,
+      "coverageKeluargaSE": 15.8
     },
     {
       "id": "PPL-50",
@@ -1595,29 +1650,30 @@
       "kabupatenKode": "6172",
       "kabupatenNama": "SINGKAWANG",
       "pencacah": "wanaulfa1103@gmail.com",
-      "pengawas": "iwan84376@gmail.com",
+      "pengawas": "trisuprapti8377@gmail.com",
       "semuaPengawas": [
+        "trisuprapti8377@gmail.com",
         "iwan84376@gmail.com"
       ],
       "slsList": [
         "RT 001 RW 001"
       ],
-      "assigned": 580,
-      "open": 422,
-      "draft": 97,
-      "dicacah": 59,
-      "submit": 15,
+      "assigned": 408,
+      "open": 226,
+      "draft": 98,
+      "dicacah": 79,
+      "submit": 13,
       "approve": 0,
-      "complete": 44,
+      "complete": 66,
       "edit": 0,
       "revoke": 0,
-      "reject": 2,
-      "diolah": 44,
-      "kontrolKeluarga": 388,
-      "kontrolUsaha": 306,
-      "keluargaAktifSE": 165,
-      "gapKontrolKeluarga": 192,
-      "coverageKeluargaSE": 15.2
+      "reject": 5,
+      "diolah": 66,
+      "kontrolKeluarga": 255,
+      "kontrolUsaha": 150,
+      "keluargaAktifSE": 86,
+      "gapKontrolKeluarga": 153,
+      "coverageKeluargaSE": 31
     },
     {
       "id": "PPL-51",
@@ -1626,28 +1682,30 @@
       "kabupatenKode": "6111",
       "kabupatenNama": "KAYONG UTARA",
       "pencacah": "www.sapuansyah03@gmail.com",
-      "pengawas": "-",
-      "semuaPengawas": [],
+      "pengawas": "fahrysamsul1@gmail.com",
+      "semuaPengawas": [
+        "fahrysamsul1@gmail.com"
+      ],
       "slsList": [
         "RT 002 DUSUN MATAN",
         "RT 002 DUSUN JASA LAUT"
       ],
-      "assigned": 162,
-      "open": 143,
+      "assigned": 169,
+      "open": 102,
       "draft": 2,
-      "dicacah": 17,
-      "submit": 17,
+      "dicacah": 65,
+      "submit": 25,
       "approve": 0,
-      "complete": 0,
+      "complete": 40,
       "edit": 0,
       "revoke": 0,
       "reject": 0,
-      "diolah": 0,
+      "diolah": 40,
       "kontrolKeluarga": 154,
       "kontrolUsaha": 45,
       "keluargaAktifSE": 91,
-      "gapKontrolKeluarga": 8,
-      "coverageKeluargaSE": 11
+      "gapKontrolKeluarga": 15,
+      "coverageKeluargaSE": 42.2
     }
   ]
 }

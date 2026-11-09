@@ -6,6 +6,8 @@ interface PetugasTableProps {
   records: PetugasAnalysis[];
   selectedKabupaten: string;
   onSelectKabupaten: (kab: string) => void;
+  statusFilter?: string;
+  onStatusFilterChange?: (status: string) => void;
   kabupatenList: { kode: string; nama: string }[];
   currentDay: number;
   fieldDays?: number;
@@ -21,6 +23,8 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
   records,
   selectedKabupaten,
   onSelectKabupaten,
+  statusFilter: controlledStatusFilter,
+  onStatusFilterChange,
   kabupatenList,
   currentDay,
   fieldDays = 23,
@@ -28,7 +32,10 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
   onSendPetugasAlert,
 }) => {
   const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [internalStatusFilter, setInternalStatusFilter] = useState<string>('all');
+  const statusFilter = controlledStatusFilter !== undefined ? controlledStatusFilter : internalStatusFilter;
+  const setStatusFilter = onStatusFilterChange || setInternalStatusFilter;
+
   const [sortField, setSortField] = useState<SortField>('persenCapaian');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -125,7 +132,7 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200 overflow-hidden mb-6 shadow-2xs">
+    <div id="petugas-table-section" className="bg-white rounded-lg border border-slate-200 overflow-hidden mb-6 shadow-2xs scroll-mt-20">
       
       {/* Table Header & Search Filter */}
       <div className="p-4 sm:p-5 border-b border-slate-200 bg-slate-50/70">
@@ -232,9 +239,9 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
               <th 
                 onClick={() => handleSort('persenCapaian')}
                 className="py-3 px-3.5 cursor-pointer hover:text-slate-900 transition-colors"
-                title="Persentase pemenuhan terhadap target kumulatif hari ini"
+                title="Persentase capaian terhadap target kumulatif harian s.d. hari ini"
               >
-                Capaian Target
+                Capaian Target Kumulatif Harian
               </th>
 
               <th 
@@ -354,13 +361,13 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
                         )}
                       </td>
 
-                      {/* Capaian Target */}
+                      {/* Capaian dari Target Kumulatif Harian & Progres Pendataan */}
                       <td className="py-3 px-3.5">
                         <div className="w-32">
                           <div className="flex items-center justify-between text-xs mb-1">
                             <span className="font-bold text-slate-800">{p.persenCapaian}%</span>
-                            <span className="text-slate-400 text-xs">
-                              {p.persenTotal}% tot
+                            <span className="text-slate-500 font-medium text-[11px]" title="Progres Pendataan terhadap total alokasi">
+                              {p.persenTotal}% data
                             </span>
                           </div>
                           <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">

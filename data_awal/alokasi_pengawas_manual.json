@@ -1,0 +1,981 @@
+{
+  "updatedAt": "2026-11-09T11:28:26.160309",
+  "sourceFile": "alokasi.docx",
+  "totalAllocations": 139,
+  "masterAllocations": 129,
+  "allocations": [
+    {
+      "email": "asyifa.julia@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171020002001300",
+      "slsName": "RT 002 RW 004",
+      "isMaster": true
+    },
+    {
+      "email": "asyifa.julia@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171020005002600",
+      "slsName": "RT 003 RW 006",
+      "isMaster": true
+    },
+    {
+      "email": "asyifa.julia@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171020005003500",
+      "slsName": "RT 001 RW 009",
+      "isMaster": true
+    },
+    {
+      "email": "asyifa.julia@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171040002006100",
+      "slsName": "RT 001 RW 017",
+      "isMaster": true
+    },
+    {
+      "email": "asyifa.julia@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171040003008100",
+      "slsName": "RT 003 RW 020",
+      "isMaster": true
+    },
+    {
+      "email": "asyifa.julia@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171040004018500",
+      "slsName": "RT 006 RW 028",
+      "isMaster": true
+    },
+    {
+      "email": "rumyatipujiastuti95@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171010003015000",
+      "slsName": "RT 003 RW 034",
+      "isMaster": true
+    },
+    {
+      "email": "rumyatipujiastuti95@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171010003015100",
+      "slsName": "RT 004 RW 034",
+      "isMaster": true
+    },
+    {
+      "email": "rumyatipujiastuti95@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171011002000300",
+      "slsName": "RT 003 RW 001",
+      "isMaster": true
+    },
+    {
+      "email": "rumyatipujiastuti95@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171030007013300",
+      "slsName": "RT 003 RW 024",
+      "isMaster": true
+    },
+    {
+      "email": "rumyatipujiastuti95@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171031001001600",
+      "slsName": "RT 005 RW 004",
+      "isMaster": true
+    },
+    {
+      "email": "rumyatipujiastuti95@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171031001002200",
+      "slsName": "RT 001 RW 006",
+      "isMaster": true
+    },
+    {
+      "email": "rumyatipujiastuti95@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171031002002600",
+      "slsName": "RT 001 RW 008",
+      "isMaster": true
+    },
+    {
+      "email": "rumyatipujiastuti95@gmail.com",
+      "kabupaten": "PONTIANAK",
+      "slsCode": "6171031005004100",
+      "slsName": "RT 001 RW 010",
+      "isMaster": true
+    },
+    {
+      "email": "dedyadyan@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101010001000800",
+      "slsName": "RT 08 RW 004 DUSUN KOLAM",
+      "isMaster": true
+    },
+    {
+      "email": "dedyadyan@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101020014004100",
+      "slsName": "RT 001 RW 009 DUSUN PLAMBOYAN",
+      "isMaster": true
+    },
+    {
+      "email": "dedyadyan@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101020015005600",
+      "slsName": "RT 008 RW 012 DUSUN SINAM",
+      "isMaster": true
+    },
+    {
+      "email": "dedyadyan@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101020017002000",
+      "slsName": "RT 003 RW 005 DUSUN PAGONG",
+      "isMaster": true
+    },
+    {
+      "email": "dedyadyan@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101022004000600",
+      "slsName": "RT 006 RW 002 DUSUN SIMPATI",
+      "isMaster": true
+    },
+    {
+      "email": "dedyadyan@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101050010000900",
+      "slsName": "RT 9 RW 05 DUSUN SELEKO",
+      "isMaster": true
+    },
+    {
+      "email": "dedyadyan@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101051001000500",
+      "slsName": "RT 05 RW 01 DUSUN BUKIT RAYA",
+      "isMaster": true
+    },
+    {
+      "email": "dedyadyan@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101090008000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "rabuni77@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101030015003000",
+      "slsName": "RT 027 RW 014 DUSUN KENANGA 2",
+      "isMaster": true
+    },
+    {
+      "email": "rabuni77@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101030019001100",
+      "slsName": "RT 011 RW 006 DUSUN SURYA",
+      "isMaster": true
+    },
+    {
+      "email": "rabuni77@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101040029000600",
+      "slsName": "RT 006 RW 01 DUSUN KAUM",
+      "isMaster": true
+    },
+    {
+      "email": "rabuni77@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101041002000300",
+      "slsName": "RT 003 RW 002 DUSUN SEI TUBA",
+      "isMaster": true
+    },
+    {
+      "email": "rabuni77@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101041006002100",
+      "slsName": "RT 021 RW 010 DUSUN SUNGAI BARU",
+      "isMaster": true
+    },
+    {
+      "email": "rabuni77@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101060011000200",
+      "slsName": "RT 002 RW 001 DUSUN SEPANDAN",
+      "isMaster": true
+    },
+    {
+      "email": "rabuni77@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101061006000200",
+      "slsName": "RT 002 RW 001 DUSUN SEMANAS",
+      "isMaster": true
+    },
+    {
+      "email": "rabuni77@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101070002001702",
+      "slsName": "RT 017 RW 003 DUSUN SENABAH",
+      "isMaster": true
+    },
+    {
+      "email": "rabuni77@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101080001101200",
+      "slsName": "PT. WHS 2 DIVISI 4",
+      "isMaster": true
+    },
+    {
+      "email": "rabuni77@gmail.com",
+      "kabupaten": "SAMBAS",
+      "slsCode": "6101090008000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "sayurasam295@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102041016000100",
+      "slsName": "RT 02 DUSUN TANJUNG",
+      "isMaster": true
+    },
+    {
+      "email": "sayurasam295@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102041018000500",
+      "slsName": "RT 005 DUSUN SEPOGOT",
+      "isMaster": true
+    },
+    {
+      "email": "sayurasam295@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102050019000200",
+      "slsName": "RT 002 DUSUN SUNGAI DAYA",
+      "isMaster": true
+    },
+    {
+      "email": "sayurasam295@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102060006001000",
+      "slsName": "RT 006 RW 00 DUSUN SANGGAU KOTA",
+      "isMaster": true
+    },
+    {
+      "email": "sayurasam295@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102061004000600",
+      "slsName": "RT 010 DUSUN SETIA USAHA",
+      "isMaster": true
+    },
+    {
+      "email": "sayurasam295@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102070003001000",
+      "slsName": "RT 10 RW 04 DUSUN PIJU",
+      "isMaster": true
+    },
+    {
+      "email": "sayurasam295@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102070004100500",
+      "slsName": "PT WKN BLOK G-7",
+      "isMaster": true
+    },
+    {
+      "email": "sayurasam295@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102080005401100",
+      "slsName": "PERUMAHAN KARYAWAN ABLING I DAN ABLING II",
+      "isMaster": true
+    },
+    {
+      "email": "sayurasam295@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102080010000500",
+      "slsName": "RT 005 RW 004 DUSUN KINDAU",
+      "isMaster": true
+    },
+    {
+      "email": "sayurasam295@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102081008000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "triansori71@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102010007000300",
+      "slsName": "RT 003 RW 001 DUSUN PANGKALAN DARAT",
+      "isMaster": true
+    },
+    {
+      "email": "triansori71@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102012001000800",
+      "slsName": "RT 003 RW 003 DUSUN BHAKTI",
+      "isMaster": true
+    },
+    {
+      "email": "triansori71@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102012004004500",
+      "slsName": "RT 006 RW 001 DUSUN TANJUNG GUNDUL",
+      "isMaster": true
+    },
+    {
+      "email": "triansori71@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102030004000500",
+      "slsName": "RT 05 DUSUN SEMANGAT",
+      "isMaster": true
+    },
+    {
+      "email": "triansori71@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102030009000200",
+      "slsName": "RT 02 DUSUN PASUKAYU",
+      "isMaster": true
+    },
+    {
+      "email": "triansori71@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102031003000200",
+      "slsName": "RT 02 RW 01 DUSUN SERINDU",
+      "isMaster": true
+    },
+    {
+      "email": "triansori71@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102031013000600",
+      "slsName": "RT 006 RW 001 DUSUN BERABAS BARU I",
+      "isMaster": true
+    },
+    {
+      "email": "triansori71@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102040014001400",
+      "slsName": "RT 014 RW 008",
+      "isMaster": true
+    },
+    {
+      "email": "triansori71@gmail.com",
+      "kabupaten": "BENGKAYANG",
+      "slsCode": "6102081008000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "chairulamri.1990@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105070003000800",
+      "slsName": "RT 16 RW 003 DUSUN PELAIK",
+      "isMaster": true
+    },
+    {
+      "email": "chairulamri.1990@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105060011001200",
+      "slsName": "RT 11 RW 03 DUSUN SUMBER BARU",
+      "isMaster": true
+    },
+    {
+      "email": "chairulamri.1990@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105020002002000",
+      "slsName": "RT 02 DUSUN TANJUNG PERAK",
+      "isMaster": true
+    },
+    {
+      "email": "chairulamri.1990@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105220005000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "chairulamri.1990@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105120011001200",
+      "slsName": "RT 012 DUSUN SEBULOH",
+      "isMaster": true
+    },
+    {
+      "email": "patrisia.selvina2020@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105010007000400",
+      "slsName": "RT 04 DUSUN NEKCIKAM",
+      "isMaster": true
+    },
+    {
+      "email": "patrisia.selvina2020@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105140004000300",
+      "slsName": "RT 001 DUSUN SEDOWAI",
+      "isMaster": true
+    },
+    {
+      "email": "patrisia.selvina2020@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105150008001400",
+      "slsName": "RT 14 DUSUN SUNGAI MELING (DESA PERSIAPAN SUNGAI KENAIK)",
+      "isMaster": true
+    },
+    {
+      "email": "patrisia.selvina2020@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105160005000900",
+      "slsName": "RT 14 DUSUN MANUK LABONG",
+      "isMaster": true
+    },
+    {
+      "email": "patrisia.selvina2020@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105180007000300",
+      "slsName": "RT 003 RW 02 DUSUN TATAI KUJU",
+      "isMaster": true
+    },
+    {
+      "email": "patrisia.selvina2020@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105180011001300",
+      "slsName": "RT 017 DUSUN MUNGGU ANYANG",
+      "isMaster": true
+    },
+    {
+      "email": "patrisia.selvina2020@gmail.com",
+      "kabupaten": "SANGGAU",
+      "slsCode": "6105220005000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "gustirantau4@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106061001000100",
+      "slsName": "RT 001 DUSUN KAMAT",
+      "isMaster": true
+    },
+    {
+      "email": "gustirantau4@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106071004000300",
+      "slsName": "RT 003 RW 002",
+      "isMaster": true
+    },
+    {
+      "email": "gustirantau4@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106072002000200",
+      "slsName": "RT 002 DUSUN SIMPANG EMPAT",
+      "isMaster": true
+    },
+    {
+      "email": "gustirantau4@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106090004100200",
+      "slsName": "KEBUN",
+      "isMaster": true
+    },
+    {
+      "email": "gustirantau4@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106100004001300",
+      "slsName": "RT 013 DUSUN BATU KAMBING",
+      "isMaster": true
+    },
+    {
+      "email": "gustirantau4@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106100017001000",
+      "slsName": "RT 010 DUSUN TEBING TINGGI",
+      "isMaster": true
+    },
+    {
+      "email": "gustirantau4@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106120006001501",
+      "slsName": "RT 08 DUSUN BALAI BERKUAK",
+      "isMaster": true
+    },
+    {
+      "email": "gustirantau4@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106121004000800",
+      "slsName": "RT 001 DUSUN MENTAWA BIRING",
+      "isMaster": true
+    },
+    {
+      "email": "qwerty.ade00@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106010004000400",
+      "slsName": "RT 1 DUSUN BANJAR SARI SELATAN",
+      "isMaster": true
+    },
+    {
+      "email": "qwerty.ade00@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106010004001200",
+      "slsName": "RT 2 DUSUN BANGUN SARI",
+      "isMaster": true
+    },
+    {
+      "email": "qwerty.ade00@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106020016000200",
+      "slsName": "RT 002 RW 001 DUSUN PELEMPANGAN",
+      "isMaster": true
+    },
+    {
+      "email": "qwerty.ade00@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106032001001300",
+      "slsName": "RT 013 DUSUN SUMBER SARI",
+      "isMaster": true
+    },
+    {
+      "email": "qwerty.ade00@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106032008001900",
+      "slsName": "RT 014 DUSUN PEMINTUAN",
+      "isMaster": true
+    },
+    {
+      "email": "qwerty.ade00@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106040012000200",
+      "slsName": "RT 02 RW 01 DUSUN DERANUK",
+      "isMaster": true
+    },
+    {
+      "email": "qwerty.ade00@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106050010000600",
+      "slsName": "RT 006 DUSUN LEMBAH MURAI",
+      "isMaster": true
+    },
+    {
+      "email": "qwerty.ade00@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106052008100100",
+      "slsName": "KEBUN PLASMA",
+      "isMaster": true
+    },
+    {
+      "email": "qwerty.ade00@gmail.com",
+      "kabupaten": "KETAPANG",
+      "slsCode": "6106060007000600",
+      "slsName": "RT 006 RW 002 DUSUN PARIT BERDIRI",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107060026000300",
+      "slsName": "RT 003 DUSUN KARYA JAYA",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107070012000200",
+      "slsName": "RT 02 DUSUN BUNTUT PURUN",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107070013000500",
+      "slsName": "RT 003 DUSUN SINGA JELUM",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107070020000700",
+      "slsName": "RT 007 DUSUN KEMANGAI 2",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107110005001200",
+      "slsName": "RT 10 DUSUN KERENTANAK",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107110036000600",
+      "slsName": "RT 006 DUSUN LUBUK TAJAK",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107110039000500",
+      "slsName": "RT 005 DUSUN BUNGKONG",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107130005000600",
+      "slsName": "RT 006 RW 002 DUSUN WONOSOBO",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107130005001000",
+      "slsName": "RT 010 RW 003 DUSUN NIAGA MANDIRI",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107140006000602",
+      "slsName": "RT 006 RW 002",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107190014000200",
+      "slsName": "RT 02 DUSUN SINAR ENTEBUS",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210005000100",
+      "slsName": "RT 01 DUSUN ENGKARAM",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210024000800",
+      "slsName": "RT 008 DUSUN SEMUJAN",
+      "isMaster": true
+    },
+    {
+      "email": "1isakdora86@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210029000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "esti@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107140006002800",
+      "slsName": "RT 029 RW 006",
+      "isMaster": true
+    },
+    {
+      "email": "esti@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107140023000600",
+      "slsName": "RT 006 RW 003",
+      "isMaster": true
+    },
+    {
+      "email": "esti@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107150001000200",
+      "slsName": "RT 002 DUSUN BANYUWANGI",
+      "isMaster": true
+    },
+    {
+      "email": "esti@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107160008000100",
+      "slsName": "RT 01 DUSUN KERAPAN SEPAN",
+      "isMaster": true
+    },
+    {
+      "email": "esti@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107160017000500",
+      "slsName": "RT 01 DUSUN ITET PENYOLI",
+      "isMaster": true
+    },
+    {
+      "email": "esti@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107170006001400",
+      "slsName": "RT 014 DUSUN BANING MULYA",
+      "isMaster": true
+    },
+    {
+      "email": "esti@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107180006001000",
+      "slsName": "RT 10 RW 002 DUSUN TINTING MELAPI",
+      "isMaster": true
+    },
+    {
+      "email": "esti@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107190003400400",
+      "slsName": "KANTOR DAN BARAK PT DRM",
+      "isMaster": true
+    },
+    {
+      "email": "esti@gmail.com",
+      "kabupaten": "SINTANG",
+      "slsCode": "6107210029000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "fahrysamsul1@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111030001001900",
+      "slsName": "RT 019 DUSUN SUTERA B3",
+      "isMaster": true
+    },
+    {
+      "email": "fahrysamsul1@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111030002000200",
+      "slsName": "RT 002 DUSUN JASA LAUT",
+      "isMaster": true
+    },
+    {
+      "email": "fahrysamsul1@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111030009100102",
+      "slsName": "KEBUN SAWIT PERUSAHAAN",
+      "isMaster": true
+    },
+    {
+      "email": "fahrysamsul1@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111030010000200",
+      "slsName": "RT 002 DUSUN MATAN",
+      "isMaster": true
+    },
+    {
+      "email": "fahrysamsul1@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111040002000300",
+      "slsName": "RT 003 DUSUN TANI",
+      "isMaster": true
+    },
+    {
+      "email": "fahrysamsul1@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111040003000201",
+      "slsName": "RT 002 DUSUN MUARA KARYA",
+      "isMaster": true
+    },
+    {
+      "email": "fahrysamsul1@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111040003001600",
+      "slsName": "RT 016 DUSUN KARYA BARU",
+      "isMaster": true
+    },
+    {
+      "email": "fahrysamsul1@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111050003002100",
+      "slsName": "RT 021 DUSUN SIDAKAYA",
+      "isMaster": true
+    },
+    {
+      "email": "fahrysamsul1@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111050005000300",
+      "slsName": "RT 003 DUSUN SUKA MAKMUR",
+      "isMaster": true
+    },
+    {
+      "email": "fahrysamsul1@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111050006000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "riakku1234@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111010002001800",
+      "slsName": "RT 018 DUSUN MULIA USAHA",
+      "isMaster": true
+    },
+    {
+      "email": "riakku1234@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111010003000102",
+      "slsName": "RT 001 DUSUN TANJUNG",
+      "isMaster": true
+    },
+    {
+      "email": "riakku1234@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111010004000900",
+      "slsName": "RT 009 DUSUN TENAGA BARU",
+      "isMaster": true
+    },
+    {
+      "email": "riakku1234@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111010006000100",
+      "slsName": "RT 001 DUSUN LIMAU MANIS",
+      "isMaster": true
+    },
+    {
+      "email": "riakku1234@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111020004000300",
+      "slsName": "RT 003 DUSUN TANAH MERAH",
+      "isMaster": true
+    },
+    {
+      "email": "riakku1234@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111020006000500",
+      "slsName": "RT 005 DUSUN RANTAU PANJANG",
+      "isMaster": true
+    },
+    {
+      "email": "riakku1234@gmail.com",
+      "kabupaten": "KAYONG UTARA",
+      "slsCode": "6111050006000000",
+      "slsName": "-",
+      "isMaster": false
+    },
+    {
+      "email": "iwan84376@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172010001003901",
+      "slsName": "RT 039 RW 007",
+      "isMaster": true
+    },
+    {
+      "email": "iwan84376@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172010002000100",
+      "slsName": "RT 001 RW 001",
+      "isMaster": true
+    },
+    {
+      "email": "iwan84376@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172040001000101",
+      "slsName": "RT 001 RW 001",
+      "isMaster": true
+    },
+    {
+      "email": "iwan84376@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172040001002700",
+      "slsName": "RT 027 RW 011",
+      "isMaster": true
+    },
+    {
+      "email": "iwan84376@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172040001005500",
+      "slsName": "RT 055 RW 008",
+      "isMaster": true
+    },
+    {
+      "email": "iwan84376@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172050004001400",
+      "slsName": "RT 014 RW 005",
+      "isMaster": true
+    },
+    {
+      "email": "opposkw338@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172030002000305",
+      "slsName": "RT 003 RW 001",
+      "isMaster": true
+    },
+    {
+      "email": "opposkw338@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172030004000800",
+      "slsName": "RT 008 RW 001",
+      "isMaster": true
+    },
+    {
+      "email": "opposkw338@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172040002002200",
+      "slsName": "RT 022 RW 008",
+      "isMaster": true
+    },
+    {
+      "email": "opposkw338@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172050001000800",
+      "slsName": "RT 008 RW 003",
+      "isMaster": true
+    },
+    {
+      "email": "opposkw338@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172050001002100",
+      "slsName": "RT 021 RW 005",
+      "isMaster": true
+    },
+    {
+      "email": "opposkw338@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172050001005900",
+      "slsName": "RT 059 RW 013",
+      "isMaster": true
+    },
+    {
+      "email": "opposkw338@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172050002001800",
+      "slsName": "RT 018 RW 004",
+      "isMaster": true
+    },
+    {
+      "email": "trisuprapti8377@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172010001000104",
+      "slsName": "RT 001 RW 001",
+      "isMaster": true
+    },
+    {
+      "email": "trisuprapti8377@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172010001000502",
+      "slsName": "RT 005 RW 001",
+      "isMaster": true
+    },
+    {
+      "email": "trisuprapti8377@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172010003001400",
+      "slsName": "RT 014 RW 004",
+      "isMaster": true
+    },
+    {
+      "email": "trisuprapti8377@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172020002000200",
+      "slsName": "RT 002 RW 001",
+      "isMaster": true
+    },
+    {
+      "email": "trisuprapti8377@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172020004001100",
+      "slsName": "RT 011 RW 001",
+      "isMaster": true
+    },
+    {
+      "email": "trisuprapti8377@gmail.com",
+      "kabupaten": "SINGKAWANG",
+      "slsCode": "6172040002004000",
+      "slsName": "RT 040 RW 011",
+      "isMaster": true
+    }
+  ]
+}

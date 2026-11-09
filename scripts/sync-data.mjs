@@ -68,7 +68,8 @@ function loadSeMaster() {
 
 function loadCsvMapping() {
   const pencacahSlsMap = new Map(); // email -> Set<slsName>
-  const slsToPplMap = new Map(); // slsName (uppercase) -> email
+  const pencacahSlsCodeMap = new Map(); // email -> Set<slsCode>
+  const slsToPplMap = new Map(); // slsName (uppercase) / slsCode -> email
   const slsPengawasMap = new Map(); // slsName/slsCode -> pengawasEmail
   const pencacahPengawasMap = new Map(); // email -> Set<pengawas>
   const pencacahKabMap = new Map(); // email -> { kabKode, kabNama, kabupaten }
@@ -78,9 +79,10 @@ function loadCsvMapping() {
     if (!fs.existsSync(dir)) continue;
     const items = fs.readdirSync(dir);
 
-    // 1. Pencacah CSV
-    const pencacahFile = items.find((f) => f.includes('pencacah') && f.endsWith('.csv'));
-    if (pencacahFile) {
+    // 1. Pencacah CSV (pilih file terbaru berdasarkan nama file/timestamp)
+    const pencacahFiles = items.filter((f) => f.includes('pencacah') && f.endsWith('.csv')).sort().reverse();
+    if (pencacahFiles.length > 0) {
+      const pencacahFile = pencacahFiles[0];
       const content = fs.readFileSync(path.join(dir, pencacahFile), 'utf-8');
       const lines = content.split('\n');
       for (let i = 1; i < lines.length; i++) {
@@ -89,19 +91,26 @@ function loadCsvMapping() {
         const parts = line.includes('\t') ? line.split('\t') : line.split(',');
         if (parts.length >= 5) {
           const email = parts[1]?.trim().toLowerCase();
-          const regionName = parts[4]?.trim();
+          const regionCode = parts[3]?.trim();
+          const regionName = parts.slice(4).join(',').trim();
           if (email && regionName && regionName !== '-') {
             if (!pencacahSlsMap.has(email)) pencacahSlsMap.set(email, new Set());
+            if (!pencacahSlsCodeMap.has(email)) pencacahSlsCodeMap.set(email, new Set());
             pencacahSlsMap.get(email).add(regionName);
             slsToPplMap.set(regionName.toUpperCase(), email);
+            if (regionCode && regionCode.length === 16) {
+              pencacahSlsCodeMap.get(email).add(regionCode);
+              slsToPplMap.set(regionCode, email);
+            }
           }
         }
       }
     }
 
-    // 2. Pengawas CSV
-    const pengawasFile = items.find((f) => f.includes('pengawas') && f.endsWith('.csv'));
-    if (pengawasFile) {
+    // 2. Pengawas CSV (pilih file terbaru berdasarkan nama file/timestamp)
+    const pengawasFiles = items.filter((f) => f.includes('pengawas') && f.endsWith('.csv')).sort().reverse();
+    if (pengawasFiles.length > 0) {
+      const pengawasFile = pengawasFiles[0];
       const content = fs.readFileSync(path.join(dir, pengawasFile), 'utf-8');
       const lines = content.split('\n');
       for (let i = 1; i < lines.length; i++) {
@@ -111,11 +120,11 @@ function loadCsvMapping() {
         if (parts.length >= 5) {
           const pengawasEmail = parts[1]?.trim().toLowerCase();
           const regionCode = parts[3]?.trim();
-          const regionName = parts[4]?.trim();
+          const regionName = parts.slice(4).join(',').trim();
           if (pengawasEmail && regionName && regionName !== '-') {
             slsPengawasMap.set(regionName.toUpperCase(), pengawasEmail);
           }
-          if (pengawasEmail && regionCode) {
+          if (pengawasEmail && regionCode && regionCode.length === 16) {
             slsPengawasMap.set(regionCode, pengawasEmail);
           }
         }
@@ -123,20 +132,63 @@ function loadCsvMapping() {
     }
   }
 
+  // 3. Muat Alokasi Pengawas Manual (misal dari alokasi.docx / alokasi_pengawas_manual.json)
+  const manualPmlPath = path.join(rootDir, 'data_awal', 'alokasi_pengawas_manual.json');
+  if (fs.existsSync(manualPmlPath)) {
+    try {
+      const manualPml = JSON.parse(fs.readFileSync(manualPmlPath, 'utf-8'));
+      if (Array.isArray(manualPml.allocations)) {
+        manualPml.allocations.forEach((a) => {
+          if (a.isMaster && a.slsCode && a.email) {
+            slsPengawasMap.set(a.slsCode, a.email);
+            if (a.slsName) {
+              slsPengawasMap.set(a.slsName.toUpperCase(), a.email);
+            }
+          }
+        });
+        console.log(`📑 Memuat ${manualPml.allocations.length} alokasi manual PML dari: ${path.basename(manualPmlPath)}`);
+      }
+    } catch (e) {
+      console.warn('⚠️ Gagal memuat alokasi pengawas manual:', e.message);
+    }
+  }
+
   // Khusus penyesuaian SLS Wonosobo Sintang (di file mapping berupa '-' pada akun mangkok5000@gmail.com)
   const wonosoboName = 'RT 006 RW 002 DUSUN WONOSOBO';
+  const wonosoboCode = '6107130005000600';
   slsToPplMap.set(wonosoboName, 'mangkok5000@gmail.com');
+  slsToPplMap.set(wonosoboCode, 'mangkok5000@gmail.com');
   if (pencacahSlsMap.has('mangkok5000@gmail.com')) {
     pencacahSlsMap.get('mangkok5000@gmail.com').add(wonosoboName);
   }
+  if (pencacahSlsCodeMap.has('mangkok5000@gmail.com')) {
+    pencacahSlsCodeMap.get('mangkok5000@gmail.com').add(wonosoboCode);
+  }
 
-  // Cross map pencacah -> pengawas via SLS
+  // Penyesuaian SLS Kapuas Kanan Hulu Sintang (RT 006 RW 002 kode 6107140006000602 di akun rezafauzan639@gmail.com)
+  const kapuasKananCode = '6107140006000602';
+  slsToPplMap.set(kapuasKananCode, 'rezafauzan639@gmail.com');
+  if (pencacahSlsMap.has('rezafauzan639@gmail.com')) {
+    pencacahSlsMap.get('rezafauzan639@gmail.com').add('RT 006 RW 002');
+  }
+  if (pencacahSlsCodeMap.has('rezafauzan639@gmail.com')) {
+    pencacahSlsCodeMap.get('rezafauzan639@gmail.com').add(kapuasKananCode);
+  }
+
+  // Cross map pencacah -> pengawas via SLS nama & kode
   pencacahSlsMap.forEach((slsSet, pencacahEmail) => {
     const pengawasSet = new Set();
     slsSet.forEach((sls) => {
       const pml = slsPengawasMap.get(sls.toUpperCase());
       if (pml) pengawasSet.add(pml);
     });
+    const codeSet = pencacahSlsCodeMap.get(pencacahEmail);
+    if (codeSet) {
+      codeSet.forEach((code) => {
+        const pml = slsPengawasMap.get(code);
+        if (pml) pengawasSet.add(pml);
+      });
+    }
     if (pengawasSet.size > 0) {
       pencacahPengawasMap.set(pencacahEmail, Array.from(pengawasSet));
     }
@@ -224,7 +276,7 @@ function sync() {
 
       const slsInfo = slsById.get(rawSls);
       const slsName = slsInfo ? slsInfo.namaSls.trim().toUpperCase() : '';
-      const pplEmail = (slsToPplMap.get(slsName) || '').toLowerCase();
+      const pplEmail = (slsToPplMap.get(rawSls) || slsToPplMap.get(slsName) || '').toLowerCase();
 
       if (!pplEmail) {
         return; // Lewati jika tidak teridentifikasi
