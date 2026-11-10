@@ -1,5 +1,5 @@
-import React from 'react';
-import { Share2, Download, Calendar, Info, Camera } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Share2, Download, Calendar, Info, Camera, ChevronDown, Table as TableIcon, LayoutGrid } from 'lucide-react';
 
 interface HeaderProps {
   currentDay: number;
@@ -14,6 +14,8 @@ interface HeaderProps {
   onExportExcel: () => void;
   onScrollToMetadata: () => void;
   onExportImage?: () => void;
+  onExportTable?: () => void;
+  onExportOverview?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -29,7 +31,27 @@ export const Header: React.FC<HeaderProps> = ({
   onExportExcel,
   onScrollToMetadata,
   onExportImage,
+  onExportTable,
+  onExportOverview,
 }) => {
+  const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
+  const exportMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (exportMenuRef.current && !exportMenuRef.current.contains(event.target as Node)) {
+        setIsExportMenuOpen(false);
+      }
+    };
+    if (isExportMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isExportMenuOpen]);
+
   const isCleaningPhase = currentDay > fieldDays;
   const idealPct = Math.min(100, (currentDay / fieldDays) * 100);
 
@@ -89,15 +111,86 @@ export const Header: React.FC<HeaderProps> = ({
               <span>Ekspor Excel</span>
             </button>
 
-            {onExportImage && (
-              <button
-                onClick={onExportImage}
-                className="inline-flex items-center px-3.5 py-2 text-sm font-medium rounded-lg text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors gap-2 cursor-pointer shadow-xs"
-                title="Ekspor tampilan monitoring wilayah ke format gambar (PNG/JPG)"
-              >
-                <Camera className="w-4 h-4 text-blue-600" />
-                <span>Ekspor Gambar</span>
-              </button>
+            {(onExportTable || onExportOverview || onExportImage) && (
+              <div className="relative" ref={exportMenuRef}>
+                {onExportTable || onExportOverview ? (
+                  <>
+                    <button
+                      onClick={() => setIsExportMenuOpen(!isExportMenuOpen)}
+                      className="inline-flex items-center px-3.5 py-2 text-sm font-medium rounded-lg text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors gap-1.5 cursor-pointer shadow-xs"
+                      title="Pilihan ekspor tampilan dashboard ke format gambar (PNG/JPG)"
+                    >
+                      <Camera className="w-4 h-4 text-blue-600" />
+                      <span>Ekspor Gambar</span>
+                      <ChevronDown className="w-3.5 h-3.5 text-blue-500" />
+                    </button>
+
+                    {isExportMenuOpen && (
+                      <div className="absolute right-0 mt-2 w-72 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50 animate-fade-in text-xs">
+                        <div className="px-3.5 py-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                          Pilih Tampilan yang Ingin Diekspor
+                        </div>
+
+                        {onExportTable && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setIsExportMenuOpen(false);
+                              onExportTable();
+                            }}
+                            className="w-full text-left px-3.5 py-2.5 hover:bg-blue-50/70 flex items-start gap-3 transition-colors cursor-pointer group"
+                          >
+                            <div className="p-1.5 rounded-lg bg-blue-100 text-blue-700 mt-0.5 group-hover:bg-blue-200">
+                              <TableIcon className="w-4 h-4" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between">
+                                <span className="font-semibold text-slate-900 text-sm">Tabel Petugas (PPL)</span>
+                                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-100 text-blue-800">
+                                  Rekomendasi
+                                </span>
+                              </div>
+                              <div className="text-[11px] text-slate-500 mt-0.5">
+                                Ekspor gambar tabel petugas sesuai filter wilayah & status aktif
+                              </div>
+                            </div>
+                          </button>
+                        )}
+
+                        {onExportOverview && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setIsExportMenuOpen(false);
+                              onExportOverview();
+                            }}
+                            className="w-full text-left px-3.5 py-2.5 hover:bg-slate-50 flex items-start gap-3 transition-colors cursor-pointer group border-t border-slate-100"
+                          >
+                            <div className="p-1.5 rounded-lg bg-slate-100 text-slate-700 mt-0.5 group-hover:bg-slate-200">
+                              <LayoutGrid className="w-4 h-4" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="font-semibold text-slate-900 text-sm">Ringkasan Wilayah</div>
+                              <div className="text-[11px] text-slate-500 mt-0.5">
+                                Infografis evaluasi progres 8 kabupaten/kota
+                              </div>
+                            </div>
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <button
+                    onClick={onExportImage}
+                    className="inline-flex items-center px-3.5 py-2 text-sm font-medium rounded-lg text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors gap-2 cursor-pointer shadow-xs"
+                    title="Ekspor tampilan monitoring wilayah ke format gambar (PNG/JPG)"
+                  >
+                    <Camera className="w-4 h-4 text-blue-600" />
+                    <span>Ekspor Gambar</span>
+                  </button>
+                )}
+              </div>
             )}
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { 
   Share2, 
   ChevronRight, 
@@ -50,7 +50,13 @@ type KabSortField =
   | 'petugasZero' 
   | 'petugasKritis';
 
-export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
+export interface KabupatenOverviewHandle {
+  openPreview: () => void;
+  downloadImage: (format?: 'png' | 'jpeg') => Promise<void>;
+  copyImage: () => Promise<boolean>;
+}
+
+export const KabupatenOverview = forwardRef<KabupatenOverviewHandle, KabupatenOverviewProps>(({
   summaries,
   selectedKabupaten,
   onSelectKabupaten,
@@ -60,7 +66,7 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
   fieldDays = 23,
   includeDraft = false,
   lastUpdated,
-}) => {
+}, ref) => {
   const [viewMode, setViewMode] = useState<'card' | 'table'>('card');
   const [sortField, setSortField] = useState<KabSortField>('kode');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
@@ -174,6 +180,16 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
       setIsPreviewLoading(false);
     }
   };
+
+  useImperativeHandle(ref, () => ({
+    openPreview: handleOpenPreview,
+    downloadImage: async (format = 'png') => {
+      await handleDownloadImage(format);
+    },
+    copyImage: async () => {
+      return await handleCopyImage();
+    },
+  }));
 
   const idealPct = Math.min(100, (currentDay / fieldDays) * 100);
 
@@ -1063,4 +1079,6 @@ export const KabupatenOverview: React.FC<KabupatenOverviewProps> = ({
       )}
     </div>
   );
-};
+});
+
+KabupatenOverview.displayName = 'KabupatenOverview';

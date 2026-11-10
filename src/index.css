@@ -54,6 +54,14 @@
   display: flex !important;
 }
 
+.is-exporting .export-only-grid {
+  display: grid !important;
+}
+
 .is-exporting .export-grid-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.is-exporting table {
+  width: 100% !important;
 }

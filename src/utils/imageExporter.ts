@@ -38,8 +38,8 @@ const exportFilter = (node: HTMLElement) => {
  */
 async function prepareElement(element: HTMLElement): Promise<() => void> {
   element.classList.add('is-exporting');
-  // Berikan waktu jeda singkat agar browser me-render reflow CSS
-  await new Promise((resolve) => setTimeout(resolve, 80));
+  // Berikan waktu jeda agar browser me-render reflow CSS, font, dan kalkulasi tabel
+  await new Promise((resolve) => setTimeout(resolve, 120));
 
   return () => {
     element.classList.remove('is-exporting');

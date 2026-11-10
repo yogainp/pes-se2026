@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import initialData from './data/initialData.json';
 import { PetugasRecord, PetugasAnalysis, KabupatenSummary } from './types';
 import { analyzePetugas, calculateKabupatenSummary, FIELD_TARGET_DAYS, TOTAL_MONTH_DAYS } from './utils/calculations';
@@ -6,8 +6,8 @@ import { exportAnalysisToExcel } from './utils/excelExporter';
 
 import { Header } from './components/Header';
 import { KpiOverview } from './components/KpiOverview';
-import { KabupatenOverview } from './components/KabupatenOverview';
-import { PetugasTable } from './components/PetugasTable';
+import { KabupatenOverview, KabupatenOverviewHandle } from './components/KabupatenOverview';
+import { PetugasTable, PetugasTableHandle } from './components/PetugasTable';
 import { MetadataSection } from './components/MetadataSection';
 import { WhatsAppShareModal } from './components/WhatsAppShareModal';
 
@@ -87,11 +87,15 @@ export default function App() {
     }
   };
 
-  const handleScrollToOverview = () => {
-    const el = document.getElementById('kabupaten-overview-card');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+  const petugasTableRef = useRef<PetugasTableHandle>(null);
+  const kabupatenOverviewRef = useRef<KabupatenOverviewHandle>(null);
+
+  const handleExportTable = () => {
+    petugasTableRef.current?.openPreview();
+  };
+
+  const handleExportOverview = () => {
+    kabupatenOverviewRef.current?.openPreview();
   };
 
   return (
@@ -110,7 +114,8 @@ export default function App() {
         onOpenShareModal={handleOpenGeneralShare}
         onExportExcel={handleExportExcel}
         onScrollToMetadata={handleScrollToMetadata}
-        onExportImage={handleScrollToOverview}
+        onExportTable={handleExportTable}
+        onExportOverview={handleExportOverview}
       />
 
       {/* Main Content */}
@@ -127,6 +132,7 @@ export default function App() {
 
         {/* Monitoring per Wilayah (8 Kabupaten/Kota) */}
         <KabupatenOverview
+          ref={kabupatenOverviewRef}
           summaries={kabupatenSummaries}
           selectedKabupaten={selectedKabupaten}
           onSelectKabupaten={setSelectedKabupaten}
@@ -141,6 +147,7 @@ export default function App() {
 
         {/* Tabel Monitoring Detail Petugas (PPL) */}
         <PetugasTable
+          ref={petugasTableRef}
           records={analyzedRecords}
           selectedKabupaten={selectedKabupaten}
           onSelectKabupaten={setSelectedKabupaten}
@@ -152,6 +159,8 @@ export default function App() {
           totalDays={totalDays}
           includeDraft={includeDraft}
           onSendPetugasAlert={handleSendPetugasAlert}
+          lastUpdated={lastUpdated}
+          fileName={fileName}
         />
 
         {/* Metadata Operasional & Catatan Teknis */}

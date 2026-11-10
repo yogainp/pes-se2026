@@ -1,8 +1,27 @@
-import React, { useState, useMemo } from 'react';
-import { Search, ChevronDown, ChevronUp, MessageSquare } from 'lucide-react';
+import React, { useState, useMemo, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { 
+  Search, 
+  ChevronDown, 
+  ChevronUp, 
+  MessageSquare, 
+  Camera, 
+  Download, 
+  Copy, 
+  Loader2, 
+  Image as ImageIcon, 
+  Check 
+} from 'lucide-react';
 import { PetugasAnalysis, WarningStatus } from '../types';
+import { exportElementToImage, copyElementToClipboard, generateElementDataUrl } from '../utils/imageExporter';
+import { ImageExportModal } from './ImageExportModal';
 
-interface PetugasTableProps {
+export interface PetugasTableHandle {
+  openPreview: () => void;
+  downloadImage: (format?: 'png' | 'jpeg') => Promise<void>;
+  copyImage: () => Promise<boolean>;
+}
+
+export interface PetugasTableProps {
   records: PetugasAnalysis[];
   selectedKabupaten: string;
   onSelectKabupaten: (kab: string) => void;
@@ -14,12 +33,14 @@ interface PetugasTableProps {
   totalDays: number;
   includeDraft?: boolean;
   onSendPetugasAlert: (petugas: PetugasAnalysis) => void;
+  lastUpdated?: string;
+  fileName?: string;
 }
 
 type SortField = 'persenCapaian' | 'assigned' | 'realisasi' | 'dicacah' | 'gap' | 'runRateRequired' | 'pencacah';
 type SortDirection = 'asc' | 'desc';
 
-export const PetugasTable: React.FC<PetugasTableProps> = ({
+export const PetugasTable = forwardRef<PetugasTableHandle, PetugasTableProps>(({
   records,
   selectedKabupaten,
   onSelectKabupaten,
@@ -28,9 +49,12 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
   kabupatenList,
   currentDay,
   fieldDays = 23,
+  totalDays = 30,
   includeDraft = false,
   onSendPetugasAlert,
-}) => {
+  lastUpdated,
+  fileName,
+}, ref) => {
   const [search, setSearch] = useState('');
   const [internalStatusFilter, setInternalStatusFilter] = useState<string>('all');
   const statusFilter = controlledStatusFilter !== undefined ? controlledStatusFilter : internalStatusFilter;
@@ -95,6 +119,166 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
     }
   };
 
+  // Export & Preview State
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isExportDropdownOpen, setIsExportDropdownOpen] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Modal Preview state
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [previewDataUrl, setPreviewDataUrl] = useState<string | null>(null);
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsExportDropdownOpen(false);
+      }
+    };
+    if (isExportDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isExportDropdownOpen]);
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3500);
+  };
+
+  const getExportFilename = () => {
+    const now = new Date();
+    const dd = String(now.getDate()).padStart(2, '0');
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const yy = String(now.getFullYear()).slice(-2);
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+    const kabName = selectedKabupaten === 'all' 
+      ? 'Semua-Wilayah' 
+      : (kabupatenList.find((k) => k.kode === selectedKabupaten)?.nama || selectedKabupaten).replace(/\s+/g, '-');
+    return `Monitoring Petugas PES SE2026 - ${kabName} - ${dd}${mm}${yy}_${hour}${minute}`;
+  };
+
+  const handleDownloadImage = async (format: 'png' | 'jpeg' = 'png') => {
+    if (!containerRef.current) return;
+    setIsExportDropdownOpen(false);
+    setIsExporting(true);
+    try {
+      const filename = getExportFilename();
+      await exportElementToImage({
+        element: containerRef.current,
+        filename,
+        format,
+        pixelRatio: 2,
+      });
+      showToast(`Gambar tabel (${format.toUpperCase()}) berhasil diunduh!`);
+    } catch (err) {
+      console.error('Gagal mengunduh gambar tabel:', err);
+      showToast('Gagal mengunduh gambar tabel. Silakan coba lagi.');
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  const handleCopyImage = async () => {
+    if (!containerRef.current) return false;
+    setIsExportDropdownOpen(false);
+    setIsExporting(true);
+    try {
+      await copyElementToClipboard({
+        element: containerRef.current,
+        pixelRatio: 2,
+      });
+      showToast('Gambar berhasil disalin ke clipboard! Siap di-paste (Ctrl+V) ke WhatsApp.');
+      return true;
+    } catch (err: any) {
+      console.error('Gagal menyalin gambar tabel:', err);
+      showToast('Clipboard diblokir browser. Mengunduh file PNG sebagai gantinya...');
+      await exportElementToImage({
+        element: containerRef.current,
+        filename: getExportFilename(),
+        format: 'png',
+      });
+      return false;
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  const handleOpenPreview = async () => {
+    if (!containerRef.current) return;
+    setIsExportDropdownOpen(false);
+    setIsPreviewOpen(true);
+    setIsPreviewLoading(true);
+    try {
+      const url = await generateElementDataUrl({
+        element: containerRef.current,
+        format: 'png',
+        pixelRatio: 2,
+      });
+      setPreviewDataUrl(url);
+    } catch (err) {
+      console.error('Gagal memuat pratinjau tabel:', err);
+      showToast('Gagal memuat pratinjau gambar tabel.');
+    } finally {
+      setIsPreviewLoading(false);
+    }
+  };
+
+  useImperativeHandle(ref, () => ({
+    openPreview: handleOpenPreview,
+    downloadImage: handleDownloadImage,
+    copyImage: handleCopyImage,
+  }));
+
+  const idealPct = Math.min(100, (currentDay / fieldDays) * 100);
+
+  const activeKabupatenName = useMemo(() => {
+    if (selectedKabupaten === 'all') return 'Semua Wilayah (Provinsi Kalimantan Barat)';
+    const found = kabupatenList.find((k) => k.kode === selectedKabupaten);
+    return found ? `${found.nama} (${found.kode})` : selectedKabupaten;
+  }, [selectedKabupaten, kabupatenList]);
+
+  const activeStatusName = useMemo(() => {
+    switch (statusFilter) {
+      case 'zero': return 'Nol Progres (0%)';
+      case 'critical': return 'Kritis (<70%)';
+      case 'warning': return 'Waspada (70–99%)';
+      case 'on_track': return 'Sesuai Target (≥100%)';
+      default: return 'Semua Status';
+    }
+  }, [statusFilter]);
+
+  const statusCounts = useMemo(() => {
+    return {
+      zero: sortedRecords.filter((p) => p.status === 'zero').length,
+      critical: sortedRecords.filter((p) => p.status === 'critical').length,
+      warning: sortedRecords.filter((p) => p.status === 'warning').length,
+      onTrack: sortedRecords.filter((p) => p.status === 'on_track' || p.status === 'ahead').length,
+      totalAssigned: sortedRecords.reduce((sum, p) => sum + p.assigned, 0),
+      totalRealisasi: sortedRecords.reduce((sum, p) => sum + (includeDraft ? p.realisasi : p.dicacah), 0),
+      totalTargetKumulatif: sortedRecords.reduce((sum, p) => sum + p.targetKumulatif, 0),
+    };
+  }, [sortedRecords, includeDraft]);
+
+  const exportTimestamp = useMemo(() => {
+    const now = new Date();
+    return now.toLocaleString('id-ID', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }, []);
+
   const getStatusBadge = (status: WarningStatus) => {
     switch (status) {
       case 'zero':
@@ -132,10 +316,100 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
   };
 
   return (
-    <div id="petugas-table-section" className="bg-white rounded-lg border border-slate-200 overflow-hidden mb-6 shadow-2xs scroll-mt-20">
+    <div ref={containerRef} id="petugas-table-section" className="bg-white rounded-lg border border-slate-200 overflow-hidden mb-6 shadow-2xs scroll-mt-20 relative">
       
+      {/* Export-Only Official Infographic Header Banner */}
+      <div className="hidden export-only mb-5 pb-4 border-b-2 border-slate-200">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-lg bg-[#005596] flex items-center justify-center text-white font-bold text-lg tracking-wider shrink-0 shadow-xs">
+              BPS
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl font-bold text-slate-900 tracking-tight">
+                  Monitoring Harian Petugas PES SE2026
+                </h1>
+                <span className="text-xs font-semibold px-2.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 font-medium">
+                  Provinsi Kalimantan Barat
+                </span>
+                {selectedKabupaten !== 'all' && (
+                  <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-[#005596] text-white shadow-xs">
+                    {activeKabupatenName}
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Evaluasi Kinerja & Target Harian Petugas Pencacah Lapangan (PPL) • Target Lapangan: 1 s.d. {fieldDays} Nov • Pembersihan s.d. {totalDays} Nov 2026
+              </p>
+            </div>
+          </div>
+
+          <div className="text-right">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800">
+              <span>Hari ke-{currentDay} ({currentDay} Nov)</span>
+              <span>•</span>
+              <span>Target Ideal: {idealPct.toFixed(1)}%</span>
+              {includeDraft && (
+                <>
+                  <span>•</span>
+                  <span className="text-blue-700 font-medium">+Hitung Draft</span>
+                </>
+              )}
+            </div>
+            {lastUpdated && (
+              <div className="text-[11px] text-slate-500 mt-1">
+                Data Fasih: <span className="font-semibold text-slate-700">{lastUpdated}</span>
+              </div>
+            )}
+            {fileName && (
+              <div className="text-[11px] text-slate-500 mt-0.5">
+                Sumber Data: <span className="font-semibold text-slate-700">{fileName}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Scope and Mini KPI Breakdown Bar */}
+        <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+          <div className="flex items-center gap-3 text-slate-600">
+            <span>Wilayah: <strong className="text-slate-900">{activeKabupatenName}</strong></span>
+            <span>•</span>
+            <span>Filter Status: <strong className="text-slate-900">{activeStatusName}</strong></span>
+            <span>•</span>
+            <span>Total Evaluasi: <strong className="text-blue-900">{sortedRecords.length} Petugas</strong></span>
+            <span>•</span>
+            <span>Alokasi: <strong className="text-slate-900">{statusCounts.totalAssigned}</strong></span>
+            <span>•</span>
+            <span>Realisasi: <strong className="text-emerald-700">{statusCounts.totalRealisasi}</strong></span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            {statusCounts.critical > 0 && (
+              <span className="px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-medium">
+                Kritis: {statusCounts.critical}
+              </span>
+            )}
+            {statusCounts.warning > 0 && (
+              <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 font-medium">
+                Waspada: {statusCounts.warning}
+              </span>
+            )}
+            {statusCounts.onTrack > 0 && (
+              <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium">
+                Sesuai/Lebih: {statusCounts.onTrack}
+              </span>
+            )}
+            {statusCounts.zero > 0 && (
+              <span className="px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-300 font-medium">
+                Nol Progres: {statusCounts.zero}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Table Header & Search Filter */}
-      <div className="p-4 sm:p-5 border-b border-slate-200 bg-slate-50/70">
+      <div className="p-4 sm:p-5 border-b border-slate-200 bg-slate-50/70 export-exclude">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
           
           <div>
@@ -187,6 +461,88 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
               <option value="warning">Waspada (70–99%)</option>
               <option value="on_track">Sesuai Target (≥100%)</option>
             </select>
+
+            {/* Tombol Ekspor Gambar Dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                type="button"
+                onClick={() => setIsExportDropdownOpen(!isExportDropdownOpen)}
+                disabled={isExporting}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm transition-colors cursor-pointer shadow-2xs disabled:opacity-60"
+                title="Ekspor tabel pemantauan petugas ini menjadi gambar (PNG/JPG)"
+              >
+                {isExporting ? (
+                  <Loader2 className="w-4 h-4 animate-spin text-[#005596]" />
+                ) : (
+                  <Camera className="w-4 h-4 text-slate-600" />
+                )}
+                <span>{isExporting ? 'Memproses...' : 'Ekspor Gambar'}</span>
+                <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+              </button>
+
+              {isExportDropdownOpen && (
+                <div className="absolute right-0 mt-1.5 w-64 bg-white rounded-lg shadow-xl border border-slate-200 py-1.5 z-40 text-xs animate-fade-in">
+                  <div className="px-3 py-1 border-b border-slate-100 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                    Pilih Format Ekspor Tabel
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleDownloadImage('png')}
+                    className="w-full text-left px-3 py-2 hover:bg-slate-50 flex items-start gap-2.5 transition-colors cursor-pointer group"
+                  >
+                    <div className="p-1 rounded bg-blue-50 text-blue-700 mt-0.5 group-hover:bg-blue-100">
+                      <Download className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-slate-800">Unduh PNG (.png)</div>
+                      <div className="text-[11px] text-slate-500">Resolusi tinggi retina & teks tajam</div>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleDownloadImage('jpeg')}
+                    className="w-full text-left px-3 py-2 hover:bg-slate-50 flex items-start gap-2.5 transition-colors cursor-pointer group"
+                  >
+                    <div className="p-1 rounded bg-slate-100 text-slate-700 mt-0.5 group-hover:bg-slate-200">
+                      <Download className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-slate-800">Unduh JPG (.jpg)</div>
+                      <div className="text-[11px] text-slate-500">Format ringkas terkompresi</div>
+                    </div>
+                  </button>
+
+                  <div className="my-1 border-t border-slate-100" />
+
+                  <button
+                    type="button"
+                    onClick={handleCopyImage}
+                    className="w-full text-left px-3 py-2 hover:bg-emerald-50/60 flex items-start gap-2.5 transition-colors cursor-pointer group"
+                  >
+                    <div className="p-1 rounded bg-emerald-50 text-emerald-700 mt-0.5 group-hover:bg-emerald-100">
+                      <Copy className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-emerald-900">Salin ke WhatsApp</div>
+                      <div className="text-[11px] text-slate-500">Bisa langsung Ctrl+V di chat WA</div>
+                    </div>
+                  </button>
+
+                  <div className="my-1 border-t border-slate-100" />
+
+                  <button
+                    type="button"
+                    onClick={handleOpenPreview}
+                    className="w-full text-left px-3 py-1.5 hover:bg-slate-50 flex items-center gap-2.5 text-slate-600 transition-colors cursor-pointer"
+                  >
+                    <ImageIcon className="w-3.5 h-3.5 text-slate-400 ml-1" />
+                    <span>Pratinjau Gambar (Preview)...</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
         </div>
@@ -261,7 +617,7 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
               </th>
 
               <th className="py-3 px-3.5 text-center">Status</th>
-              <th className="py-3 px-3 text-center w-20">Aksi</th>
+              <th className="py-3 px-3 text-center w-20 export-exclude">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -287,7 +643,7 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
                         <div className="flex items-start gap-2">
                           <button
                             onClick={() => setExpandedId(isExpanded ? null : p.id)}
-                            className="mt-0.5 p-0.5 text-slate-400 hover:text-slate-700 rounded transition-colors cursor-pointer"
+                            className="mt-0.5 p-0.5 text-slate-400 hover:text-slate-700 rounded transition-colors cursor-pointer export-exclude"
                             title="Tampilkan rincian SLS"
                           >
                             {isExpanded ? (
@@ -408,7 +764,7 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
                       </td>
 
                       {/* Aksi */}
-                      <td className="py-3 px-3 text-center">
+                      <td className="py-3 px-3 text-center export-exclude">
                         <button
                           onClick={() => onSendPetugasAlert(p)}
                           className="inline-flex items-center justify-center p-2 text-slate-500 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition-colors cursor-pointer"
@@ -490,6 +846,43 @@ export const PetugasTable: React.FC<PetugasTableProps> = ({
         </table>
       </div>
 
+      {/* Export-Only Official Infographic Footer Watermark */}
+      <div className="hidden export-only mt-5 pt-3 border-t border-slate-200 text-xs text-slate-500">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-slate-700">Badan Pusat Statistik Provinsi Kalimantan Barat</span>
+            <span>•</span>
+            <span>Sistem Monitoring Lapangan PES SE2026</span>
+          </div>
+          <div className="text-slate-400 text-[11px]">
+            Format: Tabel Pemantauan Petugas (PPL) • Diekspor pada: {exportTimestamp} WIB • Terintegrasi Fasih BPS RI
+          </div>
+        </div>
+      </div>
+
+      {/* Modal Pratinjau Gambar */}
+      <ImageExportModal
+        isOpen={isPreviewOpen}
+        onClose={() => setIsPreviewOpen(false)}
+        imageDataUrl={previewDataUrl}
+        isLoading={isPreviewLoading}
+        onDownloadPng={() => handleDownloadImage('png')}
+        onDownloadJpeg={() => handleDownloadImage('jpeg')}
+        onCopyToClipboard={handleCopyImage}
+        title="Pratinjau Tabel Monitoring Petugas (PPL)"
+        subtitle={`Posisi Hari ke-${currentDay} • Wilayah: ${activeKabupatenName} (${sortedRecords.length} Petugas)`}
+      />
+
+      {/* Toast Feedback */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-3 rounded-lg shadow-2xl text-xs sm:text-sm font-medium flex items-center gap-2.5 animate-fade-in border border-slate-800 export-exclude">
+          <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
     </div>
   );
-};
+});
+
+PetugasTable.displayName = 'PetugasTable';
